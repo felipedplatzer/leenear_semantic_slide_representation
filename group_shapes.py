@@ -70,7 +70,7 @@ def calculate_bounds(shapes):
         'height': max_bottom - min_top
     }
 
-def group_selected_shapes(group_name, selection, level):
+def group_selected_shapes(group_name, selection):
     """
     Main function to group selected shapes based on user input.
     """    
@@ -85,7 +85,6 @@ def group_selected_shapes(group_name, selection, level):
     # Create group entry
     group_entry = {
         'label': group_name,
-        'level': level,
         'shape_count': len(selected_shapes),
         'shape_id': [shape['shape_id'] for shape in selected_shapes],
         'top': bounds['top'],
