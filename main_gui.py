@@ -202,7 +202,7 @@ def show_group_naming_dialog(selection):
     
     # Finish button
     finish_btn = tk.Button(buttons_frame, text="Save & Finish", 
-                          command=lambda: finish_labeling(name_entry.get().strip(), selection, dialog_root),
+                          command=lambda: save_and_finish(name_entry.get().strip(), selection, dialog_root),
                           bg="#F44336", fg="white",
                           width=10, height=5)
     finish_btn.pack(side=tk.LEFT, padx=(0, 5))
@@ -212,7 +212,14 @@ def show_group_naming_dialog(selection):
                         command=lambda: skip_labeling(dialog_root),
                         bg="#FFC107", fg="black",
                         width=10, height=5)
-    skip_btn.pack(side=tk.LEFT)
+    skip_btn.pack(side=tk.LEFT, padx=(0, 5))
+    
+    # Finish button (no save)
+    finish_btn_no_save = tk.Button(buttons_frame, text="Finish", 
+                                  command=lambda: finish(dialog_root),
+                                  bg="#9C27B0", fg="white",
+                                  width=10, height=5)
+    finish_btn_no_save.pack(side=tk.LEFT)
     
     # Focus on textbox after dialog is created
     dialog_root.after(100, lambda: name_entry.focus())
@@ -230,7 +237,7 @@ def show_group_naming_dialog(selection):
             widget.bind('<Return>', lambda e: widget.invoke())
     
     # Apply focus binding to all buttons
-    for button in [continue_btn, finish_btn, skip_btn]:
+    for button in [continue_btn, finish_btn, skip_btn, finish_btn_no_save]:
         button.bind('<FocusIn>', on_button_focus)
 
 def skip_labeling(dialog_root):
@@ -239,34 +246,18 @@ def skip_labeling(dialog_root):
     # Status updates are not needed since main window is hidden
     print("Skipped selection - listening for next group")
 
-
-def continue_labeling(group_name, selection, dialog_root):
-    """Continue with labeling"""
-    if group_name is not None:
+def save(group_name, selection):
+    if group_name is not None and group_name != '':
         x = group_shapes.group_selected_shapes(group_name, selection)
         group_list.append(x)
-
         print(f"Group named: {group_name}")
         print(f"Selection count: {selection.ShapeRange.Count}")
-    
-        dialog_root.destroy()
-        # Status updates are not needed since main window is hidden
         print(f"Group '{group_name}' saved - listening for next group")
-
-
-
-def finish_labeling(group_name, selection, dialog_root):
-    """Finish the labeling process"""
-    global listener_active
-    if group_name is not None:
-        x = group_shapes.group_selected_shapes(group_name, selection)
-        group_list.append(x)
-
-        print(f"Group named: {group_name}")
-        print(f"Selection count: {selection.ShapeRange.Count}")
-
     else:
-        print("Group name cannot be empty")
+        print("Group name cannot be empty. Saving skipped")
+
+def finish(dialog_root):
+    global listener_active
     # Stop the listener
     dialog_root.destroy()
     listener_active = False
@@ -275,9 +266,21 @@ def finish_labeling(group_name, selection, dialog_root):
     group_dl = structure_shapes.generate_structure_main(group_dl)
     group_df = basic.save_to_csv(group_dl, test_index)  # Saves as CSV
     print("Done")   
-    
     print("Finished labeling process")
     exit()
+
+
+def continue_labeling(group_name, selection, dialog_root):
+    save(group_name, selection)
+    dialog_root.destroy()
+
+
+def save_and_finish(group_name, selection, dialog_root):
+    """Finish the labeling process"""
+    global listener_active
+    save(group_name, selection)
+    finish(dialog_root)
+
 
 
 def main():

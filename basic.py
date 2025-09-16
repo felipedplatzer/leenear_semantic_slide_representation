@@ -21,10 +21,10 @@ def process_groups(shape_data, group_list, test_index, slide_dimensions):
 def save_to_csv(dl, test_index):
     df = pd.DataFrame(dl)
     # Handle commas 
-    df["text"] = df["text"].str.replace('"', '""').apply(lambda x: f'"{x}"')
     df["shape_id"] = df["shape_id"].apply(json.dumps)
-    df["shape_id"] = df["shape_id"].str.replace('"', '""').apply(lambda x: f'"{x}"')
-
+    for x in ["shape_id", "text", "label"]:
+        df[x] = df[x].str.replace('"', '""').apply(lambda y: f'"{y}"')
+    
     # round to 2 decimal places
     for x in ["top", "left", "right", "bottom", "width", "height"]:
         df[x] = df[x].round(2)
