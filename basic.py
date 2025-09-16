@@ -31,6 +31,8 @@ def process_groups(shape_data, group_list, test_index, slide_dimensions):
     return data_list
 
 
+def add_text_sections(dl, text_section_list):
+    return dl + text_section_list
 
 def save_to_csv(dl, test_index):
     df = pd.DataFrame(dl)

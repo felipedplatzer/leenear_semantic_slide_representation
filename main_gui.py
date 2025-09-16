@@ -19,6 +19,7 @@ listener_active = False
 ppt_app = None
 selection_monitor_thread = None
 group_list = []
+text_section_list = []
 last_selection_ref = None
 last_selection_ref_shape_ids = []
 
@@ -276,10 +277,231 @@ def continue_labeling(group_name, selection, dialog_root):
 
 
 def save_and_finish(group_name, selection, dialog_root):
-    """Finish the labeling process"""
-    global listener_active
+    """Save group and open text labeling form"""
     save(group_name, selection)
-    finish(dialog_root)
+    dialog_root.destroy()
+    show_text_labeling_form(selection)
+
+def update_text_preview(preview_label, shape_id_entry, start_char_entry, end_char_entry, selection):
+    """Update the text preview based on input values"""
+    try:
+        shape_id = shape_id_entry.get().strip()
+        start_char = start_char_entry.get().strip()
+        end_char = end_char_entry.get().strip()
+        
+        # Check if all required fields are filled
+        if not shape_id or not start_char or not end_char:
+            preview_label.config(text="Please fill in Shape ID, Start Char, and End Char", fg="gray")
+            return
+        
+        # Convert to integers
+        try:
+            start_pos = int(start_char)
+            end_pos = int(end_char)
+        except ValueError:
+            preview_label.config(text="Error: Start Char and End Char must be numbers", fg="red")
+            return
+        
+        # Find the shape by ID
+        target_shape = None
+        for shape in ppt_app.ActiveWindow.View.Slide.Shapes:
+            if str(shape.Id) == str(shape_id):
+                target_shape = shape
+                break
+        
+        if not target_shape:
+            preview_label.config(text=f"Error: Shape ID '{shape_id}' not found in selection", fg="red")
+            return
+        
+        # Check if shape has text
+        if not hasattr(target_shape, 'TextFrame'):
+            preview_label.config(text=f"Error: Shape {shape_id} does not contain text", fg="red")
+            return
+        
+        # Get the text content
+        full_text = target_shape.TextFrame.TextRange.Text
+        
+        # Validate character positions
+        if start_pos < 0 or end_pos < 0:
+            preview_label.config(text="Error: Character positions must be positive numbers", fg="red")
+            return
+        
+        if start_pos >= len(full_text):
+            preview_label.config(text=f"Error: Start position {start_pos} is beyond text length ({len(full_text)})", fg="red")
+            return
+        
+        if end_pos > len(full_text):
+            preview_label.config(text=f"Error: End position {end_pos} is beyond text length ({len(full_text)})", fg="red")
+            return
+        
+        if start_pos >= end_pos:
+            preview_label.config(text="Error: Start position must be less than end position", fg="red")
+            return
+        
+        # Extract the text segment
+        text_segment = full_text[start_pos:end_pos]
+        
+        # Display the preview
+        preview_text = f"Text Preview (Chars {start_pos}-{end_pos}):\n\n{text_segment}"
+        preview_label.config(text=preview_text, fg="black")
+        
+    except Exception as e:
+        preview_label.config(text=f"Error: {str(e)}", fg="red")
+
+def show_text_labeling_form(selection):
+    """Show text labeling form for text sections"""
+    # Create new text labeling dialog
+    text_dialog = tk.Tk()
+    text_dialog.title("Label Text Sections")
+    text_dialog.geometry("500x400")
+    text_dialog.resizable(False, False)
+    
+    # Center on screen
+    text_dialog.update_idletasks()
+    x = (text_dialog.winfo_screenwidth() // 2) - (500 // 2)
+    y = (text_dialog.winfo_screenheight() // 2) - (400 // 2)
+    text_dialog.geometry(f"500x400+{x}+{y}")
+    
+    # Bring dialog to foreground
+    text_dialog.lift()
+    text_dialog.attributes('-topmost', True)
+    text_dialog.after_idle(lambda: text_dialog.attributes('-topmost', False))
+    text_dialog.focus_force()
+    
+    # Main frame
+    main_frame = tk.Frame(text_dialog, padx=20, pady=20)
+    main_frame.pack(fill=tk.BOTH, expand=True)
+    
+    # Title
+    title_label = tk.Label(main_frame, text="Label Text Sections", 
+                          font=("Arial", 14, "bold"))
+    title_label.pack(pady=(0, 20))
+    
+    # Text preview panel
+    preview_frame = tk.Frame(main_frame, relief="sunken", bd=2, bg="white")
+    preview_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 20))
+    
+    preview_label = tk.Label(preview_frame, text="Text preview will appear here", 
+                            fg="gray", wraplength=450, justify="left", 
+                            bg="white", anchor="nw")
+    preview_label.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
+    
+    # Input fields frame
+    inputs_frame = tk.Frame(main_frame)
+    inputs_frame.pack(fill=tk.X, pady=(0, 20))
+    
+    # Shape ID input
+    shape_id_label = tk.Label(inputs_frame, text="Shape ID:", font=("Arial", 10))
+    shape_id_label.grid(row=0, column=0, sticky="w", pady=(0, 5))
+    shape_id_entry = tk.Entry(inputs_frame, font=("Arial", 11), width=30)
+    shape_id_entry.grid(row=0, column=1, sticky="ew", pady=(0, 5))
+    shape_id_entry.bind('<FocusOut>', lambda e: update_text_preview(preview_label, shape_id_entry, start_char_entry, end_char_entry, selection))
+    
+    # Start char input
+    start_char_label = tk.Label(inputs_frame, text="Start Char (0-indexed):", font=("Arial", 10))
+    start_char_label.grid(row=1, column=0, sticky="w", pady=(0, 5))
+    start_char_entry = tk.Entry(inputs_frame, font=("Arial", 11), width=30)
+    start_char_entry.grid(row=1, column=1, sticky="ew", pady=(0, 5))
+    start_char_entry.bind('<FocusOut>', lambda e: update_text_preview(preview_label, shape_id_entry, start_char_entry, end_char_entry, selection))
+    
+    # End char input
+    end_char_label = tk.Label(inputs_frame, text="End Char (0-indexed):", font=("Arial", 10))
+    end_char_label.grid(row=2, column=0, sticky="w", pady=(0, 5))
+    end_char_entry = tk.Entry(inputs_frame, font=("Arial", 11), width=30)
+    end_char_entry.grid(row=2, column=1, sticky="ew", pady=(0, 5))
+    end_char_entry.bind('<FocusOut>', lambda e: update_text_preview(preview_label, shape_id_entry, start_char_entry, end_char_entry, selection))
+    
+    # Name of text section input
+    name_label = tk.Label(inputs_frame, text="Name of Text Section:", font=("Arial", 10))
+    name_label.grid(row=3, column=0, sticky="w", pady=(0, 5))
+    name_entry = tk.Entry(inputs_frame, font=("Arial", 11), width=30)
+    name_entry.grid(row=3, column=1, sticky="ew", pady=(0, 5))
+    
+    # Configure grid weights
+    inputs_frame.columnconfigure(1, weight=1)
+    
+    # Buttons frame
+    buttons_frame = tk.Frame(main_frame)
+    buttons_frame.pack(fill=tk.X, pady=(20, 0))
+    
+    # Save & Next button
+    save_next_btn = tk.Button(buttons_frame, text="Save & Next", 
+                             command=lambda: save_and_next_text(shape_id_entry.get().strip(), 
+                                                              start_char_entry.get().strip(),
+                                                              end_char_entry.get().strip(),
+                                                              name_entry.get().strip(),
+                                                              text_dialog),
+                             bg="#2196F3", fg="white",
+                             width=12, height=2)
+    save_next_btn.pack(side=tk.LEFT, padx=(0, 10))
+    
+    # Save & Finish button
+    save_finish_btn = tk.Button(buttons_frame, text="Save & Finish", 
+                               command=lambda: save_and_finish_text(shape_id_entry.get().strip(), 
+                                                                  start_char_entry.get().strip(),
+                                                                  end_char_entry.get().strip(),
+                                                                  name_entry.get().strip(),
+                                                                  text_dialog),
+                               bg="#4CAF50", fg="white",
+                               width=12, height=2)
+    save_finish_btn.pack(side=tk.LEFT, padx=(0, 10))
+    
+    # Finish button
+    finish_btn = tk.Button(buttons_frame, text="Finish", 
+                          command=lambda: finish_text_labeling(text_dialog),
+                          bg="#F44336", fg="white",
+                          width=12, height=2)
+    finish_btn.pack(side=tk.LEFT)
+    
+    # Focus on first input
+    text_dialog.after(100, lambda: shape_id_entry.focus())
+    
+    # Bind Enter key to Save & Next
+    text_dialog.bind('<Return>', lambda e: save_and_next_text(shape_id_entry.get().strip(), 
+                                                             start_char_entry.get().strip(),
+                                                             end_char_entry.get().strip(),
+                                                             name_entry.get().strip(),
+                                                             text_dialog))
+
+def save_and_next_text(shape_id, start_char, end_char, name, dialog):
+    """Save text section and continue to next"""
+    # TODO: Implement save and next functionality
+    text_section_list.append({'shape_id': shape_id, 'start_char': start_char, 'end_char': end_char, 'group_name': name})
+    print(f"Save & Next: Shape ID={shape_id}, Start={start_char}, End={end_char}, Name={name}")
+    # Clear the form for next entry
+    for widget in dialog.winfo_children():
+        if isinstance(widget, tk.Frame):
+            for child in widget.winfo_children():
+                if isinstance(child, tk.Frame):
+                    for entry in child.winfo_children():
+                        if isinstance(entry, tk.Entry):
+                            entry.delete(0, tk.END)
+
+def save_and_finish_text(shape_id, start_char, end_char, name, dialog):
+    """Save text section and finish"""
+    # TODO: Implement save and finish functionality
+    text_section_list.append({'shape_id': shape_id, 'start_char': start_char, 'end_char': end_char, 'group_name': name})
+    print(f"Save & Finish: Shape ID={shape_id}, Start={start_char}, End={end_char}, Name={name}")
+    dialog.destroy()
+    finish_text_labeling_process()
+
+def finish_text_labeling(dialog):
+    """Finish text labeling without saving"""
+    dialog.destroy()
+    finish_text_labeling_process()
+
+def finish_text_labeling_process():
+    """Complete the text labeling process"""
+    global listener_active
+    listener_active = False
+    print("Text labeling finished - stopping listener")
+    dl = basic.process_groups(shape_data, group_list, test_index, slide_dimensions)
+    dl = structure_shapes.generate_structure_main(dl)
+    dl = basic.add_text_sections(dl, text_section_list)
+    df = basic.save_to_csv(dl, test_index)  # Saves as CSV
+    print("Done")   
+    print("Finished labeling process")
+    exit()
 
 
 
