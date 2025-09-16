@@ -28,6 +28,11 @@ def get_selected_shapes_info(selection):
             height = shape.Height
             right = left + width
             bottom = top + height
+
+            if shape.HasTextFrame:
+                text = shape.TextFrame.TextRange.Text
+            else:
+                text = ''
             
             # Extract shape ID from text
             shape_info = {
@@ -37,7 +42,8 @@ def get_selected_shapes_info(selection):
                 'right': right,
                 'bottom': bottom,
                 'width': width,
-                'height': height,
+                'height': height,   
+                'text': text,
             }
             
             selected_shapes.append(shape_info)
@@ -70,6 +76,15 @@ def calculate_bounds(shapes):
         'height': max_bottom - min_top
     }
 
+
+def get_group_text(selected_shapes):
+    """
+    Get the text of the selected shapes.
+    """
+    shapes_with_text = [shape for shape in selected_shapes if shape['text'] != '']
+    return '\n\n\n'.join([shape['text'] for shape in shapes_with_text])
+
+
 def group_selected_shapes(group_name, selection):
     """
     Main function to group selected shapes based on user input.
@@ -93,6 +108,7 @@ def group_selected_shapes(group_name, selection):
         'bottom': bounds['bottom'],
         'width': bounds['width'],
         'height': bounds['height'],
+        'text': get_group_text(selected_shapes),
         'timestamp': datetime.now()
     }
     

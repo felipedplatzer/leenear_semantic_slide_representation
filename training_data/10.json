@@ -1,0 +1,330 @@
+[
+    {
+        "index": "1",
+        "label": "Design element",
+        "top": -0.0,
+        "left": 0.434,
+        "right": 1.0,
+        "bottom": 0.084
+    },
+    {
+        "index": "2",
+        "label": "Header / chapter name",
+        "top": 0.004,
+        "left": 0.05,
+        "right": 0.432,
+        "bottom": 0.077
+    },
+    {
+        "index": "2.01",
+        "label": "Icon",
+        "top": 0.004,
+        "left": 0.05,
+        "right": 0.091,
+        "bottom": 0.077
+    },
+    {
+        "index": "2.02",
+        "label": "Header",
+        "top": 0.022,
+        "left": 0.096,
+        "right": 0.432,
+        "bottom": 0.06
+    },
+    {
+        "index": "3",
+        "label": "Title",
+        "top": 0.097,
+        "left": 0.05,
+        "right": 0.954,
+        "bottom": 0.157
+    },
+    {
+        "index": "4",
+        "label": "Semiconductor market shares by product type",
+        "top": 0.184,
+        "left": 0.04,
+        "right": 0.505,
+        "bottom": 0.914
+    },
+    {
+        "index": "4.01",
+        "label": "Header",
+        "top": 0.184,
+        "left": 0.04,
+        "right": 0.48,
+        "bottom": 0.285
+    },
+    {
+        "index": "4.02",
+        "label": "Chart - semiconductor market share by product type",
+        "top": 0.295,
+        "left": 0.051,
+        "right": 0.505,
+        "bottom": 0.914
+    },
+    {
+        "index": "5",
+        "label": "Product type descriptions",
+        "top": 0.184,
+        "left": 0.515,
+        "right": 0.954,
+        "bottom": 0.867
+    },
+    {
+        "index": "5.01",
+        "label": "Header",
+        "top": 0.184,
+        "left": 0.515,
+        "right": 0.954,
+        "bottom": 0.243
+    },
+    {
+        "index": "5.02",
+        "label": "Product type descriptions",
+        "top": 0.277,
+        "left": 0.517,
+        "right": 0.954,
+        "bottom": 0.867
+    },
+    {
+        "index": "05.02.01",
+        "label": "Logic",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.01.01",
+        "label": "Header",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.01.02",
+        "label": "Description",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.02",
+        "label": "Memory",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.02.01",
+        "label": "Header",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.02.02",
+        "label": "Description",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.03",
+        "label": "Analog",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.03.01",
+        "label": "Header",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.03.02",
+        "label": "Description",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.04",
+        "label": "Microprocessor Units (MPU)",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.04.01",
+        "label": "Header",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.04.02",
+        "label": "Description",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.05",
+        "label": "Opto",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.05.01",
+        "label": "Header",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.05.02",
+        "label": "Description",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.06",
+        "label": "Discretes",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.06.01",
+        "label": "Header",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.06.02",
+        "label": "Description",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.07",
+        "label": "Microcontroller Units (MCU)",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.07.01",
+        "label": "Header",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.07.02",
+        "label": "Description",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.08",
+        "label": "Sensors",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.08.01",
+        "label": "Header",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.08.02",
+        "label": "Description",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.09",
+        "label": "Digital Signal Processors (DSP)",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.09.01",
+        "label": "Header",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "05.02.09.02",
+        "label": "Description",
+        "top": NaN,
+        "left": NaN,
+        "right": NaN,
+        "bottom": NaN
+    },
+    {
+        "index": "6",
+        "label": "Page number",
+        "top": 0.914,
+        "left": 0.05,
+        "right": 0.11,
+        "bottom": 0.948
+    },
+    {
+        "index": "7",
+        "label": "Footnote",
+        "top": 0.914,
+        "left": 0.078,
+        "right": 0.954,
+        "bottom": 0.956
+    },
+    {
+        "index": "8",
+        "label": "Manifold logo",
+        "top": 0.922,
+        "left": 0.892,
+        "right": 0.967,
+        "bottom": 0.95
+    }
+]

@@ -1,0 +1,450 @@
+[
+    {
+        "index": "1",
+        "label": "Design element",
+        "top": -0.0,
+        "left": 0.434,
+        "right": 1.0,
+        "bottom": 0.084
+    },
+    {
+        "index": "2",
+        "label": "Title",
+        "top": 0.097,
+        "left": 0.05,
+        "right": 0.956,
+        "bottom": 0.157
+    },
+    {
+        "index": "3",
+        "label": "Core players",
+        "top": 0.187,
+        "left": 0.05,
+        "right": 0.455,
+        "bottom": 0.876
+    },
+    {
+        "index": "3.01",
+        "label": "Header",
+        "top": 0.187,
+        "left": 0.05,
+        "right": 0.366,
+        "bottom": 0.247
+    },
+    {
+        "index": "3.02",
+        "label": "Value chain",
+        "top": 0.253,
+        "left": 0.051,
+        "right": 0.454,
+        "bottom": 0.317
+    },
+    {
+        "index": "03.02.01",
+        "label": "Header - design",
+        "top": 0.253,
+        "left": 0.051,
+        "right": 0.168,
+        "bottom": 0.317
+    },
+    {
+        "index": "03.02.02",
+        "label": "Header - manufacturing",
+        "top": 0.253,
+        "left": 0.194,
+        "right": 0.311,
+        "bottom": 0.317
+    },
+    {
+        "index": "03.02.03",
+        "label": "Header - ATP",
+        "top": 0.253,
+        "left": 0.337,
+        "right": 0.454,
+        "bottom": 0.317
+    },
+    {
+        "index": "03.02.04",
+        "label": "Arrow",
+        "top": 0.285,
+        "left": 0.168,
+        "right": 0.194,
+        "bottom": 0.285
+    },
+    {
+        "index": "03.02.05",
+        "label": "Arrow",
+        "top": 0.285,
+        "left": 0.311,
+        "right": 0.337,
+        "bottom": 0.285
+    },
+    {
+        "index": "3.03",
+        "label": "Fabless design firms",
+        "top": 0.341,
+        "left": 0.05,
+        "right": 0.17,
+        "bottom": 0.683
+    },
+    {
+        "index": "03.03.01",
+        "label": "Frame",
+        "top": 0.341,
+        "left": 0.05,
+        "right": 0.17,
+        "bottom": 0.683
+    },
+    {
+        "index": "03.03.02",
+        "label": "AMD logo",
+        "top": 0.434,
+        "left": 0.072,
+        "right": 0.148,
+        "bottom": 0.467
+    },
+    {
+        "index": "03.03.03",
+        "label": "Nvidia logo",
+        "top": 0.486,
+        "left": 0.067,
+        "right": 0.153,
+        "bottom": 0.515
+    },
+    {
+        "index": "03.03.04",
+        "label": "Qualcomm logo",
+        "top": 0.534,
+        "left": 0.067,
+        "right": 0.153,
+        "bottom": 0.563
+    },
+    {
+        "index": "03.03.05",
+        "label": "Broadcom logo",
+        "top": 0.582,
+        "left": 0.06,
+        "right": 0.16,
+        "bottom": 0.606
+    },
+    {
+        "index": "03.03.06",
+        "label": "Marvell logo",
+        "top": 0.626,
+        "left": 0.072,
+        "right": 0.15,
+        "bottom": 0.665
+    },
+    {
+        "index": "3.04",
+        "label": "Foundries",
+        "top": 0.341,
+        "left": 0.193,
+        "right": 0.313,
+        "bottom": 0.683
+    },
+    {
+        "index": "03.04.01",
+        "label": "Frame",
+        "top": 0.341,
+        "left": 0.193,
+        "right": 0.313,
+        "bottom": 0.683
+    },
+    {
+        "index": "03.04.02",
+        "label": "TSMC logo",
+        "top": 0.444,
+        "left": 0.22,
+        "right": 0.286,
+        "bottom": 0.536
+    },
+    {
+        "index": "03.04.03",
+        "label": "UMC logo",
+        "top": 0.567,
+        "left": 0.208,
+        "right": 0.297,
+        "bottom": 0.603
+    },
+    {
+        "index": "03.04.04",
+        "label": "GlobalFoundries logo",
+        "top": 0.638,
+        "left": 0.207,
+        "right": 0.298,
+        "bottom": 0.669
+    },
+    {
+        "index": "3.05",
+        "label": "OSAT firms",
+        "top": 0.341,
+        "left": 0.335,
+        "right": 0.455,
+        "bottom": 0.683
+    },
+    {
+        "index": "03.05.01",
+        "label": "Frame",
+        "top": 0.341,
+        "left": 0.335,
+        "right": 0.455,
+        "bottom": 0.683
+    },
+    {
+        "index": "03.05.02",
+        "label": "Amkor logo",
+        "top": 0.462,
+        "left": 0.349,
+        "right": 0.437,
+        "bottom": 0.534
+    },
+    {
+        "index": "03.05.03",
+        "label": "Teradyne logo",
+        "top": 0.567,
+        "left": 0.35,
+        "right": 0.44,
+        "bottom": 0.604
+    },
+    {
+        "index": "03.05.04",
+        "label": "Advantest logo",
+        "top": 0.621,
+        "left": 0.345,
+        "right": 0.446,
+        "bottom": 0.668
+    },
+    {
+        "index": "3.06",
+        "label": "Integrated device manufacturers (IDMs)",
+        "top": 0.711,
+        "left": 0.05,
+        "right": 0.455,
+        "bottom": 0.876
+    },
+    {
+        "index": "03.06.01",
+        "label": "Frame",
+        "top": 0.711,
+        "left": 0.05,
+        "right": 0.455,
+        "bottom": 0.876
+    },
+    {
+        "index": "03.06.02",
+        "label": "Logos of TI, Samsung, Micron, Intel, Onsemi",
+        "top": 0.763,
+        "left": 0.081,
+        "right": 0.436,
+        "bottom": 0.807
+    },
+    {
+        "index": "03.06.03",
+        "label": "Logos of Kioxia, NXP, Renesas, Analog Devices, Infineon",
+        "top": 0.811,
+        "left": 0.085,
+        "right": 0.428,
+        "bottom": 0.865
+    },
+    {
+        "index": "4",
+        "label": "Suppliers",
+        "top": 0.187,
+        "left": 0.499,
+        "right": 0.95,
+        "bottom": 0.88
+    },
+    {
+        "index": "4.01",
+        "label": "Header",
+        "top": 0.187,
+        "left": 0.499,
+        "right": 0.815,
+        "bottom": 0.247
+    },
+    {
+        "index": "4.02",
+        "label": "Header - supplier types",
+        "top": 0.253,
+        "left": 0.501,
+        "right": 0.95,
+        "bottom": 0.317
+    },
+    {
+        "index": "04.02.01",
+        "label": "Header - design",
+        "top": 0.253,
+        "left": 0.501,
+        "right": 0.711,
+        "bottom": 0.317
+    },
+    {
+        "index": "04.02.02",
+        "label": "Header - manufacturing",
+        "top": 0.253,
+        "left": 0.743,
+        "right": 0.95,
+        "bottom": 0.317
+    },
+    {
+        "index": "4.03",
+        "label": "Core IP firms",
+        "top": 0.344,
+        "left": 0.501,
+        "right": 0.601,
+        "bottom": 0.88
+    },
+    {
+        "index": "04.03.01",
+        "label": "Frame",
+        "top": 0.344,
+        "left": 0.501,
+        "right": 0.601,
+        "bottom": 0.88
+    },
+    {
+        "index": "04.03.02",
+        "label": "Arm and imagination logo",
+        "top": 0.435,
+        "left": 0.509,
+        "right": 0.59,
+        "bottom": 0.52
+    },
+    {
+        "index": "4.04",
+        "label": "EDA firms",
+        "top": 0.344,
+        "left": 0.615,
+        "right": 0.715,
+        "bottom": 0.88
+    },
+    {
+        "index": "04.04.01",
+        "label": "Frame",
+        "top": 0.344,
+        "left": 0.615,
+        "right": 0.715,
+        "bottom": 0.88
+    },
+    {
+        "index": "04.04.02",
+        "label": "Cadence and Synopsys logo",
+        "top": 0.426,
+        "left": 0.628,
+        "right": 0.707,
+        "bottom": 0.52
+    },
+    {
+        "index": "4.05",
+        "label": "Raw materials firms",
+        "top": 0.344,
+        "left": 0.74,
+        "right": 0.84,
+        "bottom": 0.88
+    },
+    {
+        "index": "04.05.01",
+        "label": "Frame",
+        "top": 0.344,
+        "left": 0.74,
+        "right": 0.84,
+        "bottom": 0.88
+    },
+    {
+        "index": "04.05.02",
+        "label": "ShinEtsu and Siltronic logo",
+        "top": 0.438,
+        "left": 0.754,
+        "right": 0.825,
+        "bottom": 0.576
+    },
+    {
+        "index": "04.05.03",
+        "label": "GW and Sumco loco",
+        "top": 0.601,
+        "left": 0.755,
+        "right": 0.826,
+        "bottom": 0.739
+    },
+    {
+        "index": "4.06",
+        "label": "Equipment firms",
+        "top": 0.344,
+        "left": 0.85,
+        "right": 0.95,
+        "bottom": 0.88
+    },
+    {
+        "index": "04.06.01",
+        "label": "Frame",
+        "top": 0.344,
+        "left": 0.85,
+        "right": 0.95,
+        "bottom": 0.88
+    },
+    {
+        "index": "04.06.02",
+        "label": "Applied Materials and Hitachi logo",
+        "top": 0.438,
+        "left": 0.857,
+        "right": 0.946,
+        "bottom": 0.567
+    },
+    {
+        "index": "04.06.03",
+        "label": "ASML ASM and Zeiss logo",
+        "top": 0.562,
+        "left": 0.857,
+        "right": 0.943,
+        "bottom": 0.68
+    },
+    {
+        "index": "04.06.04",
+        "label": "Nikon and Besi logo",
+        "top": 0.672,
+        "left": 0.872,
+        "right": 0.928,
+        "bottom": 0.815
+    },
+    {
+        "index": "04.06.05",
+        "label": "TEL logo",
+        "top": 0.82,
+        "left": 0.867,
+        "right": 0.933,
+        "bottom": 0.876
+    },
+    {
+        "index": "5",
+        "label": "Divider",
+        "top": 0.191,
+        "left": 0.479,
+        "right": 0.479,
+        "bottom": 0.88
+    },
+    {
+        "index": "6",
+        "label": "Footnote",
+        "top": 0.918,
+        "left": 0.1,
+        "right": 0.811,
+        "bottom": 0.96
+    },
+    {
+        "index": "7",
+        "label": "Page number",
+        "top": 0.922,
+        "left": 0.05,
+        "right": 0.11,
+        "bottom": 0.956
+    },
+    {
+        "index": "8",
+        "label": "Manifold logo",
+        "top": 0.922,
+        "left": 0.892,
+        "right": 0.967,
+        "bottom": 0.95
+    }
+]
