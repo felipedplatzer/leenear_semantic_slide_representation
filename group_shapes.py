@@ -92,7 +92,8 @@ def group_selected_shapes(group_name, selection):
         'right': bounds['right'],
         'bottom': bounds['bottom'],
         'width': bounds['width'],
-        'height': bounds['height']
+        'height': bounds['height'],
+        'timestamp': datetime.now()
     }
     
     return group_entry

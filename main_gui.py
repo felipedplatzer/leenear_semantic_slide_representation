@@ -137,7 +137,7 @@ def check_selection():
                 current_selection_shape_ids = [shape.Id for shape in selection.ShapeRange]
                 # current_selection = str(selection.ShapeRange.Count)
                 
-                if set(current_selection_shape_ids) != set(last_selection_ref_shape_ids) and selection.ShapeRange.Count > 1:
+                if set(current_selection_shape_ids) != set(last_selection_ref_shape_ids) and selection.ShapeRange.Count >= 1:
                     print("Selection changed")
                     last_selection_ref = selection
                     last_selection_ref_shape_ids = current_selection_shape_ids
