@@ -34,7 +34,7 @@ def create_shape_boxes(ppt_app):
             shape = shapes.Item(i)
             
             # Get shape properties
-            shape_id = shape.Id
+            shape_id = str(shape.Id)
             top = shape.Top
             left = shape.Left
             width = shape.Width

@@ -1,15 +1,0 @@
-test_index,index,label,shape_id,text,top,left,right,bottom,width,height,slide_height,slide_width
-10,01,"nan","[465]","",-0.01,312.54,720.0,33.84,407.46,33.85,405.0,720.0
-10,02,"nan","[2]","Original slide",1.16,352.19,499.77,28.51,147.58,27.35,405.0,720.0
-10,03,"nan","[471]","",1.72,36.0,65.3,31.02,29.3,29.3,405.0,720.0
-10,04,"nan","[470]","Segmentation by product type",8.8,68.87,311.0,24.2,242.13,15.4,405.0,720.0
-10,05,"xyplus","[468\, 472\, 473\, 474\, 475]","nan",39.34,29.11,687.0,370.26,657.89,330.92,405.0,720.0
-10,05.01,"nan","[468]","Logic and memory chips make up >50% of the market.",39.34,36.0,687.0,63.5,651.0,24.17,405.0,720.0
-10,05.02,"xy","[473\, 475]","nan",74.33,29.11,363.52,370.26,334.41,295.93,405.0,720.0
-10,05.02.01,"x","[473]","nan",74.33,29.11,345.6,115.53,316.49,41.2,405.0,720.0
-10,05.02.02,"y","[475]","nan",119.51,36.52,363.52,370.26,327.0,250.75,405.0,720.0
-10,05.03,"nan","[474]","Product type description",74.33,370.51,687.0,98.57,316.49,24.24,405.0,720.0
-10,05.04,"nan","[472]","Logic: Main building blocks of digital circuits. They perform basic logical operations like AND\, OR\, NOT\, and XOR\Memory: Store data. Includes volatile memory (like RAM) and non-volatile memory (like flash memory and ROM)\Analog: Process analog signals. Used in audio amplification\, radio transmission\, and signal processing. \Microprocessor Units (MPU): Umbrella term that includes central processing units (CPUs)\, graphics processing units (GPUs)\, and others\Opto: Source\, detect\, and control light. Used in fiber-optic communications\, display technology\, and lighting\Discretes: Individual semiconductor devices like diodes and thyristors. Used in power management\, switching\, and amplification\Microcontroller Units (MCU): Similar to MPUs\, but don’t need external support chips to create a complete embedded system\Sensors: Convert environmental variables such as temperature\, pressure\, into electrical signals \Digital Signal Processors (DSP): Specialized microprocessors designed to process digital signals. Used in audio and video processing\, telecommunications\, and control systems",112.17,372.58,686.99,350.94,314.41,238.77,405.0,720.0
-10,06,"nan","[469]","Source: SIA\, 2020.",370.26,56.22,687.0,387.22,630.78,16.96,405.0,720.0
-10,07,"nan","[467]","1",373.3,36.0,79.2,387.0,43.2,13.7,405.0,720.0
-10,08,"nan","[466]","",373.3,642.28,696.19,384.72,53.91,11.42,405.0,720.0

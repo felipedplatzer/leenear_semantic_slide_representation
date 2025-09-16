@@ -2,6 +2,7 @@ import pandas as pd
 import json
 import csv
 from datetime import datetime
+import structure_text
 
 def is_orphan(shape_dict, group_list):
     shape_id = shape_dict['shape_id']
@@ -18,24 +19,44 @@ def add_unnamed_shapes(shape_data, group_list):
     return group_list
 
 
-def process_groups(shape_data, group_list, test_index, slide_dimensions):
-    # concat shape data and group list
-    data_list = add_unnamed_shapes(shape_data, group_list)
-
-    # add slide dimensions and test index to each dict
-    for x in data_list:
-        x['slide_height'] = slide_dimensions['height']
-        x['slide_width'] = slide_dimensions['width']
-        x['test_index'] = test_index  
-    # Create dataframe
-    return data_list
+def get_parent_shape(this_id, dl):
+    for i, x in enumerate(dl):
+        if len(x['shape_id']) == 1 and x['shape_id'][0] == this_id:
+            return i, x
+    return None
 
 
 def add_text_sections(dl, text_section_list):
-    return dl + text_section_list
+    # Group into shape id's
+    shape_ids_with_text = list(set([x['shape_id'] for x in text_section_list]))
+    dl_new = dl.copy()
+    # For each shape id, get tree structure
+    for x in shape_ids_with_text:
+        # Get all sections in this shape
+        sections_in_shape = [y for y in text_section_list if y['shape_id'] == x]
+        # Get tree structure
+        sections_in_shape = structure_text.structure_text_sections(sections_in_shape)
+        # Get parent shape
+        parent_shape_i, parent_shape = get_parent_shape(x, dl)
+        # Add prefix 
+        for y in sections_in_shape: 
+            y['index'] = parent_shape['index'] + '.' + y['index']
+            y['shape_id'] = [y['shape_id']] # fix
+        # Insert into array
+        dl_new[parent_shape_i:parent_shape_i] = sections_in_shape
+    return dl_new
+
+
 
 def save_to_csv(dl, test_index):
     df = pd.DataFrame(dl)
+    # add missing cols
+    col_list = ["test_index", "index",  "label", "shape_id", "start_char", "end_char", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]
+    for x in col_list:
+        if x not in df.columns:
+            df[x] = ''
+    # fill na
+    df = df.fillna('')
     # Handle commas 
     df["shape_id"] = df["shape_id"].apply(json.dumps)
     for x in ["shape_id", "text", "label"]:
@@ -45,13 +66,13 @@ def save_to_csv(dl, test_index):
     for x in ["top", "left", "right", "bottom", "width", "height"]:
         df[x] = df[x].round(2)
     #reorder cols
-    df = df[["test_index", "index",  "label", "shape_id", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]]
+    df = df[["test_index", "index",  "label", "shape_id", "start_char", "end_char", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]]
     # Get filename and save
     test_index_str = str(test_index).zfill(3)
     filename = f"test_{str(test_index_str)}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
     filepath = f'./csv_files/{filename}'
     # Sort
     df = df.sort_values(by="index", ascending=True)
-    df.to_csv(filepath, index=False, encoding="utf-8", quoting=csv.QUOTE_NONE, escapechar='\\')
+    df.to_csv(filepath, index=False, encoding="utf-8", quoting=csv.QUOTE_NONE, escapechar='\\', na_rep='')
     return df
     

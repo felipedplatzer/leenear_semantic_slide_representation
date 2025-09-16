@@ -463,24 +463,47 @@ def show_text_labeling_form(selection):
                                                              name_entry.get().strip(),
                                                              text_dialog))
 
+def get_text_dict(shape_id, start_char, end_char, name):
+    for x in ppt_app.ActiveWindow.View.Slide.Shapes:
+        if str(x.ID) == shape_id:
+            if x.HasTextFrame:
+                text = x.TextFrame.TextRange.Text[int(start_char):int(end_char)]
+                return {'shape_id': shape_id, 'start_char': int(start_char), 'end_char': int(end_char), 'label': name, 'text': text}
+    return {'shape_id': shape_id, 'start_char': int(start_char), 'end_char': int(end_char), 'label': name, 'text': ''}
+
 def save_and_next_text(shape_id, start_char, end_char, name, dialog):
     """Save text section and continue to next"""
     # TODO: Implement save and next functionality
-    text_section_list.append({'shape_id': shape_id, 'start_char': start_char, 'end_char': end_char, 'group_name': name})
+    text_section_list.append(get_text_dict(shape_id, start_char, end_char, name))
     print(f"Save & Next: Shape ID={shape_id}, Start={start_char}, End={end_char}, Name={name}")
-    # Clear the form for next entry
+    
+    # Find the input fields and update them
     for widget in dialog.winfo_children():
         if isinstance(widget, tk.Frame):
             for child in widget.winfo_children():
                 if isinstance(child, tk.Frame):
+                    entries = []
                     for entry in child.winfo_children():
                         if isinstance(entry, tk.Entry):
-                            entry.delete(0, tk.END)
+                            entries.append(entry)
+                    
+                    if len(entries) >= 4:  # shape_id, start_char, end_char, name
+                        # Keep shape_id the same (entries[0])
+                        # Set start_char to previous end_char (entries[1])
+                        entries[1].delete(0, tk.END)
+                        entries[1].insert(0, end_char)
+                        # Clear end_char (entries[2])
+                        entries[2].delete(0, tk.END)
+                        # Clear name (entries[3])
+                        entries[3].delete(0, tk.END)
+                        # Focus on end_char field
+                        entries[2].focus()
+                        break
 
 def save_and_finish_text(shape_id, start_char, end_char, name, dialog):
     """Save text section and finish"""
     # TODO: Implement save and finish functionality
-    text_section_list.append({'shape_id': shape_id, 'start_char': start_char, 'end_char': end_char, 'group_name': name})
+    text_section_list.append(get_text_dict(shape_id, start_char, end_char, name))
     print(f"Save & Finish: Shape ID={shape_id}, Start={start_char}, End={end_char}, Name={name}")
     dialog.destroy()
     finish_text_labeling_process()
@@ -495,9 +518,13 @@ def finish_text_labeling_process():
     global listener_active
     listener_active = False
     print("Text labeling finished - stopping listener")
-    dl = basic.process_groups(shape_data, group_list, test_index, slide_dimensions)
+    dl = basic.add_unnamed_shapes(shape_data, group_list)
     dl = structure_shapes.generate_structure_main(dl)
     dl = basic.add_text_sections(dl, text_section_list)
+    for x in dl:
+        x['slide_height'] = slide_dimensions['height']
+        x['slide_width'] = slide_dimensions['width']
+        x['test_index'] = test_index  
     df = basic.save_to_csv(dl, test_index)  # Saves as CSV
     print("Done")   
     print("Finished labeling process")

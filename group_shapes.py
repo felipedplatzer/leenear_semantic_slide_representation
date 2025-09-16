@@ -86,7 +86,7 @@ def group_selected_shapes(group_name, selection):
     group_entry = {
         'label': group_name,
         'shape_count': len(selected_shapes),
-        'shape_id': [shape['shape_id'] for shape in selected_shapes],
+        'shape_id': [str(shape['shape_id']) for shape in selected_shapes],
         'top': bounds['top'],
         'left': bounds['left'],
         'right': bounds['right'],
