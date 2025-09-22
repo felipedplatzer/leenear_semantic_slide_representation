@@ -1,0 +1,321 @@
+[
+  {
+    "label": "Design element",
+    "shape_id": [
+      "124"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "123"
+    ]
+  },
+  {
+    "label": "Name, title, picture, and quick bio of people",
+    "shape_id": [
+      "127",
+      "130",
+      "131",
+      "132",
+      "134",
+      "138",
+      "139",
+      "140",
+      "141",
+      "142",
+      "143",
+      "144",
+      "145",
+      "146",
+      "147",
+      "148",
+      "149",
+      "150",
+      "151",
+      "152",
+      "128",
+      "129",
+      "133",
+      "135",
+      "136",
+      "137",
+      "153",
+      "154",
+      "155",
+      "156"
+    ]
+  },
+  {
+    "label": "Oliver Halter",
+    "shape_id": [
+      "130",
+      "139",
+      "136"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "136"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "130"
+    ]
+  },
+  {
+    "label": "Quick bio",
+    "shape_id": [
+      "139"
+    ]
+  },
+  {
+    "label": "Jordan Katz",
+    "shape_id": [
+      "134",
+      "142",
+      "155"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "155"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "134"
+    ]
+  },
+  {
+    "label": "Quick bio",
+    "shape_id": [
+      "142"
+    ]
+  },
+  {
+    "label": "Erich Klotz",
+    "shape_id": [
+      "145",
+      "150",
+      "137"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "137"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "145"
+    ]
+  },
+  {
+    "label": "Quick bio",
+    "shape_id": [
+      "150"
+    ]
+  },
+  {
+    "label": "Carlo Sanchez",
+    "shape_id": [
+      "127",
+      "138",
+      "129"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "129"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "127"
+    ]
+  },
+  {
+    "label": "Quick bio",
+    "shape_id": [
+      "138"
+    ]
+  },
+  {
+    "label": "Daniela Terrizzi",
+    "shape_id": [
+      "131",
+      "140",
+      "133"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "133"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "131"
+    ]
+  },
+  {
+    "label": "Quick bio",
+    "shape_id": [
+      "140"
+    ]
+  },
+  {
+    "label": "Tom Weakland",
+    "shape_id": [
+      "144",
+      "149",
+      "156"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "156"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "144"
+    ]
+  },
+  {
+    "label": "Quick bio",
+    "shape_id": [
+      "149"
+    ]
+  },
+  {
+    "label": "Mary Van De Kamp",
+    "shape_id": [
+      "147",
+      "152",
+      "155"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "155"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "147"
+    ]
+  },
+  {
+    "label": "Quick bio",
+    "shape_id": [
+      "152"
+    ]
+  },
+  {
+    "label": "Al Klein",
+    "shape_id": [
+      "143",
+      "148",
+      "137"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "137"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "143"
+    ]
+  },
+  {
+    "label": "Quick bio",
+    "shape_id": [
+      "148"
+    ]
+  },
+  {
+    "label": "Kelly Pollard",
+    "shape_id": [
+      "146",
+      "151",
+      "153"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "153"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "146"
+    ]
+  },
+  {
+    "label": "Quick bio",
+    "shape_id": [
+      "151"
+    ]
+  },
+  {
+    "label": "James Zuercher",
+    "shape_id": [
+      "132",
+      "141",
+      "135"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "135"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "132"
+    ]
+  },
+  {
+    "label": "Quick bio",
+    "shape_id": [
+      "141"
+    ]
+  },
+  {
+    "label": "Page number",
+    "shape_id": [
+      "125"
+    ]
+  },
+  {
+    "label": "Manifold logo",
+    "shape_id": [
+      "126"
+    ]
+  }
+]

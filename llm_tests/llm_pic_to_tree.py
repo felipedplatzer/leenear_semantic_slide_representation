@@ -16,7 +16,7 @@ def build_example_list(training_dir):
     for filename in os.listdir(training_dir):
         base_name = filename[:-5]  # Remove '.png'
         json_path = os.path.join(training_dir, f'{base_name}.json')
-        image = base.get_picture(base_name)
+        image = base.get_picture(base_name, active_bool=False)
 
         with open(json_path, 'r') as f:
             tree = json.load(f)
@@ -51,33 +51,31 @@ def write_sections(elements_json, folder, base_name):
         json.dump(elements_json, f, indent=2)
 
 
-
-
-if __name__ == "__main__":
-    rump = input('Enter slide index: ')
-
-
+def main(rump, active_bool):
     load_dotenv('env.env')
-
     # Initialize Gemini
     genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
     model = genai.GenerativeModel("gemini-1.5-pro")
-
-
     # Step 1: Load training examples
     example_prompts = build_example_list(base.training_data_folder)
-    
     # Step 2: Target slide to analyze
-    target_image = base.get_picture(rump)
-
+    target_image = base.get_picture(rump, active_bool)
     # Step 3: Final prompt
     prompt = build_prompt(example_prompts, target_image)
-
     # Step 4: Send to Gemini
     response = model.generate_content(prompt)
     text = response.text
     elements_json = base.get_json_from_llm_response(text)
-
     write_sections(elements_json, base.get_project_path('resources', 'llm_pic_to_tree_results'), rump)
     # Step 5: Output the result
-    print(response.text)
+    print(elements_json)
+    return elements_json
+
+
+if __name__ == "__main__":
+    rump = input('Enter slide index: ')
+    active_bool = False # get slide from resources folder, not from active slide
+    main(rump, active_bool)
+
+
+

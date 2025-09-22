@@ -13,13 +13,8 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import base
 
-# Load environment variables
-load_dotenv('env.env')
 
-# Initialize OpenAI
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-def describe_image(image_path):
+def describe_image(image_path, client):
     """Use OpenAI to describe an image"""
     try:
         # Open and convert image to ensure proper format
@@ -75,7 +70,7 @@ def get_description_textbox(shape):
         return "Textbox (unable to read content)"
 
 
-def get_description_picture(shape):
+def get_description_picture(shape, client):
     temp_path = None
     try:
         # Create temp file with explicit path
@@ -84,7 +79,7 @@ def get_description_picture(shape):
         # Export shape as image
         shape.Export(temp_path, Filter=3)  # 2 = png, 3 = jpg, 4 = bmp
         # Get description
-        description = describe_image(temp_path)
+        description = describe_image(temp_path, client)
         
     except Exception as e:
         print(f"Error processing image in shape {shape.Id}: {e}")
@@ -99,11 +94,11 @@ def get_description_picture(shape):
     return description
 
 
-def get_description_table(shape):
+def get_description_table(shape, client):
     try:
         table = shape.Table
         table_desc = f"Table with {table.Rows.Count} rows and {table.Columns.Count} columns"
-        table_desc += '. ' + get_description_picture(shape)
+        table_desc += '. ' + get_description_picture(shape, client)
         return table_desc
     except:
         return "Table"
@@ -126,7 +121,7 @@ def get_description_cell(cell, table_id, i_row, i_cell):
     except:
         return cell_desc
 
-def extract_shape_descriptions(slide):
+def extract_shape_descriptions(slide, client):
     """Extract descriptions of all shapes in a PowerPoint presentation using win32com"""
     # Process each shape in the slide
     slide_height = slide.Parent.PageSetup.SlideHeight
@@ -151,7 +146,7 @@ def extract_shape_descriptions(slide):
 
     for x in tables:
         d = base.get_shape_info(x)
-        d['description'] = get_description_table(x)
+        d['description'] = get_description_table(x, client)
         all_elements_dl.append(d)
 
     for x in charts:
@@ -161,7 +156,7 @@ def extract_shape_descriptions(slide):
 
     for x in pictures:
         d = base.get_shape_info(x)
-        d['description'] = get_description_picture(x)
+        d['description'] = get_description_picture(x, client)
         all_elements_dl.append(d)
 
     # Postprocess tables - break into cells
@@ -186,17 +181,30 @@ def extract_shape_descriptions(slide):
     # Return
     return all_elements_dl
 
+
+def main(rump, active_bool, client):
+    if active_bool == False:
+        presentation, slide = base.open_slide(rump)
+    else:
+        presentation, slide = base.get_active_slide()
+    output_file = base.get_project_path('resources', 'llm_pic_to_descs_results', f'{rump}.json')    
+    shape_descriptions = extract_shape_descriptions(slide, client)
+    with open(output_file, 'w') as f:
+        json.dump(shape_descriptions, f, indent=2)
+    print(f"Saved {len(shape_descriptions)} shape descriptions to {output_file}")
+    if active_bool == False:
+        presentation.Close()
+    return shape_descriptions
+
+
 # Main execution
 if __name__ == "__main__":
     rump = input('Enter slide index: ')
-    ppt_file = base.get_project_path('resources', 'input_slides', f'{rump}.pptx')
-    output_file = base.get_project_path('resources', 'llm_pic_to_descs_results', f'{rump}.json')
-    presentation, slide = base.open_slide(rump)
-    if os.path.exists(ppt_file):
-        shape_descriptions = extract_shape_descriptions(slide)
-        with open(output_file, 'w') as f:
-            json.dump(shape_descriptions, f, indent=2)
-        print(f"Saved {len(shape_descriptions)} shape descriptions to {output_file}")
-        presentation.Close()
-    else:
-        print(f"PowerPoint file '{ppt_file}' not found. Please update the file path.")
+    # Load environment variables
+    load_dotenv('env.env')
+
+    # Initialize OpenAI
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+    active_bool = False # get slide from resources folder, not from active slide
+    main(rump, active_bool, client)

@@ -1,0 +1,166 @@
+[
+  {
+    "label": "Design element",
+    "shape_id": [
+      "124",
+      "125",
+      "126"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": []
+  },
+  {
+    "label": "People",
+    "shape_id": [
+      "130",
+      "134",
+      "145",
+      "127",
+      "131",
+      "144",
+      "147",
+      "143",
+      "146",
+      "132"
+    ]
+  },
+  {
+    "label": "Oliver Halter",
+    "shape_id": [
+      "130",
+      "156",
+      "139"
+    ]
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "156",
+      "128",
+      "154",
+      "129",
+      "133",
+      "136",
+      "155",
+      "137",
+      "153",
+      "135"
+    ]
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "130",
+      "134",
+      "145",
+      "127",
+      "131",
+      "144",
+      "147",
+      "143",
+      "146",
+      "132"
+    ]
+  },
+  {
+    "label": "Bio",
+    "shape_id": [
+      "139",
+      "142",
+      "150",
+      "138",
+      "140",
+      "149",
+      "148",
+      "148",
+      "151",
+      "141"
+    ]
+  },
+  {
+    "label": "Jordan Katz",
+    "shape_id": [
+      "134",
+      "128",
+      "142"
+    ]
+  },
+  {
+    "label": "Erich Klotz",
+    "shape_id": [
+      "145",
+      "154",
+      "150"
+    ]
+  },
+  {
+    "label": "Carlo Sanchez",
+    "shape_id": [
+      "127",
+      "129",
+      "138"
+    ]
+  },
+  {
+    "label": "Daniela Terrizzi",
+    "shape_id": [
+      "131",
+      "133",
+      "140"
+    ]
+  },
+  {
+    "label": "Tom Weakland",
+    "shape_id": [
+      "144",
+      "136",
+      "149"
+    ]
+  },
+  {
+    "label": "Mary Van De Kamp",
+    "shape_id": [
+      "147",
+      "155",
+      "148"
+    ]
+  },
+  {
+    "label": "Al Klein",
+    "shape_id": [
+      "143",
+      "137",
+      "148"
+    ]
+  },
+  {
+    "label": "Kelly Pollard",
+    "shape_id": [
+      "146",
+      "153",
+      "151"
+    ]
+  },
+  {
+    "label": "James Zuercher",
+    "shape_id": [
+      "132",
+      "135",
+      "141"
+    ]
+  },
+  {
+    "label": "Page number",
+    "shape_id": [
+      "125"
+    ]
+  },
+  {
+    "label": "Manifold logo",
+    "shape_id": [
+      "126"
+    ]
+  }
+]

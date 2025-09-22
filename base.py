@@ -28,6 +28,13 @@ def open_slide(rump):
     slide = presentation.Slides(1)
     return presentation, slide
 
+def get_active_slide():
+    """Get the currently active slide from PowerPoint"""
+    ppt_app = win32com.client.Dispatch("PowerPoint.Application")
+    presentation = ppt_app.ActivePresentation
+    slide = ppt_app.ActiveWindow.View.Slide  # Get the currently active/selected slide
+    return presentation, slide
+
 
 def get_json_from_llm_response(text):
     if '```json' in text:
@@ -55,14 +62,18 @@ def get_bounds_from_shape_ids(dl, elements_data):
 
 
 
-def get_picture(rump):
+def get_picture(rump, active_bool):
     if os.path.exists(f'{picture_folder}/{rump}.png'):
         return Image.open(f'{picture_folder}/{rump}.png')
     else:
-        presentation, slide = open_slide(rump)
+        if active_bool:
+            presentation, slide = get_active_slide()
+        else:
+            presentation, slide = open_slide(rump)
         png_file = f'{picture_folder}/{rump}.png'
         slide.Export(png_file, "PNG")
-        presentation.Close()
+        if active_bool == False:
+            presentation.Close()
         return Image.open(png_file)
 
 def get_sections(rump):

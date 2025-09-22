@@ -110,17 +110,16 @@ def get_elements_by_section(section_tree, elements_data, relative_coordinates_bo
     return elements_json
 
 
-if __name__ == "__main__":
-    # Example usage
+
+def main(rump, active_bool):
+# Example usage
     RELATIVE_COORDINATES_BOOL = True
     MODEL = 'openai'  # toggle between google and openai
     ONE_IMAGE_BOOL = False
-    rump = input('Enter slide index: ')
     # Example elements data - replace with your actual data
     with open(base.get_project_path('resources', 'llm_pic_to_descs_results', f'{rump}.json'), 'r') as f:
         elements_data = json.load(f)
     
-
     # Load section tree from file    
     with open(base.get_project_path('resources', 'llm_pic_to_tree_results', f'{rump}.json'), 'r') as f:
         section_tree = json.load(f)
@@ -141,6 +140,14 @@ if __name__ == "__main__":
     
 
     # Annotate the image
-    image = base.get_picture(rump)
+    image = base.get_picture(rump, active_bool)
     result_with_pos = base.get_bounds_from_shape_ids(result, elements_data)
     annotate_image.annotate_image(image, result_with_pos, ONE_IMAGE_BOOL, RELATIVE_COORDINATES_BOOL)
+    return result_with_pos
+
+
+if __name__ == "__main__":
+    rump = input('Enter slide index: ')
+    active_bool = False # get slide from resources folder, not from active slide
+    main(rump, active_bool)
+    
