@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import csv
+import os
 from datetime import datetime
 import structure_text
 
@@ -70,7 +71,9 @@ def save_to_csv(dl, test_index):
     # Get filename and save
     test_index_str = str(test_index).zfill(3)
     filename = f"test_{str(test_index_str)}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-    filepath = f'./csv_files/{filename}'
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    filepath = os.path.join(script_dir, 'csv_files', filename)
     # Sort
     df = df.sort_values(by="index", ascending=True)
     df.to_csv(filepath, index=False, encoding="utf-8", quoting=csv.QUOTE_NONE, escapechar='\\', na_rep='')

@@ -1,0 +1,238 @@
+[
+  {
+    "label": "Design element",
+    "sections": []
+  },
+  {
+    "label": "Title",
+    "sections": []
+  },
+  {
+    "label": "Core players",
+    "sections": [
+      {
+        "label": "Header",
+        "sections": []
+      },
+      {
+        "label": "Value chain",
+        "sections": [
+          {
+            "label": "Header - design",
+            "sections": []
+          },
+          {
+            "label": "Header - manufacturing",
+            "sections": []
+          },
+          {
+            "label": "Header - ATP",
+            "sections": []
+          },
+          {
+            "label": "Arrow",
+            "sections": []
+          },
+          {
+            "label": "Arrow",
+            "sections": []
+          }
+        ]
+      },
+      {
+        "label": "Fabless design firms",
+        "sections": [
+          {
+            "label": "Frame",
+            "sections": []
+          },
+          {
+            "label": "AMD logo",
+            "sections": []
+          },
+          {
+            "label": "Nvidia logo",
+            "sections": []
+          },
+          {
+            "label": "Qualcomm logo",
+            "sections": []
+          },
+          {
+            "label": "Broadcom logo",
+            "sections": []
+          },
+          {
+            "label": "Marvell logo",
+            "sections": []
+          }
+        ]
+      },
+      {
+        "label": "Foundries",
+        "sections": [
+          {
+            "label": "Frame",
+            "sections": []
+          },
+          {
+            "label": "TSMC logo",
+            "sections": []
+          },
+          {
+            "label": "UMC logo",
+            "sections": []
+          },
+          {
+            "label": "GlobalFoundries logo",
+            "sections": []
+          }
+        ]
+      },
+      {
+        "label": "OSAT firms",
+        "sections": [
+          {
+            "label": "Frame",
+            "sections": []
+          },
+          {
+            "label": "Amkor logo",
+            "sections": []
+          },
+          {
+            "label": "Teradyne logo",
+            "sections": []
+          },
+          {
+            "label": "Advantest logo",
+            "sections": []
+          }
+        ]
+      },
+      {
+        "label": "Integrated device manufacturers (IDMs)",
+        "sections": [
+          {
+            "label": "Frame",
+            "sections": []
+          },
+          {
+            "label": "Logos of TI, Samsung, Micron, Intel, Onsemi",
+            "sections": []
+          },
+          {
+            "label": "Logos of Kioxia, NXP, Renesas, Analog Devices, Infineon",
+            "sections": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Suppliers",
+    "sections": [
+      {
+        "label": "Header",
+        "sections": []
+      },
+      {
+        "label": "Header - supplier types",
+        "sections": [
+          {
+            "label": "Header - design",
+            "sections": []
+          },
+          {
+            "label": "Header - manufacturing",
+            "sections": []
+          }
+        ]
+      },
+      {
+        "label": "Core IP firms",
+        "sections": [
+          {
+            "label": "Frame",
+            "sections": []
+          },
+          {
+            "label": "Arm and imagination logo",
+            "sections": []
+          }
+        ]
+      },
+      {
+        "label": "EDA firms",
+        "sections": [
+          {
+            "label": "Frame",
+            "sections": []
+          },
+          {
+            "label": "Cadence and Synopsys logo",
+            "sections": []
+          }
+        ]
+      },
+      {
+        "label": "Raw materials firms",
+        "sections": [
+          {
+            "label": "Frame",
+            "sections": []
+          },
+          {
+            "label": "ShinEtsu and Siltronic logo",
+            "sections": []
+          },
+          {
+            "label": "GW and Sumco loco",
+            "sections": []
+          }
+        ]
+      },
+      {
+        "label": "Equipment firms",
+        "sections": [
+          {
+            "label": "Frame",
+            "sections": []
+          },
+          {
+            "label": "Applied Materials and Hitachi logo",
+            "sections": []
+          },
+          {
+            "label": "ASML ASM and Zeiss logo",
+            "sections": []
+          },
+          {
+            "label": "Nikon and Besi logo",
+            "sections": []
+          },
+          {
+            "label": "TEL logo",
+            "sections": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Divider",
+    "sections": []
+  },
+  {
+    "label": "Footnote",
+    "sections": []
+  },
+  {
+    "label": "Page number",
+    "sections": []
+  },
+  {
+    "label": "Manifold logo",
+    "sections": []
+  }
+]

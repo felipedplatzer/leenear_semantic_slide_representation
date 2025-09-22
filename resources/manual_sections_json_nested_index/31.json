@@ -1,0 +1,66 @@
+[
+    {
+        "index": 1.0,
+        "label": "Design element",
+        "top": -0.0,
+        "left": 0.434,
+        "right": 1.0,
+        "bottom": 0.084
+    },
+    {
+        "index": 2.0,
+        "label": "Title",
+        "top": 0.097,
+        "left": 0.05,
+        "right": 0.956,
+        "bottom": 0.157
+    },
+    {
+        "index": 3.0,
+        "label": "Approach flowchart",
+        "top": 0.356,
+        "left": 0.05,
+        "right": 0.967,
+        "bottom": 0.48
+    },
+    {
+        "index": 3.01,
+        "label": "Step 1",
+        "top": 0.356,
+        "left": 0.05,
+        "right": 0.342,
+        "bottom": 0.48
+    },
+    {
+        "index": 3.02,
+        "label": "Step 2",
+        "top": 0.356,
+        "left": 0.362,
+        "right": 0.655,
+        "bottom": 0.48
+    },
+    {
+        "index": 3.03,
+        "label": "Step 3",
+        "top": 0.356,
+        "left": 0.675,
+        "right": 0.967,
+        "bottom": 0.48
+    },
+    {
+        "index": 4.0,
+        "label": "Page number",
+        "top": 0.922,
+        "left": 0.05,
+        "right": 0.11,
+        "bottom": 0.956
+    },
+    {
+        "index": 5.0,
+        "label": "Manifold logo",
+        "top": 0.922,
+        "left": 0.892,
+        "right": 0.967,
+        "bottom": 0.95
+    }
+]

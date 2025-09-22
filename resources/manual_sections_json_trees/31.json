@@ -1,0 +1,59 @@
+[
+  {
+    "label": "Section 1",
+    "sections": [
+      {
+        "label": "Design element",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "label": "Section 2",
+    "sections": [
+      {
+        "label": "Title",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "label": "Section 3",
+    "sections": [
+      {
+        "label": "Approach flowchart",
+        "sections": []
+      },
+      {
+        "label": "Step 1",
+        "sections": []
+      },
+      {
+        "label": "Step 2",
+        "sections": []
+      },
+      {
+        "label": "Step 3",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "label": "Section 4",
+    "sections": [
+      {
+        "label": "Page number",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "label": "Section 5",
+    "sections": [
+      {
+        "label": "Manifold logo",
+        "sections": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,179 @@
+[
+  {
+    "label": "Design element",
+    "sections": []
+  },
+  {
+    "label": "Header / chapter name",
+    "sections": [
+      {
+        "label": "Icon",
+        "sections": []
+      },
+      {
+        "label": "Header",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "label": "Title",
+    "sections": []
+  },
+  {
+    "label": "Semiconductor market shares by product type",
+    "sections": [
+      {
+        "label": "Header",
+        "sections": []
+      },
+      {
+        "label": "Chart - semiconductor market share by product type",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "label": "Product type descriptions",
+    "sections": [
+      {
+        "label": "Header",
+        "sections": []
+      },
+      {
+        "label": "Product type descriptions",
+        "sections": [
+          {
+            "label": "Logic",
+            "sections": [
+              {
+                "label": "Header",
+                "sections": []
+              },
+              {
+                "label": "Description",
+                "sections": []
+              }
+            ]
+          },
+          {
+            "label": "Memory",
+            "sections": [
+              {
+                "label": "Header",
+                "sections": []
+              },
+              {
+                "label": "Description",
+                "sections": []
+              }
+            ]
+          },
+          {
+            "label": "Analog",
+            "sections": [
+              {
+                "label": "Header",
+                "sections": []
+              },
+              {
+                "label": "Description",
+                "sections": []
+              }
+            ]
+          },
+          {
+            "label": "Microprocessor Units (MPU)",
+            "sections": [
+              {
+                "label": "Header",
+                "sections": []
+              },
+              {
+                "label": "Description",
+                "sections": []
+              }
+            ]
+          },
+          {
+            "label": "Opto",
+            "sections": [
+              {
+                "label": "Header",
+                "sections": []
+              },
+              {
+                "label": "Description",
+                "sections": []
+              }
+            ]
+          },
+          {
+            "label": "Discretes",
+            "sections": [
+              {
+                "label": "Header",
+                "sections": []
+              },
+              {
+                "label": "Description",
+                "sections": []
+              }
+            ]
+          },
+          {
+            "label": "Microcontroller Units (MCU)",
+            "sections": [
+              {
+                "label": "Header",
+                "sections": []
+              },
+              {
+                "label": "Description",
+                "sections": []
+              }
+            ]
+          },
+          {
+            "label": "Sensors",
+            "sections": [
+              {
+                "label": "Header",
+                "sections": []
+              },
+              {
+                "label": "Description",
+                "sections": []
+              }
+            ]
+          },
+          {
+            "label": "Digital Signal Processors (DSP)",
+            "sections": [
+              {
+                "label": "Header",
+                "sections": []
+              },
+              {
+                "label": "Description",
+                "sections": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Page number",
+    "sections": []
+  },
+  {
+    "label": "Footnote",
+    "sections": []
+  },
+  {
+    "label": "Manifold logo",
+    "sections": []
+  }
+]

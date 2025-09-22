@@ -1,0 +1,56 @@
+[
+  {
+    "label": "Design element",
+    "sections": []
+  },
+  {
+    "label": "Title",
+    "sections": []
+  },
+  {
+    "label": "Priority trends",
+    "sections": [
+      {
+        "label": "Header",
+        "sections": []
+      },
+      {
+        "label": "Table of trends",
+        "sections": [
+          {
+            "label": "Trend column",
+            "sections": []
+          },
+          {
+            "label": "Impact on semiconductor industry column",
+            "sections": []
+          },
+          {
+            "label": "Impact on KPMG's business lines column",
+            "sections": []
+          }
+        ]
+      },
+      {
+        "label": "Prioritized for further analysis",
+        "sections": []
+      },
+      {
+        "label": "Impact scale",
+        "sections": []
+      },
+      {
+        "label": "Footnote",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "label": "Page number",
+    "sections": []
+  },
+  {
+    "label": "Manifold logo",
+    "sections": []
+  }
+]
