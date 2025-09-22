@@ -2,24 +2,24 @@
   {
     "shape_id": "563",
     "shape_type": 17,
-    "top": 0.328,
-    "left": 0.873,
-    "width": 0.114,
-    "height": 0.126,
-    "right": 0.987,
-    "bottom": 0.454,
+    "top": 0.337,
+    "left": 0.883,
+    "width": 0.078,
+    "height": 0.107,
+    "right": 0.962,
+    "bottom": 0.444,
     "name": "Google Shape;563;g2ecbd9d9bc7_0_568",
     "description": "Text content: Prioritized for further analysis"
   },
   {
     "shape_id": "567",
     "shape_type": 17,
-    "top": 0.922,
+    "top": 0.924,
     "left": 0.05,
-    "width": 0.06,
-    "height": 0.034,
-    "right": 0.11,
-    "bottom": 0.956,
+    "width": 0.011,
+    "height": 0.03,
+    "right": 0.061,
+    "bottom": 0.953,
     "name": "Google Shape;567;g2ecbd9d9bc7_0_568",
     "description": "Text content: 1"
   },
@@ -28,58 +28,58 @@
     "shape_type": 17,
     "top": 0.097,
     "left": 0.05,
-    "width": 0.904,
-    "height": 0.06,
-    "right": 0.954,
-    "bottom": 0.157,
+    "width": 0.764,
+    "height": 0.107,
+    "right": 0.814,
+    "bottom": 0.204,
     "name": "Google Shape;568;g2ecbd9d9bc7_0_568",
     "description": "Text content: 4 priority trends were identified based on impact on the industry and \u000bon KPMG\u2019s business lines."
   },
   {
     "shape_id": "594",
     "shape_type": 17,
-    "top": 0.837,
-    "left": 0.587,
-    "width": 0.066,
-    "height": 0.054,
-    "right": 0.652,
-    "bottom": 0.891,
+    "top": 0.846,
+    "left": 0.597,
+    "width": 0.039,
+    "height": 0.036,
+    "right": 0.636,
+    "bottom": 0.882,
     "name": "Google Shape;594;g2ecbd9d9bc7_0_568",
     "description": "Text content: High"
   },
   {
     "shape_id": "595",
     "shape_type": 17,
-    "top": 0.837,
-    "left": 0.683,
-    "width": 0.094,
-    "height": 0.054,
-    "right": 0.777,
-    "bottom": 0.891,
+    "top": 0.846,
+    "left": 0.693,
+    "width": 0.064,
+    "height": 0.036,
+    "right": 0.757,
+    "bottom": 0.882,
     "name": "Google Shape;595;g2ecbd9d9bc7_0_568",
     "description": "Text content: Medium"
   },
   {
     "shape_id": "596",
     "shape_type": 17,
-    "top": 0.837,
-    "left": 0.805,
-    "width": 0.059,
-    "height": 0.054,
-    "right": 0.864,
-    "bottom": 0.891,
+    "top": 0.846,
+    "left": 0.815,
+    "width": 0.035,
+    "height": 0.036,
+    "right": 0.85,
+    "bottom": 0.882,
     "name": "Google Shape;596;g2ecbd9d9bc7_0_568",
     "description": "Text content: Low"
   },
   {
     "shape_id": "598",
     "shape_type": 17,
-    "top": 0.811,
-    "left": 0.04,
-    "width": 0.475,
-    "height": 0.108,
-    "right": 0.515,
-    "bottom": 0.918,
+    "top": 0.819,
+    "left": 0.05,
+    "width": 0.455,
+    "height": 0.089,
+    "right": 0.505,
+    "bottom": 0.908,
     "name": "Google Shape;598;g2ecbd9d9bc7_0_568",
     "description": "Text content: Impact on semiconductor industry and relevance for KPMG\u2019s business lines are based on qualitative analyses. Impact on semiconductor industry considers likelihood and impact of each trend"
   },
@@ -93,7 +93,7 @@
     "right": 0.86,
     "bottom": 0.809,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568",
-    "description": "Table with 14 rows and 3 columns. Table listing trends impacting the semiconductor industry and KPMG"
+    "description": "Table with 14 rows and 3 columns. Trends impacting the semiconductor industry and KPMG's"
   },
   {
     "shape_id": "565",
@@ -129,7 +129,7 @@
     "right": 0.557,
     "bottom": 0.341,
     "name": "Google Shape;569;g2ecbd9d9bc7_0_568",
-    "description": "A blue circle with a white quarter section."
+    "description": "A blue circle with a white quarter segment."
   },
   {
     "shape_id": "570",
@@ -141,7 +141,7 @@
     "right": 0.557,
     "bottom": 0.38,
     "name": "Google Shape;570;g2ecbd9d9bc7_0_568",
-    "description": "A blue circle with a white quarter segment."
+    "description": "A blue circle with a white quarter section."
   },
   {
     "shape_id": "571",
@@ -165,7 +165,7 @@
     "right": 0.763,
     "bottom": 0.419,
     "name": "Google Shape;572;g2ecbd9d9bc7_0_568",
-    "description": "A blue circle with a white quarter section."
+    "description": "A blue pie chart with a white quarter segment."
   },
   {
     "shape_id": "573",
@@ -177,7 +177,7 @@
     "right": 0.763,
     "bottom": 0.458,
     "name": "Google Shape;573;g2ecbd9d9bc7_0_568",
-    "description": "A blue circle with a white quarter segment."
+    "description": "Blue circle with a white quarter segment."
   },
   {
     "shape_id": "574",
@@ -189,7 +189,7 @@
     "right": 0.557,
     "bottom": 0.419,
     "name": "Google Shape;574;g2ecbd9d9bc7_0_568",
-    "description": "A circle half white, half dark blue."
+    "description": "A circle half-filled with dark blue on the right"
   },
   {
     "shape_id": "575",
@@ -201,7 +201,7 @@
     "right": 0.557,
     "bottom": 0.497,
     "name": "Google Shape;575;g2ecbd9d9bc7_0_568",
-    "description": "Half white, half blue circle."
+    "description": "A circle divided into two halves, one white and"
   },
   {
     "shape_id": "576",
@@ -213,7 +213,7 @@
     "right": 0.557,
     "bottom": 0.536,
     "name": "Google Shape;576;g2ecbd9d9bc7_0_568",
-    "description": "A circle divided into two halves, one white and"
+    "description": "Half-filled circle icon, blue and white."
   },
   {
     "shape_id": "577",
@@ -249,7 +249,7 @@
     "right": 0.557,
     "bottom": 0.692,
     "name": "Google Shape;579;g2ecbd9d9bc7_0_568",
-    "description": "Half white, half blue circle."
+    "description": "A circle divided into two halves, one white and"
   },
   {
     "shape_id": "580",
@@ -261,7 +261,7 @@
     "right": 0.557,
     "bottom": 0.77,
     "name": "Google Shape;580;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a quarter section highlighted."
+    "description": "A pie chart with a dark blue quarter segment."
   },
   {
     "shape_id": "581",
@@ -273,7 +273,7 @@
     "right": 0.557,
     "bottom": 0.809,
     "name": "Google Shape;581;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a dark blue quarter segment."
+    "description": "A pie chart with a dark blue quarter section."
   },
   {
     "shape_id": "582",
@@ -285,7 +285,7 @@
     "right": 0.763,
     "bottom": 0.809,
     "name": "Google Shape;582;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a quarter section shaded."
+    "description": "A pie chart with a dark blue quarter section."
   },
   {
     "shape_id": "583",
@@ -309,7 +309,7 @@
     "right": 0.763,
     "bottom": 0.614,
     "name": "Google Shape;584;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a quarter section highlighted in dark"
+    "description": "A pie chart with a dark blue quarter segment."
   },
   {
     "shape_id": "585",
@@ -333,7 +333,7 @@
     "right": 0.763,
     "bottom": 0.536,
     "name": "Google Shape;586;g2ecbd9d9bc7_0_568",
-    "description": "A circle divided into two halves, one white and"
+    "description": "A circle divided into two halves: one white and"
   },
   {
     "shape_id": "587",
@@ -345,7 +345,7 @@
     "right": 0.763,
     "bottom": 0.497,
     "name": "Google Shape;587;g2ecbd9d9bc7_0_568",
-    "description": "A circle divided into two halves, one white and"
+    "description": "A circle with half white and half dark blue."
   },
   {
     "shape_id": "588",
@@ -357,7 +357,7 @@
     "right": 0.763,
     "bottom": 0.77,
     "name": "Google Shape;588;g2ecbd9d9bc7_0_568",
-    "description": "Half white, half blue circle."
+    "description": "A circle divided into two halves: one white and"
   },
   {
     "shape_id": "589",
@@ -381,7 +381,7 @@
     "right": 0.557,
     "bottom": 0.458,
     "name": "Google Shape;590;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a dark blue quarter section."
+    "description": "A pie chart with a dark blue quarter segment."
   },
   {
     "shape_id": "591",
@@ -429,7 +429,7 @@
     "right": 0.873,
     "bottom": 0.468,
     "name": "Google Shape;597;g2ecbd9d9bc7_0_568",
-    "description": "A vertical black line with circular ends."
+    "description": "Vertical line with circles at both ends."
   },
   {
     "shape_id": "599",
@@ -453,7 +453,7 @@
     "right": 0.557,
     "bottom": 0.653,
     "name": "Google Shape;600;g2ecbd9d9bc7_0_568",
-    "description": "Half blue, half white circle."
+    "description": "Half white, half dark blue circle."
   },
   {
     "shape_id": "601",
@@ -465,7 +465,7 @@
     "right": 0.557,
     "bottom": 0.731,
     "name": "Google Shape;601;g2ecbd9d9bc7_0_568",
-    "description": "A circle with half dark blue and half white."
+    "description": "A circle divided into two halves, one white and"
   },
   {
     "shape_id": "602",
@@ -477,7 +477,7 @@
     "right": 0.763,
     "bottom": 0.731,
     "name": "Google Shape;602;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a quarter section shaded in blue"
+    "description": "Pie chart with a quarter shaded."
   },
   {
     "shape_id": "603",
@@ -489,7 +489,7 @@
     "right": 0.763,
     "bottom": 0.653,
     "name": "Google Shape;603;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a dark blue quarter section."
+    "description": "A pie chart with a quarter section shaded."
   },
   {
     "shape_id": "564.1.1",

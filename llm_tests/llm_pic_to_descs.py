@@ -139,6 +139,13 @@ def extract_shape_descriptions(slide):
     
     for x in textboxes:
         d = base.get_shape_info(x)
+        pos_dict = base.get_text_pos(x)
+        d['top'] = pos_dict['top']
+        d['left'] = pos_dict['left']
+        d['width'] = pos_dict['width']
+        d['height'] = pos_dict['height']
+        d['right'] = pos_dict['right']
+        d['bottom'] = pos_dict['bottom']
         d['description'] = get_description_textbox(x)
         all_elements_dl.append(d)
 

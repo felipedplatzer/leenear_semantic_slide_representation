@@ -88,6 +88,16 @@ def get_shape_info(shape):
     }
     return shape_info
 
+def get_text_pos(shape):
+    return {
+        'top': shape.TextFrame2.TextRange.BoundTop,
+        'left': shape.TextFrame2.TextRange.BoundLeft,
+        'width': shape.TextFrame2.TextRange.BoundWidth,
+        'height': shape.TextFrame2.TextRange.BoundHeight,
+        'right': shape.TextFrame2.TextRange.BoundLeft + shape.TextFrame2.TextRange.BoundWidth,
+        'bottom': shape.TextFrame2.TextRange.BoundTop + shape.TextFrame2.TextRange.BoundHeight,
+    }
+
 
 def classify_shapes(slide):
     textboxes = []
