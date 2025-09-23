@@ -3,6 +3,7 @@
     "label": "Design element",
     "shape_id": [
       "565",
+      "568",
       "569",
       "570",
       "571",
@@ -34,97 +35,259 @@
       "601",
       "602",
       "603"
-    ]
+    ],
+    "left": 0.05,
+    "top": -0.0,
+    "right": 1.0,
+    "bottom": 0.897
   },
   {
     "label": "Title",
     "shape_id": [
-      "568"
-    ]
-  },
-  {
-    "label": "Priority trends",
-    "shape_id": [
-      "563",
-      "564",
-      "568",
-      "598"
-    ]
-  },
-  {
-    "label": "Header",
-    "shape_id": [
-      "568"
-    ]
-  },
-  {
-    "label": "Table of trends",
-    "shape_id": [
       "564"
-    ]
+    ],
+    "left": 0.05,
+    "top": 0.229,
+    "right": 0.86,
+    "bottom": 0.809
   },
   {
-    "label": "Trend column",
+    "label": "Table of trends and their impacts",
     "shape_id": [
+      "564",
       "564.1.1",
-      "564.2.1",
-      "564.3.1",
-      "564.4.1",
-      "564.5.1",
-      "564.6.1",
-      "564.7.1",
-      "564.8.1",
-      "564.9.1",
-      "564.10.1",
-      "564.11.1",
-      "564.12.1",
-      "564.13.1",
-      "564.14.1"
-    ]
-  },
-  {
-    "label": "Impact on semiconductor industry column",
-    "shape_id": [
       "564.1.2",
-      "564.2.2",
-      "564.3.2",
-      "564.4.2",
-      "564.5.2",
-      "564.6.2",
-      "564.7.2",
-      "564.8.2",
-      "564.9.2",
-      "564.10.2",
-      "564.11.2",
-      "564.12.2",
-      "564.13.2",
-      "564.14.2"
-    ]
-  },
-  {
-    "label": "Impact on KPMG's business lines column",
-    "shape_id": [
       "564.1.3",
+      "564.2.1",
+      "564.2.2",
       "564.2.3",
+      "564.3.1",
+      "564.3.2",
       "564.3.3",
+      "564.4.1",
+      "564.4.2",
       "564.4.3",
+      "564.5.1",
+      "564.5.2",
       "564.5.3",
+      "564.6.1",
+      "564.6.2",
       "564.6.3",
+      "564.7.1",
+      "564.7.2",
       "564.7.3",
+      "564.8.1",
+      "564.8.2",
       "564.8.3",
+      "564.9.1",
+      "564.9.2",
       "564.9.3",
+      "564.10.1",
+      "564.10.2",
       "564.10.3",
+      "564.11.1",
+      "564.11.2",
       "564.11.3",
+      "564.12.1",
+      "564.12.2",
       "564.12.3",
+      "564.13.1",
+      "564.13.2",
       "564.13.3",
+      "564.14.1",
+      "564.14.2",
       "564.14.3"
-    ]
+    ],
+    "left": 0.05,
+    "top": 0.229,
+    "right": 0.86,
+    "bottom": 0.809
   },
   {
-    "label": "Prioritized for further analysis",
+    "label": "Header - Trend",
     "shape_id": [
-      "563"
-    ]
+      "564.1.1"
+    ],
+    "left": 0.05,
+    "top": 0.229,
+    "right": 0.445,
+    "bottom": 0.303
+  },
+  {
+    "label": "Header - Impact on semiconductor industry",
+    "shape_id": [
+      "564.1.2"
+    ],
+    "left": 0.445,
+    "top": 0.229,
+    "right": 0.653,
+    "bottom": 0.303
+  },
+  {
+    "label": "Header - Impact on KPMG's business lines",
+    "shape_id": [
+      "564.1.3"
+    ],
+    "left": 0.653,
+    "top": 0.229,
+    "right": 0.86,
+    "bottom": 0.303
+  },
+  {
+    "label": "Geographic diversification of supply chain",
+    "shape_id": [
+      "564.2.1",
+      "564.2.2",
+      "564.2.3"
+    ],
+    "left": 0.05,
+    "top": 0.303,
+    "right": 0.86,
+    "bottom": 0.342
+  },
+  {
+    "label": "Industry recovery and normalization",
+    "shape_id": [
+      "564.3.1",
+      "564.3.2",
+      "564.3.3"
+    ],
+    "left": 0.05,
+    "top": 0.342,
+    "right": 0.86,
+    "bottom": 0.381
+  },
+  {
+    "label": "Increased cyberthreats",
+    "shape_id": [
+      "564.4.1",
+      "564.4.2",
+      "564.4.3"
+    ],
+    "left": 0.05,
+    "top": 0.381,
+    "right": 0.86,
+    "bottom": 0.42
+  },
+  {
+    "label": "Automotive/semiconductor partnerships",
+    "shape_id": [
+      "564.5.1",
+      "564.5.2",
+      "564.5.3"
+    ],
+    "left": 0.05,
+    "top": 0.42,
+    "right": 0.86,
+    "bottom": 0.459
+  },
+  {
+    "label": "Talent shortage",
+    "shape_id": [
+      "564.6.1",
+      "564.6.2",
+      "564.6.3"
+    ],
+    "left": 0.05,
+    "top": 0.459,
+    "right": 0.86,
+    "bottom": 0.498
+  },
+  {
+    "label": "Innovations in manufacturing & design (incl. application of AI)",
+    "shape_id": [
+      "564.7.1",
+      "564.7.2",
+      "564.7.3"
+    ],
+    "left": 0.05,
+    "top": 0.498,
+    "right": 0.86,
+    "bottom": 0.537
+  },
+  {
+    "label": "Advanced node technologies",
+    "shape_id": [
+      "564.8.1",
+      "564.8.2",
+      "564.8.3"
+    ],
+    "left": 0.05,
+    "top": 0.537,
+    "right": 0.86,
+    "bottom": 0.575
+  },
+  {
+    "label": "Demand growth from automotive sector (A/EV)",
+    "shape_id": [
+      "564.9.1",
+      "564.9.2",
+      "564.9.3"
+    ],
+    "left": 0.05,
+    "top": 0.575,
+    "right": 0.86,
+    "bottom": 0.614
+  },
+  {
+    "label": "Demand growth from 5G / 6G",
+    "shape_id": [
+      "564.11.1",
+      "564.11.2",
+      "564.11.3"
+    ],
+    "left": 0.05,
+    "top": 0.653,
+    "right": 0.86,
+    "bottom": 0.692
+  },
+  {
+    "label": "Demand growth from edge computing",
+    "shape_id": [
+      "564.10.1",
+      "564.10.2",
+      "564.10.3"
+    ],
+    "left": 0.05,
+    "top": 0.614,
+    "right": 0.86,
+    "bottom": 0.653
+  },
+  {
+    "label": "Demand growth from generative AI",
+    "shape_id": [
+      "564.12.1",
+      "564.12.2",
+      "564.12.3"
+    ],
+    "left": 0.05,
+    "top": 0.692,
+    "right": 0.86,
+    "bottom": 0.731
+  },
+  {
+    "label": "ESG and sustainability improvements",
+    "shape_id": [
+      "564.13.1",
+      "564.13.2",
+      "564.13.3"
+    ],
+    "left": 0.05,
+    "top": 0.731,
+    "right": 0.86,
+    "bottom": 0.77
+  },
+  {
+    "label": "Metaverse growth",
+    "shape_id": [
+      "564.14.1",
+      "564.14.2",
+      "564.14.3"
+    ],
+    "left": 0.05,
+    "top": 0.77,
+    "right": 0.86,
+    "bottom": 0.809
   },
   {
     "label": "Impact scale",
@@ -132,24 +295,80 @@
       "594",
       "595",
       "596"
-    ]
+    ],
+    "left": 0.597,
+    "top": 0.846,
+    "right": 0.85,
+    "bottom": 0.882
+  },
+  {
+    "label": "High",
+    "shape_id": [
+      "594"
+    ],
+    "left": 0.597,
+    "top": 0.846,
+    "right": 0.636,
+    "bottom": 0.882
+  },
+  {
+    "label": "Medium",
+    "shape_id": [
+      "595"
+    ],
+    "left": 0.693,
+    "top": 0.846,
+    "right": 0.757,
+    "bottom": 0.882
+  },
+  {
+    "label": "Low",
+    "shape_id": [
+      "596"
+    ],
+    "left": 0.815,
+    "top": 0.846,
+    "right": 0.85,
+    "bottom": 0.882
+  },
+  {
+    "label": "Prioritized for further analysis",
+    "shape_id": [
+      "563"
+    ],
+    "left": 0.883,
+    "top": 0.337,
+    "right": 0.962,
+    "bottom": 0.444
   },
   {
     "label": "Footnote",
     "shape_id": [
       "598"
-    ]
+    ],
+    "left": 0.05,
+    "top": 0.819,
+    "right": 0.505,
+    "bottom": 0.908
   },
   {
     "label": "Page number",
     "shape_id": [
       "567"
-    ]
+    ],
+    "left": 0.05,
+    "top": 0.924,
+    "right": 0.061,
+    "bottom": 0.953
   },
   {
     "label": "Manifold logo",
     "shape_id": [
       "566"
-    ]
+    ],
+    "left": 0.892,
+    "top": 0.922,
+    "right": 0.967,
+    "bottom": 0.95
   }
 ]

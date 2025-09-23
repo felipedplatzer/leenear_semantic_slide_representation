@@ -9,7 +9,8 @@
     "right": 0.962,
     "bottom": 0.444,
     "name": "Google Shape;563;g2ecbd9d9bc7_0_568",
-    "description": "Text content: Prioritized for further analysis"
+    "shape_type_category": "textbox",
+    "description": "Text reading \"Prioritized for further analysis\" on"
   },
   {
     "shape_id": "567",
@@ -21,7 +22,8 @@
     "right": 0.061,
     "bottom": 0.953,
     "name": "Google Shape;567;g2ecbd9d9bc7_0_568",
-    "description": "Text content: 1"
+    "shape_type_category": "textbox",
+    "description": "Black square with a white number \"1\"."
   },
   {
     "shape_id": "568",
@@ -33,7 +35,8 @@
     "right": 0.814,
     "bottom": 0.204,
     "name": "Google Shape;568;g2ecbd9d9bc7_0_568",
-    "description": "Text content: 4 priority trends were identified based on impact on the industry and \u000bon KPMG\u2019s business lines."
+    "shape_type_category": "textbox",
+    "description": "Dark background with a small, bright light."
   },
   {
     "shape_id": "594",
@@ -45,7 +48,8 @@
     "right": 0.636,
     "bottom": 0.882,
     "name": "Google Shape;594;g2ecbd9d9bc7_0_568",
-    "description": "Text content: High"
+    "shape_type_category": "textbox",
+    "description": "The image shows the word \"High\" in gray"
   },
   {
     "shape_id": "595",
@@ -57,7 +61,8 @@
     "right": 0.757,
     "bottom": 0.882,
     "name": "Google Shape;595;g2ecbd9d9bc7_0_568",
-    "description": "Text content: Medium"
+    "shape_type_category": "textbox",
+    "description": "The image shows the word \"Medium\" in gray"
   },
   {
     "shape_id": "596",
@@ -69,7 +74,8 @@
     "right": 0.85,
     "bottom": 0.882,
     "name": "Google Shape;596;g2ecbd9d9bc7_0_568",
-    "description": "Text content: Low"
+    "shape_type_category": "textbox",
+    "description": "The image shows the word \"Low\" in gray"
   },
   {
     "shape_id": "598",
@@ -81,7 +87,8 @@
     "right": 0.505,
     "bottom": 0.908,
     "name": "Google Shape;598;g2ecbd9d9bc7_0_568",
-    "description": "Text content: Impact on semiconductor industry and relevance for KPMG\u2019s business lines are based on qualitative analyses. Impact on semiconductor industry considers likelihood and impact of each trend"
+    "shape_type_category": "textbox",
+    "description": "Text about the semiconductor industry's impact and KPMG's"
   },
   {
     "shape_id": "564",
@@ -93,7 +100,8 @@
     "right": 0.86,
     "bottom": 0.809,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568",
-    "description": "Table with 14 rows and 3 columns. Trends impacting the semiconductor industry and KPMG's"
+    "shape_type_category": "table",
+    "description": "Trends impacting the semiconductor industry and KPMG's"
   },
   {
     "shape_id": "565",
@@ -105,7 +113,8 @@
     "right": 1.0,
     "bottom": 0.084,
     "name": "Google Shape;565;g2ecbd9d9bc7_0_568",
-    "description": "Diagonal gradient from teal to black with a white section"
+    "shape_type_category": "picture",
+    "description": "Diagonal gradient from teal to black."
   },
   {
     "shape_id": "566",
@@ -117,6 +126,7 @@
     "right": 0.967,
     "bottom": 0.95,
     "name": "Google Shape;566;g2ecbd9d9bc7_0_568",
+    "shape_type_category": "picture",
     "description": "The image shows the word \"MANIFOLD\""
   },
   {
@@ -129,7 +139,8 @@
     "right": 0.557,
     "bottom": 0.341,
     "name": "Google Shape;569;g2ecbd9d9bc7_0_568",
-    "description": "A blue circle with a white quarter segment."
+    "shape_type_category": "picture",
+    "description": "A purple circular shape with a black section."
   },
   {
     "shape_id": "570",
@@ -141,7 +152,8 @@
     "right": 0.557,
     "bottom": 0.38,
     "name": "Google Shape;570;g2ecbd9d9bc7_0_568",
-    "description": "A blue circle with a white quarter section."
+    "shape_type_category": "picture",
+    "description": "A purple circular shape with a black background."
   },
   {
     "shape_id": "571",
@@ -153,7 +165,8 @@
     "right": 0.763,
     "bottom": 0.341,
     "name": "Google Shape;571;g2ecbd9d9bc7_0_568",
-    "description": "A blue circle with a white quarter segment."
+    "shape_type_category": "picture",
+    "description": "A purple circular shape with a black center."
   },
   {
     "shape_id": "572",
@@ -165,7 +178,8 @@
     "right": 0.763,
     "bottom": 0.419,
     "name": "Google Shape;572;g2ecbd9d9bc7_0_568",
-    "description": "A blue pie chart with a white quarter segment."
+    "shape_type_category": "picture",
+    "description": "A purple circular shape with a black section."
   },
   {
     "shape_id": "573",
@@ -177,7 +191,8 @@
     "right": 0.763,
     "bottom": 0.458,
     "name": "Google Shape;573;g2ecbd9d9bc7_0_568",
-    "description": "Blue circle with a white quarter segment."
+    "shape_type_category": "picture",
+    "description": "A blue circle with a black segment."
   },
   {
     "shape_id": "574",
@@ -189,7 +204,8 @@
     "right": 0.557,
     "bottom": 0.419,
     "name": "Google Shape;574;g2ecbd9d9bc7_0_568",
-    "description": "A circle half-filled with dark blue on the right"
+    "shape_type_category": "picture",
+    "description": "A blue circle with a vertical line inside."
   },
   {
     "shape_id": "575",
@@ -201,7 +217,8 @@
     "right": 0.557,
     "bottom": 0.497,
     "name": "Google Shape;575;g2ecbd9d9bc7_0_568",
-    "description": "A circle divided into two halves, one white and"
+    "shape_type_category": "picture",
+    "description": "Half moon, dark background."
   },
   {
     "shape_id": "576",
@@ -213,7 +230,8 @@
     "right": 0.557,
     "bottom": 0.536,
     "name": "Google Shape;576;g2ecbd9d9bc7_0_568",
-    "description": "Half-filled circle icon, blue and white."
+    "shape_type_category": "picture",
+    "description": "A blue circle with a black vertical stripe."
   },
   {
     "shape_id": "577",
@@ -225,7 +243,8 @@
     "right": 0.557,
     "bottom": 0.575,
     "name": "Google Shape;577;g2ecbd9d9bc7_0_568",
-    "description": "A circle divided into two halves, one white and"
+    "shape_type_category": "picture",
+    "description": "A blue circle with a vertical black stripe."
   },
   {
     "shape_id": "578",
@@ -237,7 +256,8 @@
     "right": 0.557,
     "bottom": 0.614,
     "name": "Google Shape;578;g2ecbd9d9bc7_0_568",
-    "description": "Half blue, half white circle."
+    "shape_type_category": "picture",
+    "description": "A half-black, half-blue circle on a black"
   },
   {
     "shape_id": "579",
@@ -249,7 +269,8 @@
     "right": 0.557,
     "bottom": 0.692,
     "name": "Google Shape;579;g2ecbd9d9bc7_0_568",
-    "description": "A circle divided into two halves, one white and"
+    "shape_type_category": "picture",
+    "description": "A blue circle with a vertical split."
   },
   {
     "shape_id": "580",
@@ -261,7 +282,8 @@
     "right": 0.557,
     "bottom": 0.77,
     "name": "Google Shape;580;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a dark blue quarter segment."
+    "shape_type_category": "picture",
+    "description": "A purple pie chart with a quarter segment highlighted."
   },
   {
     "shape_id": "581",
@@ -273,7 +295,8 @@
     "right": 0.557,
     "bottom": 0.809,
     "name": "Google Shape;581;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a dark blue quarter section."
+    "shape_type_category": "picture",
+    "description": "A purple pie chart with a quarter section highlighted."
   },
   {
     "shape_id": "582",
@@ -285,7 +308,8 @@
     "right": 0.763,
     "bottom": 0.809,
     "name": "Google Shape;582;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a dark blue quarter section."
+    "shape_type_category": "picture",
+    "description": "A purple pie chart with a quarter section highlighted."
   },
   {
     "shape_id": "583",
@@ -297,7 +321,8 @@
     "right": 0.763,
     "bottom": 0.692,
     "name": "Google Shape;583;g2ecbd9d9bc7_0_568",
-    "description": "Pie chart with a quarter shaded."
+    "shape_type_category": "picture",
+    "description": "A purple pie chart with one-quarter highlighted."
   },
   {
     "shape_id": "584",
@@ -309,7 +334,8 @@
     "right": 0.763,
     "bottom": 0.614,
     "name": "Google Shape;584;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a dark blue quarter segment."
+    "shape_type_category": "picture",
+    "description": "A purple pie chart with a missing segment."
   },
   {
     "shape_id": "585",
@@ -321,7 +347,8 @@
     "right": 0.763,
     "bottom": 0.575,
     "name": "Google Shape;585;g2ecbd9d9bc7_0_568",
-    "description": "A circle divided into two halves, one white and"
+    "shape_type_category": "picture",
+    "description": "A blue circle with a black half."
   },
   {
     "shape_id": "586",
@@ -333,7 +360,8 @@
     "right": 0.763,
     "bottom": 0.536,
     "name": "Google Shape;586;g2ecbd9d9bc7_0_568",
-    "description": "A circle divided into two halves: one white and"
+    "shape_type_category": "picture",
+    "description": "A blue circle with a black half."
   },
   {
     "shape_id": "587",
@@ -345,7 +373,8 @@
     "right": 0.763,
     "bottom": 0.497,
     "name": "Google Shape;587;g2ecbd9d9bc7_0_568",
-    "description": "A circle with half white and half dark blue."
+    "shape_type_category": "picture",
+    "description": "A black circle with a blue half-moon shape"
   },
   {
     "shape_id": "588",
@@ -357,7 +386,8 @@
     "right": 0.763,
     "bottom": 0.77,
     "name": "Google Shape;588;g2ecbd9d9bc7_0_568",
-    "description": "A circle divided into two halves: one white and"
+    "shape_type_category": "picture",
+    "description": "A blue circle with a black half."
   },
   {
     "shape_id": "589",
@@ -369,7 +399,8 @@
     "right": 0.763,
     "bottom": 0.38,
     "name": "Google Shape;589;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a quarter section highlighted in blue"
+    "shape_type_category": "picture",
+    "description": "A blue circular pie chart on a black background."
   },
   {
     "shape_id": "590",
@@ -381,7 +412,8 @@
     "right": 0.557,
     "bottom": 0.458,
     "name": "Google Shape;590;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a dark blue quarter segment."
+    "shape_type_category": "picture",
+    "description": "A purple pie chart with one-quarter highlighted."
   },
   {
     "shape_id": "591",
@@ -393,7 +425,8 @@
     "right": 0.595,
     "bottom": 0.889,
     "name": "Google Shape;591;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a quarter section highlighted in blue"
+    "shape_type_category": "picture",
+    "description": "A blue pie chart with a missing segment."
   },
   {
     "shape_id": "592",
@@ -405,7 +438,8 @@
     "right": 0.691,
     "bottom": 0.889,
     "name": "Google Shape;592;g2ecbd9d9bc7_0_568",
-    "description": "Half white, half blue circle."
+    "shape_type_category": "picture",
+    "description": "A half-filled blue circle on a black background."
   },
   {
     "shape_id": "593",
@@ -417,7 +451,8 @@
     "right": 0.812,
     "bottom": 0.889,
     "name": "Google Shape;593;g2ecbd9d9bc7_0_568",
-    "description": "A blue circle with a white quarter segment."
+    "shape_type_category": "picture",
+    "description": "A blue circle with a black segment."
   },
   {
     "shape_id": "597",
@@ -429,7 +464,8 @@
     "right": 0.873,
     "bottom": 0.468,
     "name": "Google Shape;597;g2ecbd9d9bc7_0_568",
-    "description": "Vertical line with circles at both ends."
+    "shape_type_category": "picture",
+    "description": "A vertical black and gray abstract pattern."
   },
   {
     "shape_id": "599",
@@ -441,7 +477,8 @@
     "right": 0.864,
     "bottom": 0.897,
     "name": "Google Shape;599;g2ecbd9d9bc7_0_568",
-    "description": "A plain white rectangle with a thin black border."
+    "shape_type_category": "picture",
+    "description": "A plain black rectangle."
   },
   {
     "shape_id": "600",
@@ -453,7 +490,8 @@
     "right": 0.557,
     "bottom": 0.653,
     "name": "Google Shape;600;g2ecbd9d9bc7_0_568",
-    "description": "Half white, half dark blue circle."
+    "shape_type_category": "picture",
+    "description": "A half-black, half-blue circle."
   },
   {
     "shape_id": "601",
@@ -465,7 +503,8 @@
     "right": 0.557,
     "bottom": 0.731,
     "name": "Google Shape;601;g2ecbd9d9bc7_0_568",
-    "description": "A circle divided into two halves, one white and"
+    "shape_type_category": "picture",
+    "description": "A blue circle with a black half."
   },
   {
     "shape_id": "602",
@@ -477,7 +516,8 @@
     "right": 0.763,
     "bottom": 0.731,
     "name": "Google Shape;602;g2ecbd9d9bc7_0_568",
-    "description": "Pie chart with a quarter shaded."
+    "shape_type_category": "picture",
+    "description": "A purple pie chart with one-quarter highlighted."
   },
   {
     "shape_id": "603",
@@ -489,7 +529,8 @@
     "right": 0.763,
     "bottom": 0.653,
     "name": "Google Shape;603;g2ecbd9d9bc7_0_568",
-    "description": "A pie chart with a quarter section shaded."
+    "shape_type_category": "picture",
+    "description": "A purple pie chart with a quarter segment highlighted."
   },
   {
     "shape_id": "564.1.1",
@@ -501,8 +542,11 @@
     "right": 0.445,
     "bottom": 0.303,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.1.1",
-    "i_row": 1,
-    "i_cell": 1,
+    "i_row": 0,
+    "i_cell": 0,
+    "text": "Trend",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 0 and column 0 with text = Trend"
   },
   {
@@ -515,8 +559,11 @@
     "right": 0.653,
     "bottom": 0.303,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.1.2",
-    "i_row": 1,
-    "i_cell": 2,
+    "i_row": 0,
+    "i_cell": 1,
+    "text": "Impact on\u000bsemiconductor industry",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 0 and column 1 with text = Impact on\u000bsemiconductor industry"
   },
   {
@@ -529,8 +576,11 @@
     "right": 0.86,
     "bottom": 0.303,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.1.3",
-    "i_row": 1,
-    "i_cell": 3,
+    "i_row": 0,
+    "i_cell": 2,
+    "text": "Impact on\u000bKPMG\u2019s business lines",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 0 and column 2 with text = Impact on\u000bKPMG\u2019s business lines"
   },
   {
@@ -543,8 +593,11 @@
     "right": 0.445,
     "bottom": 0.342,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.2.1",
-    "i_row": 2,
-    "i_cell": 1,
+    "i_row": 1,
+    "i_cell": 0,
+    "text": "Geographic diversification of supply chain",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 1 and column 0 with text = Geographic diversification of supply chain"
   },
   {
@@ -557,8 +610,11 @@
     "right": 0.653,
     "bottom": 0.342,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.2.2",
-    "i_row": 2,
-    "i_cell": 2,
+    "i_row": 1,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 1 and column 1"
   },
   {
@@ -571,8 +627,11 @@
     "right": 0.86,
     "bottom": 0.342,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.2.3",
-    "i_row": 2,
-    "i_cell": 3,
+    "i_row": 1,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 1 and column 2"
   },
   {
@@ -585,8 +644,11 @@
     "right": 0.445,
     "bottom": 0.381,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.3.1",
-    "i_row": 3,
-    "i_cell": 1,
+    "i_row": 2,
+    "i_cell": 0,
+    "text": "Industry recovery and normalization",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 2 and column 0 with text = Industry recovery and normalization"
   },
   {
@@ -599,8 +661,11 @@
     "right": 0.653,
     "bottom": 0.381,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.3.2",
-    "i_row": 3,
-    "i_cell": 2,
+    "i_row": 2,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 2 and column 1"
   },
   {
@@ -613,8 +678,11 @@
     "right": 0.86,
     "bottom": 0.381,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.3.3",
-    "i_row": 3,
-    "i_cell": 3,
+    "i_row": 2,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 2 and column 2"
   },
   {
@@ -627,8 +695,11 @@
     "right": 0.445,
     "bottom": 0.42,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.4.1",
-    "i_row": 4,
-    "i_cell": 1,
+    "i_row": 3,
+    "i_cell": 0,
+    "text": "Increased cyberthreats",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 3 and column 0 with text = Increased cyberthreats"
   },
   {
@@ -641,8 +712,11 @@
     "right": 0.653,
     "bottom": 0.42,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.4.2",
-    "i_row": 4,
-    "i_cell": 2,
+    "i_row": 3,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 3 and column 1"
   },
   {
@@ -655,8 +729,11 @@
     "right": 0.86,
     "bottom": 0.42,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.4.3",
-    "i_row": 4,
-    "i_cell": 3,
+    "i_row": 3,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 3 and column 2"
   },
   {
@@ -669,8 +746,11 @@
     "right": 0.445,
     "bottom": 0.459,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.5.1",
-    "i_row": 5,
-    "i_cell": 1,
+    "i_row": 4,
+    "i_cell": 0,
+    "text": "Automotive/semiconductor partnerships",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 4 and column 0 with text = Automotive/semiconductor partnerships"
   },
   {
@@ -683,8 +763,11 @@
     "right": 0.653,
     "bottom": 0.459,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.5.2",
-    "i_row": 5,
-    "i_cell": 2,
+    "i_row": 4,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 4 and column 1"
   },
   {
@@ -697,8 +780,11 @@
     "right": 0.86,
     "bottom": 0.459,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.5.3",
-    "i_row": 5,
-    "i_cell": 3,
+    "i_row": 4,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 4 and column 2"
   },
   {
@@ -711,8 +797,11 @@
     "right": 0.445,
     "bottom": 0.498,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.6.1",
-    "i_row": 6,
-    "i_cell": 1,
+    "i_row": 5,
+    "i_cell": 0,
+    "text": "Talent shortage",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 5 and column 0 with text = Talent shortage"
   },
   {
@@ -725,8 +814,11 @@
     "right": 0.653,
     "bottom": 0.498,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.6.2",
-    "i_row": 6,
-    "i_cell": 2,
+    "i_row": 5,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 5 and column 1"
   },
   {
@@ -739,8 +831,11 @@
     "right": 0.86,
     "bottom": 0.498,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.6.3",
-    "i_row": 6,
-    "i_cell": 3,
+    "i_row": 5,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 5 and column 2"
   },
   {
@@ -753,8 +848,11 @@
     "right": 0.445,
     "bottom": 0.537,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.7.1",
-    "i_row": 7,
-    "i_cell": 1,
+    "i_row": 6,
+    "i_cell": 0,
+    "text": "Innovations in manufacturing & design (incl. application of AI)",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 6 and column 0 with text = Innovations in manufacturing & design (incl. application of AI)"
   },
   {
@@ -767,8 +865,11 @@
     "right": 0.653,
     "bottom": 0.537,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.7.2",
-    "i_row": 7,
-    "i_cell": 2,
+    "i_row": 6,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 6 and column 1"
   },
   {
@@ -781,8 +882,11 @@
     "right": 0.86,
     "bottom": 0.537,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.7.3",
-    "i_row": 7,
-    "i_cell": 3,
+    "i_row": 6,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 6 and column 2"
   },
   {
@@ -795,8 +899,11 @@
     "right": 0.445,
     "bottom": 0.575,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.8.1",
-    "i_row": 8,
-    "i_cell": 1,
+    "i_row": 7,
+    "i_cell": 0,
+    "text": "Advanced node technologies",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 7 and column 0 with text = Advanced node technologies"
   },
   {
@@ -809,8 +916,11 @@
     "right": 0.653,
     "bottom": 0.575,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.8.2",
-    "i_row": 8,
-    "i_cell": 2,
+    "i_row": 7,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 7 and column 1"
   },
   {
@@ -823,8 +933,11 @@
     "right": 0.86,
     "bottom": 0.575,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.8.3",
-    "i_row": 8,
-    "i_cell": 3,
+    "i_row": 7,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 7 and column 2"
   },
   {
@@ -837,8 +950,11 @@
     "right": 0.445,
     "bottom": 0.614,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.9.1",
-    "i_row": 9,
-    "i_cell": 1,
+    "i_row": 8,
+    "i_cell": 0,
+    "text": "Demand growth from automotive sector (AV/EV)",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 8 and column 0 with text = Demand growth from automotive sector (AV/EV)"
   },
   {
@@ -851,8 +967,11 @@
     "right": 0.653,
     "bottom": 0.614,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.9.2",
-    "i_row": 9,
-    "i_cell": 2,
+    "i_row": 8,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 8 and column 1"
   },
   {
@@ -865,8 +984,11 @@
     "right": 0.86,
     "bottom": 0.614,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.9.3",
-    "i_row": 9,
-    "i_cell": 3,
+    "i_row": 8,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 8 and column 2"
   },
   {
@@ -879,8 +1001,11 @@
     "right": 0.445,
     "bottom": 0.653,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.10.1",
-    "i_row": 10,
-    "i_cell": 1,
+    "i_row": 9,
+    "i_cell": 0,
+    "text": "Demand growth from edge computing",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 9 and column 0 with text = Demand growth from edge computing"
   },
   {
@@ -893,8 +1018,11 @@
     "right": 0.653,
     "bottom": 0.653,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.10.2",
-    "i_row": 10,
-    "i_cell": 2,
+    "i_row": 9,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 9 and column 1"
   },
   {
@@ -907,8 +1035,11 @@
     "right": 0.86,
     "bottom": 0.653,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.10.3",
-    "i_row": 10,
-    "i_cell": 3,
+    "i_row": 9,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 9 and column 2"
   },
   {
@@ -921,8 +1052,11 @@
     "right": 0.445,
     "bottom": 0.692,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.11.1",
-    "i_row": 11,
-    "i_cell": 1,
+    "i_row": 10,
+    "i_cell": 0,
+    "text": "Demand growth from 5G / 6G",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 10 and column 0 with text = Demand growth from 5G / 6G"
   },
   {
@@ -935,8 +1069,11 @@
     "right": 0.653,
     "bottom": 0.692,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.11.2",
-    "i_row": 11,
-    "i_cell": 2,
+    "i_row": 10,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 10 and column 1"
   },
   {
@@ -949,8 +1086,11 @@
     "right": 0.86,
     "bottom": 0.692,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.11.3",
-    "i_row": 11,
-    "i_cell": 3,
+    "i_row": 10,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 10 and column 2"
   },
   {
@@ -963,8 +1103,11 @@
     "right": 0.445,
     "bottom": 0.731,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.12.1",
-    "i_row": 12,
-    "i_cell": 1,
+    "i_row": 11,
+    "i_cell": 0,
+    "text": "Demand growth from generative AI",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 11 and column 0 with text = Demand growth from generative AI"
   },
   {
@@ -977,8 +1120,11 @@
     "right": 0.653,
     "bottom": 0.731,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.12.2",
-    "i_row": 12,
-    "i_cell": 2,
+    "i_row": 11,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 11 and column 1"
   },
   {
@@ -991,8 +1137,11 @@
     "right": 0.86,
     "bottom": 0.731,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.12.3",
-    "i_row": 12,
-    "i_cell": 3,
+    "i_row": 11,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 11 and column 2"
   },
   {
@@ -1005,8 +1154,11 @@
     "right": 0.445,
     "bottom": 0.77,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.13.1",
-    "i_row": 13,
-    "i_cell": 1,
+    "i_row": 12,
+    "i_cell": 0,
+    "text": "ESG and sustainability improvements",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 12 and column 0 with text = ESG and sustainability improvements"
   },
   {
@@ -1019,8 +1171,11 @@
     "right": 0.653,
     "bottom": 0.77,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.13.2",
-    "i_row": 13,
-    "i_cell": 2,
+    "i_row": 12,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 12 and column 1"
   },
   {
@@ -1033,8 +1188,11 @@
     "right": 0.86,
     "bottom": 0.77,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.13.3",
-    "i_row": 13,
-    "i_cell": 3,
+    "i_row": 12,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 12 and column 2"
   },
   {
@@ -1047,8 +1205,11 @@
     "right": 0.445,
     "bottom": 0.809,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.14.1",
-    "i_row": 14,
-    "i_cell": 1,
+    "i_row": 13,
+    "i_cell": 0,
+    "text": "Metaverse growth",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 13 and column 0 with text = Metaverse growth"
   },
   {
@@ -1061,8 +1222,11 @@
     "right": 0.653,
     "bottom": 0.809,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.14.2",
-    "i_row": 14,
-    "i_cell": 2,
+    "i_row": 13,
+    "i_cell": 1,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 13 and column 1"
   },
   {
@@ -1075,8 +1239,11 @@
     "right": 0.86,
     "bottom": 0.809,
     "name": "Google Shape;564;g2ecbd9d9bc7_0_568.14.3",
-    "i_row": 14,
-    "i_cell": 3,
+    "i_row": 13,
+    "i_cell": 2,
+    "text": "",
+    "shape_type_category": "cell",
+    "table_id": 564,
     "description": "Cell of table 564 at row 13 and column 2"
   }
 ]

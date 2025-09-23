@@ -1,0 +1,467 @@
+[
+  {
+    "label": "Design element",
+    "shape_id": [
+      "123",
+      "124"
+    ],
+    "left": -0.042,
+    "top": 0.074,
+    "right": 0.257,
+    "bottom": 0.226
+  },
+  {
+    "label": "Title",
+    "shape_id": []
+  },
+  {
+    "label": "People",
+    "shape_id": [
+      "127",
+      "130",
+      "131",
+      "132",
+      "134",
+      "138",
+      "139",
+      "140",
+      "141",
+      "142",
+      "143",
+      "144",
+      "145",
+      "146",
+      "147",
+      "148",
+      "149",
+      "150",
+      "151",
+      "152"
+    ],
+    "left": 0.1,
+    "top": 0.357,
+    "right": 0.951,
+    "bottom": 0.871
+  },
+  {
+    "label": "Oliver Halter",
+    "shape_id": [
+      "130",
+      "139",
+      "149"
+    ],
+    "left": 0.1,
+    "top": 0.357,
+    "right": 0.24,
+    "bottom": 0.84
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "136"
+    ],
+    "left": 0.1,
+    "top": 0.571,
+    "right": 0.18,
+    "bottom": 0.713
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "130"
+    ],
+    "left": 0.1,
+    "top": 0.357,
+    "right": 0.181,
+    "bottom": 0.416
+  },
+  {
+    "label": "Bio",
+    "shape_id": [
+      "139",
+      "149"
+    ],
+    "left": 0.1,
+    "top": 0.415,
+    "right": 0.24,
+    "bottom": 0.84
+  },
+  {
+    "label": "Jordan Katz",
+    "shape_id": [
+      "127",
+      "138",
+      "150"
+    ],
+    "left": 0.427,
+    "top": 0.357,
+    "right": 0.757,
+    "bottom": 0.504
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "129"
+    ],
+    "left": 0.608,
+    "top": 0.208,
+    "right": 0.688,
+    "bottom": 0.35
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "127"
+    ],
+    "left": 0.608,
+    "top": 0.357,
+    "right": 0.703,
+    "bottom": 0.416
+  },
+  {
+    "label": "Bio",
+    "shape_id": [
+      "138",
+      "150"
+    ],
+    "left": 0.427,
+    "top": 0.415,
+    "right": 0.757,
+    "bottom": 0.504
+  },
+  {
+    "label": "Erich Klotz",
+    "shape_id": [
+      "131",
+      "140"
+    ],
+    "left": 0.788,
+    "top": 0.357,
+    "right": 0.951,
+    "bottom": 0.504
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "133"
+    ],
+    "left": 0.788,
+    "top": 0.208,
+    "right": 0.868,
+    "bottom": 0.35
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "131"
+    ],
+    "left": 0.788,
+    "top": 0.357,
+    "right": 0.951,
+    "bottom": 0.416
+  },
+  {
+    "label": "Bio",
+    "shape_id": [
+      "140"
+    ],
+    "left": 0.788,
+    "top": 0.415,
+    "right": 0.936,
+    "bottom": 0.504
+  },
+  {
+    "label": "Carlo Sanchez",
+    "shape_id": [
+      "134",
+      "142"
+    ],
+    "left": 0.261,
+    "top": 0.357,
+    "right": 0.389,
+    "bottom": 0.475
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "128"
+    ],
+    "left": 0.261,
+    "top": 0.208,
+    "right": 0.341,
+    "bottom": 0.35
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "134"
+    ],
+    "left": 0.261,
+    "top": 0.357,
+    "right": 0.338,
+    "bottom": 0.416
+  },
+  {
+    "label": "Bio",
+    "shape_id": [
+      "142"
+    ],
+    "left": 0.261,
+    "top": 0.415,
+    "right": 0.389,
+    "bottom": 0.475
+  },
+  {
+    "label": "Daniela Terrizzi",
+    "shape_id": [
+      "143",
+      "148"
+    ],
+    "left": 0.427,
+    "top": 0.718,
+    "right": 0.578,
+    "bottom": 0.869
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "155"
+    ],
+    "left": 0.261,
+    "top": 0.571,
+    "right": 0.341,
+    "bottom": 0.713
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "143"
+    ],
+    "left": 0.427,
+    "top": 0.718,
+    "right": 0.521,
+    "bottom": 0.777
+  },
+  {
+    "label": "Bio",
+    "shape_id": [
+      "148"
+    ],
+    "left": 0.427,
+    "top": 0.78,
+    "right": 0.578,
+    "bottom": 0.869
+  },
+  {
+    "label": "Tom Weakland",
+    "shape_id": [
+      "144",
+      "150"
+    ],
+    "left": 0.1,
+    "top": 0.415,
+    "right": 0.57,
+    "bottom": 0.777
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "137"
+    ],
+    "left": 0.427,
+    "top": 0.571,
+    "right": 0.507,
+    "bottom": 0.713
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "144"
+    ],
+    "left": 0.1,
+    "top": 0.718,
+    "right": 0.197,
+    "bottom": 0.777
+  },
+  {
+    "label": "Bio",
+    "shape_id": [
+      "150"
+    ],
+    "left": 0.427,
+    "top": 0.415,
+    "right": 0.57,
+    "bottom": 0.504
+  },
+  {
+    "label": "Mary Van De Kamp",
+    "shape_id": [
+      "147",
+      "152"
+    ],
+    "left": 0.261,
+    "top": 0.718,
+    "right": 0.394,
+    "bottom": 0.869
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "135"
+    ],
+    "left": 0.788,
+    "top": 0.571,
+    "right": 0.868,
+    "bottom": 0.713
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "147"
+    ],
+    "left": 0.261,
+    "top": 0.718,
+    "right": 0.385,
+    "bottom": 0.777
+  },
+  {
+    "label": "Bio",
+    "shape_id": [
+      "152"
+    ],
+    "left": 0.261,
+    "top": 0.78,
+    "right": 0.394,
+    "bottom": 0.869
+  },
+  {
+    "label": "Al Klein",
+    "shape_id": [
+      "145",
+      "151"
+    ],
+    "left": 0.427,
+    "top": 0.357,
+    "right": 0.727,
+    "bottom": 0.871
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "154"
+    ],
+    "left": 0.427,
+    "top": 0.208,
+    "right": 0.507,
+    "bottom": 0.35
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "145"
+    ],
+    "left": 0.427,
+    "top": 0.357,
+    "right": 0.523,
+    "bottom": 0.416
+  },
+  {
+    "label": "Bio",
+    "shape_id": [
+      "151"
+    ],
+    "left": 0.608,
+    "top": 0.782,
+    "right": 0.727,
+    "bottom": 0.871
+  },
+  {
+    "label": "Kelly Pollard",
+    "shape_id": [
+      "146",
+      "141"
+    ],
+    "left": 0.608,
+    "top": 0.718,
+    "right": 0.937,
+    "bottom": 0.869
+  },
+  {
+    "label": "Picture",
+    "shape_id": [
+      "153"
+    ],
+    "left": 0.608,
+    "top": 0.571,
+    "right": 0.688,
+    "bottom": 0.713
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "146"
+    ],
+    "left": 0.608,
+    "top": 0.718,
+    "right": 0.716,
+    "bottom": 0.777
+  },
+  {
+    "label": "Bio",
+    "shape_id": [
+      "141"
+    ],
+    "left": 0.788,
+    "top": 0.78,
+    "right": 0.937,
+    "bottom": 0.869
+  },
+  {
+    "label": "James Zuercher",
+    "shape_id": [
+      "132"
+    ],
+    "left": 0.788,
+    "top": 0.718,
+    "right": 0.896,
+    "bottom": 0.777
+  },
+  {
+    "label": "Picture",
+    "shape_id": []
+  },
+  {
+    "label": "Title",
+    "shape_id": [
+      "132"
+    ],
+    "left": 0.788,
+    "top": 0.718,
+    "right": 0.896,
+    "bottom": 0.777
+  },
+  {
+    "label": "Bio",
+    "shape_id": []
+  },
+  {
+    "label": "Page number",
+    "shape_id": [
+      "125"
+    ],
+    "left": 0.05,
+    "top": 0.922,
+    "right": 0.11,
+    "bottom": 0.956
+  },
+  {
+    "label": "Manifold logo",
+    "shape_id": [
+      "126"
+    ],
+    "left": 0.864,
+    "top": 0.924,
+    "right": 0.95,
+    "bottom": 0.948
+  }
+]

@@ -8,42 +8,98 @@
     "sections": []
   },
   {
-    "label": "Priority trends",
+    "label": "Table of trends and their impacts",
     "sections": [
       {
-        "label": "Header",
+        "label": "Header - Trend",
         "sections": []
       },
       {
-        "label": "Table of trends",
-        "sections": [
-          {
-            "label": "Trend column",
-            "sections": []
-          },
-          {
-            "label": "Impact on semiconductor industry column",
-            "sections": []
-          },
-          {
-            "label": "Impact on KPMG's business lines column",
-            "sections": []
-          }
-        ]
-      },
-      {
-        "label": "Prioritized for further analysis",
+        "label": "Header - Impact on semiconductor industry",
         "sections": []
       },
       {
-        "label": "Impact scale",
+        "label": "Header - Impact on KPMG's business lines",
         "sections": []
       },
       {
-        "label": "Footnote",
+        "label": "Geographic diversification of supply chain",
+        "sections": []
+      },
+      {
+        "label": "Industry recovery and normalization",
+        "sections": []
+      },
+      {
+        "label": "Increased cyberthreats",
+        "sections": []
+      },
+      {
+        "label": "Automotive/semiconductor partnerships",
+        "sections": []
+      },
+      {
+        "label": "Talent shortage",
+        "sections": []
+      },
+      {
+        "label": "Innovations in manufacturing & design (incl. application of AI)",
+        "sections": []
+      },
+      {
+        "label": "Advanced node technologies",
+        "sections": []
+      },
+      {
+        "label": "Demand growth from automotive sector (A/EV)",
+        "sections": []
+      },
+      {
+        "label": "Demand growth from 5G / 6G",
+        "sections": []
+      },
+      {
+        "label": "Demand growth from edge computing",
+        "sections": []
+      },
+      {
+        "label": "Demand growth from generative AI",
+        "sections": []
+      },
+      {
+        "label": "ESG and sustainability improvements",
+        "sections": []
+      },
+      {
+        "label": "Metaverse growth",
         "sections": []
       }
     ]
+  },
+  {
+    "label": "Impact scale",
+    "sections": [
+      {
+        "label": "High",
+        "sections": []
+      },
+      {
+        "label": "Medium",
+        "sections": []
+      },
+      {
+        "label": "Low",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "label": "Prioritized for further analysis",
+    "sections": []
+  },
+  {
+    "label": "Footnote",
+    "sections": []
   },
   {
     "label": "Page number",

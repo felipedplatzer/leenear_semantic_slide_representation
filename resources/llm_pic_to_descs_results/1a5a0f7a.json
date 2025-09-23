@@ -1,0 +1,544 @@
+[
+  {
+    "id": "123",
+    "width": 576,
+    "height": 24,
+    "left": 72,
+    "top": 42,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Introductions.",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Introductions."
+  },
+  {
+    "id": "124",
+    "width": 121,
+    "height": 61,
+    "left": -29,
+    "top": 29,
+    "color_rgb": [
+      0,
+      151,
+      167
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "autoshape"
+  },
+  {
+    "id": "125",
+    "width": 43,
+    "height": 13,
+    "left": 36,
+    "top": 373,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "1",
+    "shape_type": "other"
+  },
+  {
+    "id": "126",
+    "width": 61,
+    "height": 9,
+    "left": 622,
+    "top": 374,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "The image shows a logo with the word \"MAN"
+  },
+  {
+    "id": "127",
+    "width": 106,
+    "height": 15,
+    "left": 438,
+    "top": 144,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Carlo Sanchez\u000bDirector",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Carlo Sanchez\u000bDirector"
+  },
+  {
+    "id": "128",
+    "width": 57,
+    "height": 57,
+    "left": 187,
+    "top": 84,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "A man in a casual outfit, indoors, with"
+  },
+  {
+    "id": "129",
+    "width": 57,
+    "height": 57,
+    "left": 438,
+    "top": 84,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "A grayscale portrait of a man in a suit and"
+  },
+  {
+    "id": "130",
+    "width": 106,
+    "height": 15,
+    "left": 71,
+    "top": 144,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Oliver Halter\u000bPartner",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Oliver Halter\u000bPartner"
+  },
+  {
+    "id": "131",
+    "width": 115,
+    "height": 15,
+    "left": 567,
+    "top": 144,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Daniela Terrizzi, PhD, RN Manager",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Daniela Terrizzi, PhD, RN Manager"
+  },
+  {
+    "id": "132",
+    "width": 106,
+    "height": 15,
+    "left": 567,
+    "top": 290,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "James Zuercher \u000bSenior Associate",
+    "shape_type": "textbox",
+    "description": "Textbox with text: James Zuercher \u000bSenior Associate"
+  },
+  {
+    "id": "133",
+    "width": 57,
+    "height": 57,
+    "left": 567,
+    "top": 84,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "I'm sorry, I can't identify or describe people in"
+  },
+  {
+    "id": "134",
+    "width": 106,
+    "height": 15,
+    "left": 187,
+    "top": 144,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Jordan Katz\u000bPartner",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Jordan Katz\u000bPartner"
+  },
+  {
+    "id": "135",
+    "width": 57,
+    "height": 57,
+    "left": 567,
+    "top": 231,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "A man in a suit and tie, smiling,"
+  },
+  {
+    "id": "136",
+    "width": 57,
+    "height": 57,
+    "left": 71,
+    "top": 231,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "A grayscale portrait of a smiling man in a suit"
+  },
+  {
+    "id": "137",
+    "width": 57,
+    "height": 57,
+    "left": 307,
+    "top": 231,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "A man in a suit smiling, black and white"
+  },
+  {
+    "id": "138",
+    "width": 108,
+    "height": 15,
+    "left": 438,
+    "top": 168,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Experienced healthcare consultant\rEx-BCG, UofC MBA",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Experienced healthcare consultant\rEx-BCG, UofC MBA"
+  },
+  {
+    "id": "139",
+    "width": 94,
+    "height": 15,
+    "left": 71,
+    "top": 168,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "30 years experience in enterprise tech",
+    "shape_type": "textbox",
+    "description": "Textbox with text: 30 years experience in enterprise tech"
+  },
+  {
+    "id": "140",
+    "width": 116,
+    "height": 15,
+    "left": 567,
+    "top": 168,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Asst Prof UIC, 25 years healthcare experience\rFulbright Scholar",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Asst Prof UIC, 25 years healthcare experience\rFulbright Scholar"
+  },
+  {
+    "id": "141",
+    "width": 108,
+    "height": 15,
+    "left": 567,
+    "top": 316,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Experienced healthcare consultant\rUofC MBA",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Experienced healthcare consultant\rUofC MBA"
+  },
+  {
+    "id": "142",
+    "width": 106,
+    "height": 15,
+    "left": 187,
+    "top": 168,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Leader of Manifold\u2019s HealthCare practice",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Leader of Manifold\u2019s HealthCare practice"
+  },
+  {
+    "id": "143",
+    "width": 106,
+    "height": 15,
+    "left": 307,
+    "top": 290,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Al Klein\u000bSenior Advisor",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Al Klein\u000bSenior Advisor"
+  },
+  {
+    "id": "144",
+    "width": 106,
+    "height": 15,
+    "left": 71,
+    "top": 290,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Tom Weakland\u000bSenior Advisor",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Tom Weakland\u000bSenior Advisor"
+  },
+  {
+    "id": "145",
+    "width": 115,
+    "height": 15,
+    "left": 307,
+    "top": 144,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Erich Klotz\u000bSenior Director",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Erich Klotz\u000bSenior Director"
+  },
+  {
+    "id": "146",
+    "width": 106,
+    "height": 15,
+    "left": 438,
+    "top": 290,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Kelly Pollard\u000bSenior Associate",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Kelly Pollard\u000bSenior Associate"
+  },
+  {
+    "id": "147",
+    "width": 106,
+    "height": 15,
+    "left": 187,
+    "top": 290,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Mary Van De Kamp Senior Advisor",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Mary Van De Kamp Senior Advisor"
+  },
+  {
+    "id": "148",
+    "width": 108,
+    "height": 15,
+    "left": 307,
+    "top": 316,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "30+ years experience in healthcare technology\r",
+    "shape_type": "textbox",
+    "description": "Textbox with text: 30+ years experience in healthcare technology\r"
+  },
+  {
+    "id": "149",
+    "width": 108,
+    "height": 15,
+    "left": 71,
+    "top": 316,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Led PwC\u2019s Healthcare Advisory Practice",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Led PwC\u2019s Healthcare Advisory Practice"
+  },
+  {
+    "id": "150",
+    "width": 106,
+    "height": 15,
+    "left": 307,
+    "top": 168,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "16 years experience in healthcare tech architecture & strategy",
+    "shape_type": "textbox",
+    "description": "Textbox with text: 16 years experience in healthcare tech architecture & strategy"
+  },
+  {
+    "id": "151",
+    "width": 108,
+    "height": 15,
+    "left": 438,
+    "top": 316,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "RN and healthcare consultant\u000bMBA NYU Stern",
+    "shape_type": "textbox",
+    "description": "Textbox with text: RN and healthcare consultant\u000bMBA NYU Stern"
+  },
+  {
+    "id": "152",
+    "width": 108,
+    "height": 15,
+    "left": 187,
+    "top": 316,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": "Former Chief Clinical Officer, Kindred HealthCare",
+    "shape_type": "textbox",
+    "description": "Textbox with text: Former Chief Clinical Officer, Kindred HealthCare"
+  },
+  {
+    "id": "153",
+    "width": 57,
+    "height": 57,
+    "left": 438,
+    "top": 231,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "A woman smiling in a monochrome photo."
+  },
+  {
+    "id": "154",
+    "width": 57,
+    "height": 57,
+    "left": 307,
+    "top": 84,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "A grayscale portrait of a smiling man."
+  },
+  {
+    "id": "155",
+    "width": 57,
+    "height": 57,
+    "left": 187,
+    "top": 231,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "A woman in a striped jacket, grayscale photo."
+  },
+  {
+    "id": "156",
+    "width": 57,
+    "height": 57,
+    "left": 72,
+    "top": 84,
+    "color_rgb": [
+      255,
+      255,
+      255
+    ],
+    "shape": null,
+    "text": null,
+    "shape_type": "picture",
+    "description": "A grayscale portrait of a man wearing glasses and a"
+  }
+]

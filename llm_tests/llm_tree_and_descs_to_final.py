@@ -111,18 +111,15 @@ def get_elements_by_section(section_tree, elements_data, relative_coordinates_bo
 
 
 
-def main(rump, active_bool):
-# Example usage
-    RELATIVE_COORDINATES_BOOL = True
+def main(descs, tree, slide_image_path=None):
+    """Main function that takes descs and tree dictionaries directly"""
+    RELATIVE_COORDINATES_BOOL = False
     MODEL = 'openai'  # toggle between google and openai
     ONE_IMAGE_BOOL = False
-    # Example elements data - replace with your actual data
-    with open(base.get_project_path('resources', 'llm_pic_to_descs_results', f'{rump}.json'), 'r') as f:
-        elements_data = json.load(f)
     
-    # Load section tree from file    
-    with open(base.get_project_path('resources', 'llm_pic_to_tree_results', f'{rump}.json'), 'r') as f:
-        section_tree = json.load(f)
+    # Use the provided descs and tree data
+    elements_data = descs
+    section_tree = tree
 
     # Get element assignments
     result = get_elements_by_section(section_tree, elements_data, RELATIVE_COORDINATES_BOOL, MODEL)
@@ -135,19 +132,31 @@ def main(rump, active_bool):
     print("Element assignments by section:")
     print(json.dumps(result, indent=2))
     
-    with open(base.get_project_path('resources', 'llm_tree_and_descs_to_final_results', f'{rump}.json'), 'w') as f:
-        json.dump(result, f, indent=2)
+    # Annotate the image if slide_image_path is provided
+    if slide_image_path:
+        result_with_pos = base.get_bounds_from_shape_ids(result, elements_data)
+        slide_image = Image.open(slide_image_path)
+        annotate_image.annotate_image(slide_image, result_with_pos, ONE_IMAGE_BOOL, RELATIVE_COORDINATES_BOOL)
+        return result_with_pos
     
-
-    # Annotate the image
-    image = base.get_picture(rump, active_bool)
-    result_with_pos = base.get_bounds_from_shape_ids(result, elements_data)
-    annotate_image.annotate_image(image, result_with_pos, ONE_IMAGE_BOOL, RELATIVE_COORDINATES_BOOL)
-    return result_with_pos
+    return result
 
 
 if __name__ == "__main__":
     rump = input('Enter slide index: ')
-    active_bool = False # get slide from resources folder, not from active slide
-    main(rump, active_bool)
+    
+    # Read the descs and tree files
+    with open(base.get_project_path('resources', 'llm_pic_to_descs_results', f'{rump}.json'), 'r') as f:
+        descs = json.load(f)
+    
+    with open(base.get_project_path('resources', 'llm_pic_to_tree_results', f'{rump}.json'), 'r') as f:
+        tree = json.load(f)
+    
+    # Get slide image path for annotation
+    slide_image_path = base.get_project_path('resources', 'input_slide_pictures', f'{rump}.png')
+    
+    # Call main with the loaded data
+    result = main(descs, tree, slide_image_path)
+    with open(base.get_project_path('resources', 'llm_tree_and_descs_to_final_results', f'{rump}.json'), 'w') as f:
+        json.dump(result, f, indent=2)
     

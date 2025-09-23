@@ -1,0 +1,31 @@
+[
+  {
+    "label": "Design element",
+    "sections": []
+  },
+  {
+    "label": "Title",
+    "sections": []
+  },
+  {
+    "label": "Two columns of text",
+    "sections": [
+      {
+        "label": "Left column",
+        "sections": []
+      },
+      {
+        "label": "Right column",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "label": "Page number",
+    "sections": []
+  },
+  {
+    "label": "Manifold logo",
+    "sections": []
+  }
+]

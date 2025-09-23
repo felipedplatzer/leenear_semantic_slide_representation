@@ -51,15 +51,20 @@ def write_sections(elements_json, folder, base_name):
         json.dump(elements_json, f, indent=2)
 
 
-def main(rump, active_bool):
+def main(rump, target_image):
     load_dotenv('env.env')
     # Initialize Gemini
     genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
     model = genai.GenerativeModel("gemini-1.5-pro")
     # Step 1: Load training examples
     example_prompts = build_example_list(base.training_data_folder)
-    # Step 2: Target slide to analyze
-    target_image = base.get_picture(rump, active_bool)
+    
+    # Handle both file paths and byte data
+    if isinstance(target_image, bytes):
+        # Convert bytes to PIL Image
+        from io import BytesIO
+        target_image = Image.open(BytesIO(target_image))
+    
     # Step 3: Final prompt
     prompt = build_prompt(example_prompts, target_image)
     # Step 4: Send to Gemini
@@ -75,7 +80,16 @@ def main(rump, active_bool):
 if __name__ == "__main__":
     rump = input('Enter slide index: ')
     active_bool = False # get slide from resources folder, not from active slide
-    main(rump, active_bool)
+    target_image = base.get_picture(rump, active_bool)
+    
+    # Convert PIL Image to bytes for testing byte-based functionality
+    from io import BytesIO
+    buffer = BytesIO()
+    target_image.save(buffer, format='PNG')
+    target_image_bytes = buffer.getvalue()
+    
+    # Call main with bytes instead of PIL Image
+    main(rump, target_image_bytes)
 
 
 

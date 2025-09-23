@@ -1,0 +1,56 @@
+[
+  {
+    "label": "Design element",
+    "sections": []
+  },
+  {
+    "label": "Title",
+    "sections": []
+  },
+  {
+    "label": "Comparison of key features of different types of memory",
+    "sections": [
+      {
+        "label": "Header",
+        "sections": []
+      },
+      {
+        "label": "Table",
+        "sections": [
+          {
+            "label": "Header row",
+            "sections": []
+          },
+          {
+            "label": "SRAM",
+            "sections": []
+          },
+          {
+            "label": "DRAM",
+            "sections": []
+          },
+          {
+            "label": "Flash",
+            "sections": []
+          },
+          {
+            "label": "Emerging memory",
+            "sections": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Footnote",
+    "sections": []
+  },
+  {
+    "label": "Page number",
+    "sections": []
+  },
+  {
+    "label": "Manifold logo",
+    "sections": []
+  }
+]

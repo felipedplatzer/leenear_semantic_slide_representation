@@ -1,0 +1,49 @@
+[
+  {
+    "label": "Design element",
+    "sections": []
+  },
+  {
+    "label": "Title",
+    "sections": []
+  },
+  {
+    "label": "Two column layout",
+    "sections": [
+      {
+        "label": "Left column",
+        "sections": [
+          {
+            "label": "Key finding 1",
+            "sections": []
+          },
+          {
+            "label": "Key finding 2",
+            "sections": []
+          },
+          {
+            "label": "Key finding 3",
+            "sections": []
+          }
+        ]
+      },
+      {
+        "label": "Right column",
+        "sections": [
+          {
+            "label": "Image",
+            "sections": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Page number",
+    "sections": []
+  },
+  {
+    "label": "Manifold logo",
+    "sections": []
+  }
+]

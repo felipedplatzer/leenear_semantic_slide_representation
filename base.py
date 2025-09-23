@@ -154,7 +154,7 @@ def flatten_tree(tree, parent_index=""):
 
 
 def get_cell_info(shape, i_row, i_cell):
-    return {
+    x =  {
         'shape_id': str(shape.Id) + '.' + str(i_row + 1) + '.' + str(i_cell + 1), # Table ID.Row Index.Cell Index
         'shape_type': 'cell',
         'top': shape.Table.Rows[i_row].Cells[i_cell].Shape.Top,
@@ -167,6 +167,11 @@ def get_cell_info(shape, i_row, i_cell):
         'i_row': i_row + 1,
         'i_cell': i_cell + 1,
     }
+    if hasattr(shape.Table.Rows[i_row].Cells[i_cell].Shape, 'TextFrame'):
+        x['text'] = shape.Table.Rows[i_row].Cells[i_cell].Shape.TextFrame.TextRange.Text.strip()
+    else:
+        x['text'] = ''
+    return x
 
 def table_to_cells(table_ppt):
     cells = []
@@ -174,3 +179,107 @@ def table_to_cells(table_ppt):
         for cell in row.Cells:
             cells.append(cell)
     return cells
+
+def get_shape_images(slide):
+    """
+    Extract images of each shape in the slide and return as a dictionary.
+    
+    Args:
+        slide: PowerPoint slide object
+        
+    Returns:
+        dict: Dictionary with shape_id as key and PIL Image as value
+    """
+    import tempfile
+    import os
+    from io import BytesIO
+    
+    shape_images = {}
+    
+    # Classify shapes into different types
+    textboxes, tables, charts, pictures = classify_shapes(slide)
+    
+    # Process each shape type
+    all_shapes = []
+    all_shapes.extend(textboxes)
+    all_shapes.extend(tables)
+    all_shapes.extend(charts)
+    all_shapes.extend(pictures)
+    
+    for shape in all_shapes:
+        try:
+            # Get shape info to extract ID and bounds
+            shape_info = get_shape_info(shape)
+            shape_id = shape_info['shape_id']
+            
+            # Create a temporary file for the shape export
+            with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as temp_file:
+                temp_path = temp_file.name
+            
+            try:
+                # Export the shape as PNG
+                shape.Export(temp_path, 2)
+                
+                # Open with PIL and convert to bytes
+                with Image.open(temp_path) as pil_image:
+                    # Convert to RGB if necessary
+                    if pil_image.mode != 'RGB':
+                        pil_image = pil_image.convert('RGB')
+                    
+                    # Convert to bytes
+                    buffer = BytesIO()
+                    pil_image.save(buffer, format='PNG')
+                    shape_images[shape_id] = buffer.getvalue()
+                    
+            finally:
+                # Clean up temporary file
+                if os.path.exists(temp_path):
+                    os.unlink(temp_path)
+                    
+        except Exception as e:
+            print(f"Error processing shape {shape.Id}: {e}")
+            continue
+    
+    # Also process table cells
+    for table in tables:
+        try:
+            for i_row, row in enumerate(table.Table.Rows):
+                for i_cell, cell in enumerate(row.Cells):
+                    try:
+                        # Get cell info
+                        cell_info = get_cell_info(table, i_row, i_cell)
+                        cell_id = cell_info['shape_id']
+                        
+                        # Create a temporary file for the cell export
+                        with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as temp_file:
+                            temp_path = temp_file.name
+                        
+                        try:
+                            # Export the cell as PNG
+                            cell.Shape.Export(temp_path, 2)
+                            
+                            # Open with PIL and convert to bytes
+                            with Image.open(temp_path) as pil_image:
+                                # Convert to RGB if necessary
+                                if pil_image.mode != 'RGB':
+                                    pil_image = pil_image.convert('RGB')
+                                
+                                # Convert to bytes
+                                buffer = BytesIO()
+                                pil_image.save(buffer, format='PNG')
+                                shape_images[cell_id] = buffer.getvalue()
+                                
+                        finally:
+                            # Clean up temporary file
+                            if os.path.exists(temp_path):
+                                os.unlink(temp_path)
+                                
+                    except Exception as e:
+                        print(f"Error processing cell {i_row}.{i_cell} in table {table.Id}: {e}")
+                        continue
+                        
+        except Exception as e:
+            print(f"Error processing table {table.Id}: {e}")
+            continue
+    
+    return shape_images
