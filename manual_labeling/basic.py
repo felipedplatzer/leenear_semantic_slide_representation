@@ -20,6 +20,31 @@ def add_unnamed_shapes(shape_data, group_list):
     return group_list
 
 
+def process_groups(shape_data, group_list, test_index, slide_dimensions):
+    """
+    Process groups by adding unnamed shapes and adding required metadata fields.
+    
+    Args:
+        shape_data: List of shape data dictionaries
+        group_list: List of grouped shapes
+        test_index: Test index for the current session
+        slide_dimensions: Dictionary with 'height' and 'width' of the slide
+    
+    Returns:
+        List of processed group data with metadata fields added
+    """
+    # Add unnamed shapes to the group list
+    dl = add_unnamed_shapes(shape_data, group_list)
+    
+    # Add required metadata fields to each item
+    for x in dl:
+        x['slide_height'] = slide_dimensions['height']
+        x['slide_width'] = slide_dimensions['width']
+        x['test_index'] = test_index
+    
+    return dl
+
+
 def get_parent_shape(this_id, dl):
     for i, x in enumerate(dl):
         if len(x['shape_id']) == 1 and x['shape_id'][0] == this_id:
@@ -71,9 +96,12 @@ def save_to_csv(dl, test_index):
     # Get filename and save
     test_index_str = str(test_index).zfill(3)
     filename = f"test_{str(test_index_str)}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-    # Get the directory where this script is located
+    # Get the directory where this script is located and navigate to resources/manual_sections_csv
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    filepath = os.path.join(script_dir, 'csv_files', filename)
+    # Go up one level from manual_labeling to the project root, then into resources/manual_sections_csv
+    project_root = os.path.dirname(script_dir)
+    csv_dir = os.path.join(project_root, 'resources', 'manual_sections_csv')
+    filepath = os.path.join(csv_dir, filename)
     # Sort
     df = df.sort_values(by="index", ascending=True)
     df.to_csv(filepath, index=False, encoding="utf-8", quoting=csv.QUOTE_NONE, escapechar='\\', na_rep='')

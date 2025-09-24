@@ -1,0 +1,55 @@
+test_index,index,label,shape_id,start_char,end_char,text,top,left,right,bottom,width,height,slide_height,slide_width
+6,1,Design element,"[""976""]",,,,29.97637749,-29.98622131,91.69094086,91.7007885,121.6771622,61.72441101,405,720
+6,2,Title,"[""975""]",,,Our commercial due diligence team.,42.85007858,72,648,67.01543236,576,24.16535378,405,720
+6,3,People,"[""6""\, ""7""\, ""18""\, ""22""\, ""25""\, ""26""\, ""27""\, ""28""\, ""29""\, ""30""]",,,"John Sviokla\Partner\, Advisory\30+ years as consultant\, executive\, board member\, and investor. Former CMO for PwC US. Masters and PhD from Harvard Business School\, Former Harvard professor.\
+\
+\
+Jordan Katz\Partner\, Advisory\17+ years as consultant and business P&L owner. Former Chief of Staff at Active Network\, where he led to a successful IPO in 2011. Kellogg alum.\
+\
+\
+Dan Hallstrom\, \Director\, Analytics\20+ years in the design\, development and production implementation analytical solutions. \Former North Carolina State University Professor and PwC Director.\
+\
+\
+Carlo Sanchez\, \Sr. Director\, Advisory\10+ years as strategy consultant and business operator. \Deep expertise in growth strategy and due diligence. Former consulting leader at BCG and Booth alum.\
+\
+\
+Felipe Platzer\Manager\, Advisory\6+ years in consulting. Focus areas include commercial due diligence and growth strategy. Former consultant at BCG’s Principal Investments and Private Equity practice. Fuqua alum.",89.12882233,69.30708313,687,322.0762939,617.6929169,232.9474716,405,720
+6,3.01,Pictures,"[""6""\, ""7""\, ""18""\, ""22""\, ""30""]",,,,89.12882233,69.30708313,642.5457458,155.601265,573.2386627,66.47244263,405,720
+6,3.02,John Sviokla,"[""7""\, ""25""]",,,"John Sviokla\Partner\, Advisory\30+ years as consultant\, executive\, board member\, and investor. Former CMO for PwC US. Masters and PhD from Harvard Business School\, Former Harvard professor.",89.12882233,69.30708313,180,322.0762939,110.6929169,232.9474716,405,720
+6,03.02.01,Picture,"[""7""]",,,,89.12882233,69.30708313,135.7795258,155.601265,66.47244263,66.47244263,405,720
+6,03.02.02,"Name, title, and bio","[""25""]",,,"John Sviokla\Partner\, Advisory\30+ years as consultant\, executive\, board member\, and investor. Former CMO for PwC US. Masters and PhD from Harvard Business School\, Former Harvard professor.",165.749054,72,180,322.0762939,108,156.32724,405,720
+6,03.02.02.01,Name and title,"[""25""]",0,30,"John Sviokla\Partner\, Advisory",,,,,,,405,720
+6,03.02.02.01.01,Name,"[""25""]",0,12,John Sviokla,,,,,,,405,720
+6,03.02.02.01.02,Title,"[""25""]",12,30,"\Partner\, Advisory",,,,,,,405,720
+6,03.02.02.02,Quick bio,"[""25""]",30,189,"\30+ years as consultant\, executive\, board member\, and investor. Former CMO for PwC US. Masters and PhD from Harvard Business School\, Former Harvard professor.",,,,,,,405,720
+6,3.03,Jordan Katz,"[""6""\, ""26""]",,,"Jordan Katz\Partner\, Advisory\17+ years as consultant and business P&L owner. Former Chief of Staff at Active Network\, where he led to a successful IPO in 2011. Kellogg alum.",89.12882233,195.9986572,306.75,322.0762939,110.7513428,232.9474716,405,720
+6,03.03.01,Picture,"[""6""]",,,,89.12882233,195.9986572,262.4710999,155.601265,66.47244263,66.47244263,405,720
+6,03.03.02,"Name, title, and bio","[""26""]",,,"Jordan Katz\Partner\, Advisory\17+ years as consultant and business P&L owner. Former Chief of Staff at Active Network\, where he led to a successful IPO in 2011. Kellogg alum.",165.749054,198.75,306.75,322.0762939,108,156.32724,405,720
+6,03.03.02.01,Name and title,"[""26""]",0,30,"Jordan Katz\Partner\, Advisory\",,,,,,,405,720
+6,03.03.02.01.01,Name,"[""26""]",0,12,"Jordan Katz\",,,,,,,405,720
+6,03.03.02.01.02,Title,"[""26""]",12,30,"Partner\, Advisory\",,,,,,,405,720
+6,03.03.02.02,Quick bio,"[""26""]",30,174,"17+ years as consultant and business P&L owner. Former Chief of Staff at Active Network\, where he led to a successful IPO in 2011. Kellogg alum.",,,,,,,405,720
+6,3.04,Carlo Sanchez,"[""18""\, ""28""]",,,"Carlo Sanchez\, \Sr. Director\, Advisory\10+ years as strategy consultant and business operator. \Deep expertise in growth strategy and due diligence. Former consulting leader at BCG and Booth alum.",89.12882233,322.690155,433.5,322.0762939,110.809845,232.9474716,405,720
+6,03.04.01,Picture,"[""18""]",,,,89.12882233,322.690155,389.1625977,155.601265,66.47244263,66.47244263,405,720
+6,03.04.02,"Name, title, and bio","[""28""]",,,"Carlo Sanchez\, \Sr. Director\, Advisory\10+ years as strategy consultant and business operator. \Deep expertise in growth strategy and due diligence. Former consulting leader at BCG and Booth alum.",165.749054,325.5,433.5,322.0762939,108,156.32724,405,720
+6,03.04.02.01,Name and title,"[""28""]",0,38,"Carlo Sanchez\, \Sr. Director\, Advisory",,,,,,,405,720
+6,03.04.02.01.01,Name,"[""28""]",0,14,"Carlo Sanchez\,",,,,,,,405,720
+6,03.04.02.01.02,Title,"[""28""]",14,38," \Sr. Director\, Advisory",,,,,,,405,720
+6,03.04.02.02,Quick bio,"[""28""]",38,196,"\10+ years as strategy consultant and business operator. \Deep expertise in growth strategy and due diligence. Former consulting leader at BCG and Booth alum.",,,,,,,405,720
+6,3.05,Dan Hallstrom,"[""22""\, ""27""]",,,"Dan Hallstrom\, \Director\, Analytics\20+ years in the design\, development and production implementation analytical solutions. \Former North Carolina State University Professor and PwC Director.",89.12882233,449.3818054,560.25,322.0762939,110.8681946,232.9474716,405,720
+6,03.05.01,Picture,"[""22""]",,,,89.12882233,449.3818054,515.854248,155.601265,66.47244263,66.47244263,405,720
+6,03.05.02,"Name, title, and bio","[""27""]",,,"Dan Hallstrom\, \Director\, Analytics\20+ years in the design\, development and production implementation analytical solutions. \Former North Carolina State University Professor and PwC Director.",165.749054,452.25,560.25,322.0762939,108,156.32724,405,720
+6,03.05.02.01,Name and title,"[""27""]",0,35,"Dan Hallstrom\, \Director\, Analytics",,,,,,,405,720
+6,03.05.02.01.01,Name,"[""27""]",0,14,"Dan Hallstrom\,",,,,,,,405,720
+6,03.05.02.01.02,Title,"[""27""]",14,35," \Director\, Analytics",,,,,,,405,720
+6,03.05.02.02,Quick bio,"[""27""]",35,192,"\20+ years in the design\, development and production implementation analytical solutions. \Former North Carolina State University Professor and PwC Director.",,,,,,,405,720
+6,3.06,Felipe Platzer,"[""29""\, ""30""]",,,"Felipe Platzer\Manager\, Advisory\6+ years in consulting. Focus areas include commercial due diligence and growth strategy. Former consultant at BCG’s Principal Investments and Private Equity practice. Fuqua alum.",89.12882233,576.0733032,687,322.0762939,110.9266968,232.9474716,405,720
+6,03.06.01,Picture,"[""30""]",,,,89.12882233,576.0733032,642.5457458,155.601265,66.47244263,66.47244263,405,720
+6,03.06.02,"Name, title, and bio","[""29""]",,,"Felipe Platzer\Manager\, Advisory\6+ years in consulting. Focus areas include commercial due diligence and growth strategy. Former consultant at BCG’s Principal Investments and Private Equity practice. Fuqua alum.",165.749054,579,687,322.0762939,108,156.32724,405,720
+6,03.06.02.01,Name and title,"[""29""]",0,33,"Felipe Platzer\Manager\, Advisory\",,,,,,,405,720
+6,03.06.02.01.01,Name,"[""29""]",0,14,Felipe Platzer,,,,,,,405,720
+6,03.06.02.01.02,Title,"[""29""]",14,33,"\Manager\, Advisory\",,,,,,,405,720
+6,03.06.02.02,Quick bio,"[""29""]",33,212,6+ years in consulting. Focus areas include commercial due diligence and growth strategy. Former consultant at BCG’s Principal Investments and Private Equity practice. Fuqua alum.,,,,,,,405,720
+6,4,Callout - extra people,"[""3""]",,,#NAME?,334.2087402,72,687,358.3103943,615,24.10165405,405,720
+6,5,Page number,"[""5""]",,,1,373.2991333,28.79527473,71.99999809,386.9999208,43.20472336,13.70078754,405,720
+6,6,Manifold logo,"[""31""]",,,,374.0526733,622.2755737,684.0001411,383.9635391,61.72456741,9.910865784,405,720

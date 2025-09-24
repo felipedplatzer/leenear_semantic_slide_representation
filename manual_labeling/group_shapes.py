@@ -1,5 +1,5 @@
 import win32com.client
-import resources
+#import resources
 import re
 from datetime import datetime
 import os

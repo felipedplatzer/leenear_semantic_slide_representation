@@ -1,4 +1,9 @@
+import sys
+
+import os
 import win32com.client
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import resources
 
 def create_shape_boxes(ppt_app):
