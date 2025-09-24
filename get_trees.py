@@ -1,11 +1,15 @@
 import os
 import json
+import pandas as pd
+
+from numpy import outer
 
 # Get the directory where this script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Paths
-training_dir = os.path.join(script_dir, 'training_data')
+input_dir = os.path.join(script_dir, 'resources', 'manual_sections_csv', 'after_processing')
+output_dir = os.path.join(script_dir, 'resources', 'manual_sections_json_trees')
 
 # One image or separate images - toggle this to True or False
 ONE_IMAGE_BOOL = False
@@ -17,7 +21,7 @@ def get_json_dl(json_path):
 
 def get_tree_from_index(flat_list):
     """
-    Convert a flat list of objects with hierarchical indices into a tree structure.
+    Convert a flat list of objects with hierarchical indices (e.g., 1, 1.1, 1.1.1, 1.1.2) into a tree structure.
     
     Input: [{'index': '1', 'label': 'Introduction'}, {'index': '1.1', 'label': 'Overview'}, ...]
     Output: [{'label': 'Introduction', 'sections': [{'label': 'Overview', 'sections': []}]}]
@@ -40,10 +44,13 @@ def get_tree_from_index(flat_list):
             
             # Create node if it doesn't exist
             if path_key not in nodes:
-                node = {
-                    'label': item['label'] if i == len(index_parts) - 1 else f"Section {path_key}",
-                    'sections': []
+                # Start with all original attributes from the item
+                node = item.copy() if i == len(index_parts) - 1 else {
+                    'label': f"Section {path_key}",
+                    'index': path_key
                 }
+                # Add sections array for tree structure
+                node['sections'] = []
                 nodes[path_key] = node
                 
                 # Add to parent or root
@@ -57,17 +64,9 @@ def get_tree_from_index(flat_list):
     return root_nodes
 
 def write_tree(tree, base_name):
-    with open(os.path.join(training_dir, f'{base_name}_tree.json'), 'w') as f:
+    with open(os.path.join(output_dir, f'{base_name}.json'), 'w') as f:
         json.dump(tree, f, indent=2)
 
-def get_trees_from_index(training_dir):
-    for filename in os.listdir(training_dir):
-        if filename.endswith('.json') and 'tree' not in filename:
-            base_name = filename[:-5]  # Remove '.json'
-            json_path = os.path.join(training_dir, f'{base_name}.json')
-            json_dl = get_json_dl(json_path)
-            tree = get_tree_from_index(json_dl)
-            write_tree(tree, base_name)
 
 def add_indices_from_ids(dl): # dict with label, shape_id, and maybe other attributes
     """
@@ -134,4 +133,19 @@ def add_indices_from_ids(dl): # dict with label, shape_id, and maybe other attri
     return assign_indices(dl)
 
 if __name__ == "__main__":
-    get_trees_from_index(training_dir)
+    rump = input('Enter the name of the csv file (without .csv). Leave empty to process all files in the input directory: ')
+    if rump == '':
+        filename_list = [os.path.join(input_dir, filename) for filename in os.listdir(input_dir) if filename.endswith('.csv')]
+    else:
+        rump = rump.replace('.csv', '')
+        filename_list = [os.path.join(input_dir, rump + '.csv')]
+    for filename in filename_list:
+        base_name = os.path.basename(filename)[:-4]  # Remove '.csv' and get just the filename
+        csv_path = filename
+        
+        # Read CSV and convert to dictionary list
+        df = pd.read_csv(csv_path)
+        json_dl = df.to_dict('records')
+        
+        tree = get_tree_from_index(json_dl)
+        write_tree(tree, base_name)

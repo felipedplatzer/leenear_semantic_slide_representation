@@ -1,57 +1,174 @@
 [
   {
     "label": "Section 1",
+    "index": "1",
     "sections": [
       {
+        "test_index": 31,
+        "index": 1.0,
         "label": "Design element",
+        "shape_id": "[\"318\"]",
+        "start_char": NaN,
+        "end_char": NaN,
+        "text": NaN,
+        "top": -0.01,
+        "left": 312.54,
+        "right": 720.0,
+        "bottom": 33.84,
+        "width": 407.46,
+        "height": 33.85,
+        "slide_height": 405,
+        "slide_width": 720,
         "sections": []
       }
     ]
   },
   {
     "label": "Section 2",
+    "index": "2",
     "sections": [
       {
+        "test_index": 31,
+        "index": 2.0,
         "label": "Title",
+        "shape_id": "[\"321\"]",
+        "start_char": NaN,
+        "end_char": NaN,
+        "text": "Our approach.",
+        "top": 39.34,
+        "left": 36.0,
+        "right": 688.35,
+        "bottom": 63.5,
+        "width": 652.35,
+        "height": 24.17,
+        "slide_height": 405,
+        "slide_width": 720,
         "sections": []
       }
     ]
   },
   {
     "label": "Section 3",
+    "index": "3",
     "sections": [
       {
+        "test_index": 31,
+        "index": 3.0,
         "label": "Approach flowchart",
+        "shape_id": "[\"2\"\\, \"3\"\\, \"4\"]",
+        "start_char": NaN,
+        "end_char": NaN,
+        "text": "Secondary research\\\n\\\n\\\nPrimary research\\\n\\\n\\\nSynthesis and strategy development",
+        "top": 144.1,
+        "left": 36.0,
+        "right": 696.19,
+        "bottom": 194.21,
+        "width": 660.19,
+        "height": 50.11,
+        "slide_height": 405,
+        "slide_width": 720,
         "sections": []
       },
       {
+        "test_index": 31,
+        "index": 3.01,
         "label": "Step 1",
+        "shape_id": "[\"2\"]",
+        "start_char": NaN,
+        "end_char": NaN,
+        "text": "Secondary research",
+        "top": 144.1,
+        "left": 36.0,
+        "right": 246.36,
+        "bottom": 194.21,
+        "width": 210.36,
+        "height": 50.11,
+        "slide_height": 405,
+        "slide_width": 720,
         "sections": []
       },
       {
+        "test_index": 31,
+        "index": 3.02,
         "label": "Step 2",
+        "shape_id": "[\"3\"]",
+        "start_char": NaN,
+        "end_char": NaN,
+        "text": "Primary research",
+        "top": 144.1,
+        "left": 260.91,
+        "right": 471.28,
+        "bottom": 194.21,
+        "width": 210.36,
+        "height": 50.11,
+        "slide_height": 405,
+        "slide_width": 720,
         "sections": []
       },
       {
+        "test_index": 31,
+        "index": 3.03,
         "label": "Step 3",
+        "shape_id": "[\"4\"]",
+        "start_char": NaN,
+        "end_char": NaN,
+        "text": "Synthesis and strategy development",
+        "top": 144.1,
+        "left": 485.83,
+        "right": 696.19,
+        "bottom": 194.21,
+        "width": 210.36,
+        "height": 50.11,
+        "slide_height": 405,
+        "slide_width": 720,
         "sections": []
       }
     ]
   },
   {
     "label": "Section 4",
+    "index": "4",
     "sections": [
       {
+        "test_index": 31,
+        "index": 4.0,
         "label": "Page number",
+        "shape_id": "[\"320\"]",
+        "start_char": NaN,
+        "end_char": NaN,
+        "text": "1",
+        "top": 373.3,
+        "left": 36.0,
+        "right": 79.2,
+        "bottom": 387.0,
+        "width": 43.2,
+        "height": 13.7,
+        "slide_height": 405,
+        "slide_width": 720,
         "sections": []
       }
     ]
   },
   {
     "label": "Section 5",
+    "index": "5",
     "sections": [
       {
+        "test_index": 31,
+        "index": 5.0,
         "label": "Manifold logo",
+        "shape_id": "[\"319\"]",
+        "start_char": NaN,
+        "end_char": NaN,
+        "text": NaN,
+        "top": 373.3,
+        "left": 642.28,
+        "right": 696.19,
+        "bottom": 384.72,
+        "width": 53.91,
+        "height": 11.42,
+        "slide_height": 405,
+        "slide_width": 720,
         "sections": []
       }
     ]
