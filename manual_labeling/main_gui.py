@@ -1079,6 +1079,7 @@ def finish_text_labeling_process():
     dl = basic.add_unnamed_shapes(shape_data, group_list)
     dl = structure_shapes.generate_structure_main(dl)
     dl = basic.add_text_sections(dl, text_section_list)
+    dl = basic.add_table_sections(dl, table_labels_list)
     for x in dl:
         x['slide_height'] = slide_dimensions['height']
         x['slide_width'] = slide_dimensions['width']
