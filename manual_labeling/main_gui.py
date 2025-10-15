@@ -20,6 +20,7 @@ ppt_app = None
 selection_monitor_thread = None
 group_list = []
 text_section_list = []
+table_labels_list = []
 last_selection_ref = None
 last_selection_ref_shape_ids = []
 
@@ -153,14 +154,14 @@ def show_group_naming_dialog(selection):
     # Create a new root window for the dialog
     dialog_root = tk.Tk()
     dialog_root.title("Name This Group")
-    dialog_root.geometry("350x200")
+    dialog_root.geometry("400x250")
     dialog_root.resizable(False, False)
     
     # Center on screen
     dialog_root.update_idletasks()
-    x = (dialog_root.winfo_screenwidth() // 2) - (350 // 2)
-    y = (dialog_root.winfo_screenheight() // 2) - (200 // 2)
-    dialog_root.geometry(f"350x200+{x}+{y}")
+    x = (dialog_root.winfo_screenwidth() // 2) - (400 // 2)
+    y = (dialog_root.winfo_screenheight() // 2) - (250 // 2)
+    dialog_root.geometry(f"400x250+{x}+{y}")
     
     # Bring dialog to foreground
     dialog_root.lift()
@@ -182,54 +183,40 @@ def show_group_naming_dialog(selection):
     info_label = tk.Label(main_frame, text=info_text, fg="gray")
     info_label.pack(pady=(0, 15))
     
-    # Group name input
-    name_label = tk.Label(main_frame, text="Name this group:", 
-                         font=("Arial", 10))
+    # Group name input with updated header
+    name_label = tk.Label(main_frame, text="Leave blank to not save group, e.g., if you made a mistake with the selection:", 
+                         font=("Arial", 10), wraplength=350, justify="left")
     name_label.pack(anchor="w", pady=(0, 5))
     
-    name_entry = tk.Entry(main_frame, font=("Arial", 11), width=30)
+    name_entry = tk.Entry(main_frame, font=("Arial", 11), width=40)
     name_entry.pack(pady=(0, 20))
     
     # Buttons frame
     buttons_frame = tk.Frame(main_frame)
     buttons_frame.pack(fill=tk.X, pady=(0, 10))
     
-    # Continue button
-    continue_btn = tk.Button(buttons_frame, text="Continue", 
-                            command=lambda: continue_labeling(name_entry.get().strip(), selection, dialog_root),
-                            bg="#2196F3", fg="white",
-                            width=10, height=5)
-    continue_btn.pack(side=tk.LEFT, padx=(0, 5))
+    # Go to Next Group button
+    next_group_btn = tk.Button(buttons_frame, text="Go to Next Group", 
+                             command=lambda: go_to_next_group(name_entry.get().strip(), selection, dialog_root),
+                             bg="#2196F3", fg="white",
+                             width=15, height=3)
+    next_group_btn.pack(side=tk.LEFT, padx=(0, 10))
     
-    # Finish button
-    finish_btn = tk.Button(buttons_frame, text="Save & Finish", 
-                          command=lambda: save_and_finish(name_entry.get().strip(), selection, dialog_root),
-                          bg="#F44336", fg="white",
-                          width=10, height=5)
-    finish_btn.pack(side=tk.LEFT, padx=(0, 5))
-    
-    # Skip button
-    skip_btn = tk.Button(buttons_frame, text="Skip", 
-                        command=lambda: skip_labeling(dialog_root),
-                        bg="#FFC107", fg="black",
-                        width=10, height=5)
-    skip_btn.pack(side=tk.LEFT, padx=(0, 5))
-    
-    # Finish button (no save)
-    finish_btn_no_save = tk.Button(buttons_frame, text="Finish", 
-                                  command=lambda: finish(dialog_root),
-                                  bg="#9C27B0", fg="white",
-                                  width=10, height=5)
-    finish_btn_no_save.pack(side=tk.LEFT)
+    # Go to Text Sections button
+    text_sections_btn = tk.Button(buttons_frame, text="Go to Text Sections", 
+                                 command=lambda: go_to_text_sections(name_entry.get().strip(), selection, dialog_root),
+                                 bg="#4CAF50", fg="white",
+                                 width=15, height=3)
+    text_sections_btn.pack(side=tk.LEFT)
     
     # Focus on textbox after dialog is created
     dialog_root.after(100, lambda: name_entry.focus())
     
-    # Bind Enter key to Continue (only when textbox is focused)
-    name_entry.bind('<Return>', lambda e: continue_labeling(name_entry.get().strip(), selection, dialog_root))
+    # Bind Enter key to Go to Next Group
+    name_entry.bind('<Return>', lambda e: go_to_next_group(name_entry.get().strip(), selection, dialog_root))
     
-    # Bind Escape key to Skip
-    dialog_root.bind('<Escape>', lambda e: skip_labeling(dialog_root))
+    # Bind Escape key to skip (go to next group without saving)
+    dialog_root.bind('<Escape>', lambda e: go_to_next_group("", selection, dialog_root))
     
     # Bind Enter key to focused button when buttons are focused
     def on_button_focus(event):
@@ -238,8 +225,40 @@ def show_group_naming_dialog(selection):
             widget.bind('<Return>', lambda e: widget.invoke())
     
     # Apply focus binding to all buttons
-    for button in [continue_btn, finish_btn, skip_btn, finish_btn_no_save]:
+    for button in [next_group_btn, text_sections_btn]:
         button.bind('<FocusIn>', on_button_focus)
+    
+    # Handle window close (X button) - save and quit
+    def on_closing():
+        # Save current group if name is provided
+        group_name = name_entry.get().strip()
+        if group_name:
+            save(group_name, selection)
+        # Stop the listener and finish the process
+        global listener_active
+        listener_active = False
+        dialog_root.destroy()
+        finish_text_labeling_process()
+    
+    dialog_root.protocol("WM_DELETE_WINDOW", on_closing)
+
+def go_to_next_group(group_name, selection, dialog_root):
+    """Go to next group, saving current group if name is provided"""
+    if group_name and group_name.strip():
+        save(group_name, selection)
+    else:
+        print("Group name is blank - not saving group")
+    dialog_root.destroy()
+    print("Listening for next group")
+
+def go_to_text_sections(group_name, selection, dialog_root):
+    """Go to text sections, saving current group if name is provided"""
+    if group_name and group_name.strip():
+        save(group_name, selection)
+    else:
+        print("Group name is blank - not saving group")
+    dialog_root.destroy()
+    show_text_labeling_form(selection)
 
 def skip_labeling(dialog_root):
     """Skip this selection and continue labeling"""
@@ -390,8 +409,9 @@ def show_text_labeling_form(selection):
     inputs_frame = tk.Frame(main_frame)
     inputs_frame.pack(fill=tk.X, pady=(0, 20))
     
-    # Shape ID input
-    shape_id_label = tk.Label(inputs_frame, text="Shape ID:", font=("Arial", 10))
+    # Shape ID input with updated label
+    shape_id_label = tk.Label(inputs_frame, text="Leave blank to not save text section, e.g., if you made a mistake with the selection:", 
+                             font=("Arial", 10), wraplength=300, justify="left")
     shape_id_label.grid(row=0, column=0, sticky="w", pady=(0, 5))
     shape_id_entry = tk.Entry(inputs_frame, font=("Arial", 11), width=30)
     shape_id_entry.grid(row=0, column=1, sticky="ew", pady=(0, 5))
@@ -424,44 +444,55 @@ def show_text_labeling_form(selection):
     buttons_frame = tk.Frame(main_frame)
     buttons_frame.pack(fill=tk.X, pady=(20, 0))
     
-    # Save & Next button
-    save_next_btn = tk.Button(buttons_frame, text="Save & Next", 
-                             command=lambda: save_and_next_text(shape_id_entry.get().strip(), 
-                                                              start_char_entry.get().strip(),
-                                                              end_char_entry.get().strip(),
-                                                              name_entry.get().strip(),
-                                                              text_dialog),
+    # Go to Next Text Section button
+    next_text_btn = tk.Button(buttons_frame, text="Go to Next Text Section", 
+                             command=lambda: go_to_next_text_section(shape_id_entry.get().strip(), 
+                                                                   start_char_entry.get().strip(),
+                                                                   end_char_entry.get().strip(),
+                                                                   name_entry.get().strip(),
+                                                                   text_dialog),
                              bg="#2196F3", fg="white",
-                             width=12, height=2)
-    save_next_btn.pack(side=tk.LEFT, padx=(0, 10))
+                             width=18, height=2)
+    next_text_btn.pack(side=tk.LEFT, padx=(0, 10))
     
-    # Save & Finish button
-    save_finish_btn = tk.Button(buttons_frame, text="Save & Finish", 
-                               command=lambda: save_and_finish_text(shape_id_entry.get().strip(), 
-                                                                  start_char_entry.get().strip(),
-                                                                  end_char_entry.get().strip(),
-                                                                  name_entry.get().strip(),
-                                                                  text_dialog),
-                               bg="#4CAF50", fg="white",
-                               width=12, height=2)
-    save_finish_btn.pack(side=tk.LEFT, padx=(0, 10))
-    
-    # Finish button
-    finish_btn = tk.Button(buttons_frame, text="Finish", 
-                          command=lambda: finish_text_labeling(text_dialog),
-                          bg="#F44336", fg="white",
-                          width=12, height=2)
-    finish_btn.pack(side=tk.LEFT)
+    # Go to Tables button
+    go_to_tables_btn = tk.Button(buttons_frame, text="Go to Tables", 
+                                command=lambda: go_to_tables(shape_id_entry.get().strip(), 
+                                                           start_char_entry.get().strip(),
+                                                           end_char_entry.get().strip(),
+                                                           name_entry.get().strip(),
+                                                           text_dialog),
+                                bg="#4CAF50", fg="white",
+                                width=15, height=2)
+    go_to_tables_btn.pack(side=tk.LEFT)
     
     # Focus on first input
     text_dialog.after(100, lambda: shape_id_entry.focus())
     
-    # Bind Enter key to Save & Next
-    text_dialog.bind('<Return>', lambda e: save_and_next_text(shape_id_entry.get().strip(), 
-                                                             start_char_entry.get().strip(),
-                                                             end_char_entry.get().strip(),
-                                                             name_entry.get().strip(),
-                                                             text_dialog))
+    # Bind Enter key to Go to Next Text Section
+    text_dialog.bind('<Return>', lambda e: go_to_next_text_section(shape_id_entry.get().strip(), 
+                                                                  start_char_entry.get().strip(),
+                                                                  end_char_entry.get().strip(),
+                                                                  name_entry.get().strip(),
+                                                                  text_dialog))
+    
+    # Handle window close (X button) - save and quit
+    def on_text_closing():
+        # Save current text section if all fields are filled
+        shape_id = shape_id_entry.get().strip()
+        start_char = start_char_entry.get().strip()
+        end_char = end_char_entry.get().strip()
+        name = name_entry.get().strip()
+        
+        if shape_id and start_char and end_char and name:
+            text_section_list.append(get_text_dict(shape_id, start_char, end_char, name))
+            print(f"Auto-saved text section: Shape ID={shape_id}, Start={start_char}, End={end_char}, Name={name}")
+        
+        # Finish the text labeling process
+        text_dialog.destroy()
+        finish_text_labeling_process()
+    
+    text_dialog.protocol("WM_DELETE_WINDOW", on_text_closing)
 
 def get_text_dict(shape_id, start_char, end_char, name):
     for x in ppt_app.ActiveWindow.View.Slide.Shapes:
@@ -508,24 +539,117 @@ def save_and_finish_text(shape_id, start_char, end_char, name, dialog):
     dialog.destroy()
     finish_text_labeling_process()
 
+def go_to_next_text_section(shape_id, start_char, end_char, name, dialog):
+    """Go to next text section, saving current section if shape ID is provided"""
+    if shape_id and shape_id.strip():
+        text_section_list.append(get_text_dict(shape_id, start_char, end_char, name))
+        print(f"Saved text section: Shape ID={shape_id}, Start={start_char}, End={end_char}, Name={name}")
+        
+        # Find the input fields and update them for next section
+        for widget in dialog.winfo_children():
+            if isinstance(widget, tk.Frame):
+                for child in widget.winfo_children():
+                    if isinstance(child, tk.Frame):
+                        entries = []
+                        for entry in child.winfo_children():
+                            if isinstance(entry, tk.Entry):
+                                entries.append(entry)
+                        
+                        if len(entries) >= 4:  # shape_id, start_char, end_char, name
+                            # Keep shape_id the same (entries[0])
+                            # Set start_char to previous end_char (entries[1])
+                            entries[1].delete(0, tk.END)
+                            entries[1].insert(0, end_char)
+                            # Clear end_char (entries[2])
+                            entries[2].delete(0, tk.END)
+                            # Clear name (entries[3])
+                            entries[3].delete(0, tk.END)
+                            # Focus on end_char field
+                            entries[2].focus()
+                            break
+    else:
+        print("Shape ID is blank - not saving text section")
+        # Clear all fields for next section
+        for widget in dialog.winfo_children():
+            if isinstance(widget, tk.Frame):
+                for child in widget.winfo_children():
+                    if isinstance(child, tk.Frame):
+                        entries = []
+                        for entry in child.winfo_children():
+                            if isinstance(entry, tk.Entry):
+                                entries.append(entry)
+                        
+                        if len(entries) >= 4:  # shape_id, start_char, end_char, name
+                            # Clear all fields
+                            for entry in entries:
+                                entry.delete(0, tk.END)
+                            # Focus on shape_id field
+                            entries[0].focus()
+                            break
+
+def go_to_tables(shape_id, start_char, end_char, name, dialog):
+    """Go to tables, saving current text section if shape ID is provided"""
+    if shape_id and shape_id.strip():
+        text_section_list.append(get_text_dict(shape_id, start_char, end_char, name))
+        print(f"Saved text section: Shape ID={shape_id}, Start={start_char}, End={end_char}, Name={name}")
+    else:
+        print("Shape ID is blank - not saving text section")
+    
+    dialog.destroy()
+    show_table_labeling_form()
+
 def finish_text_labeling(dialog):
     """Finish text labeling without saving"""
     dialog.destroy()
     show_table_labeling_form()
 
+def get_tables_from_slide():
+    """Get all tables from the current slide"""
+    tables = []
+    try:
+        if ppt_app and ppt_app.ActiveWindow and ppt_app.ActiveWindow.View.Slide:
+            slide = ppt_app.ActiveWindow.View.Slide
+            for shape in slide.Shapes:
+                if shape.HasTable:
+                    tables.append(shape)
+        return tables
+    except Exception as e:
+        print(f"Error getting tables: {e}")
+        return []
+
 def show_table_labeling_form():
     """Show table labeling form for table rows/columns"""
+    # Get all tables from the slide
+    tables = get_tables_from_slide()
+    
+    if not tables:
+        messagebox.showinfo("No Tables", "No tables found in the current slide.")
+        finish_text_labeling_process()
+        return
+    
+    # Start with the first table
+    show_table_form_with_data(tables, 0)
+
+def show_table_form_with_data(tables, table_index):
+    """Show table labeling form with actual table data"""
+    if table_index >= len(tables):
+        # No more tables, finish the process
+        finish_text_labeling_process()
+        return
+    
+    current_table = tables[table_index]
+    
     # Create new table labeling dialog
     table_dialog = tk.Tk()
-    table_dialog.title("Label Table Rows / Cols")
-    table_dialog.geometry("400x300")
-    table_dialog.resizable(False, False)
+    table_dialog.title(f"Label Table Rows / Cols ({table_index + 1}/{len(tables)})")
+    table_dialog.geometry("1000x800")
+    table_dialog.resizable(True, True)
     
     # Center on screen
     table_dialog.update_idletasks()
-    x = (table_dialog.winfo_screenwidth() // 2) - (400 // 2)
-    y = (table_dialog.winfo_screenheight() // 2) - (300 // 2)
-    table_dialog.geometry(f"400x300+{x}+{y}")
+    x = (table_dialog.winfo_screenwidth() // 2) - (1000 // 2)
+    y = (table_dialog.winfo_screenheight() // 2) - (800 // 2)
+    table_dialog.geometry(f"1000x800+{x}+{y}")
     
     # Bring dialog to foreground
     table_dialog.lift()
@@ -533,46 +657,408 @@ def show_table_labeling_form():
     table_dialog.after_idle(lambda: table_dialog.attributes('-topmost', False))
     table_dialog.focus_force()
     
+    # Create main scrollable frame with regular scrollbar
+    canvas = tk.Canvas(table_dialog)
+    scrollbar = tk.Scrollbar(table_dialog, orient="vertical", command=canvas.yview)
+    scrollable_frame = tk.Frame(canvas)
+    
+    scrollable_frame.bind(
+        "<Configure>",
+        lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+    )
+    
+    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+    canvas.configure(yscrollcommand=scrollbar.set)
+    
     # Main frame
-    main_frame = tk.Frame(table_dialog, padx=20, pady=20)
+    main_frame = tk.Frame(scrollable_frame, padx=20, pady=20)
     main_frame.pack(fill=tk.BOTH, expand=True)
     
-    # Title
-    title_label = tk.Label(main_frame, text="Label Table Rows / Cols", 
-                          font=("Arial", 14, "bold"))
+    # Title with actual table ID
+    title_label = tk.Label(main_frame, text=f"Table #{current_table.Id}", 
+                          font=("Arial", 16, "bold"))
     title_label.pack(pady=(0, 20))
     
-    # Placeholder content (blank for now)
-    placeholder_label = tk.Label(main_frame, text="Table labeling functionality will be implemented here", 
-                                fg="gray", wraplength=350, justify="center")
-    placeholder_label.pack(pady=(50, 20))
+    # Row labels section
+    row_frame = tk.LabelFrame(main_frame, text="Row Labels", font=("Arial", 12, "bold"))
+    row_frame.pack(fill=tk.X, pady=(0, 20))
+    
+    # Save row labels checkbox
+    save_row_labels_var = tk.BooleanVar(value=True)
+    save_row_labels_checkbox = tk.Checkbutton(row_frame, text="Save row labels", 
+                                             variable=save_row_labels_var,
+                                             font=("Arial", 10))
+    save_row_labels_checkbox.pack(anchor="w", padx=10, pady=(5, 10))
+    
+    # Row labels table
+    row_table_frame = tk.Frame(row_frame)
+    row_table_frame.pack(fill=tk.X, padx=10, pady=10)
+    
+    # Row table headers (no checkbox column)
+    tk.Label(row_table_frame, text="Row Index", font=("Arial", 10, "bold")).grid(row=0, column=0, padx=5, pady=5, sticky="w")
+    tk.Label(row_table_frame, text="Row Text (50 chars max)", font=("Arial", 10, "bold")).grid(row=0, column=1, padx=5, pady=5, sticky="w")
+    tk.Label(row_table_frame, text="Row Name", font=("Arial", 10, "bold")).grid(row=0, column=2, padx=5, pady=5, sticky="w")
+    
+    # Populate with actual row data
+    row_entries = []
+    for i in range(current_table.Table.Rows.Count):
+        # Row index
+        tk.Label(row_table_frame, text=f"{i}", font=("Arial", 9)).grid(row=i+1, column=0, padx=5, pady=2, sticky="w")
+        
+        # Get first non-merged cell text from each row
+        first_cell_text = ""
+        row_name_text = f"Row {i}"
+        try:
+            for j in range(1, current_table.Table.Rows(i+1).Cells.Count + 1):
+                cell_text = current_table.Table.Rows(i+1).Cells(j).Shape.TextFrame.TextRange.Text.strip()
+                if cell_text:  # Found first non-empty cell
+                    first_cell_text = cell_text
+                    row_name_text = cell_text
+                    break
+            # Truncate to 50 characters
+            if len(first_cell_text) > 50:
+                first_cell_text = first_cell_text[:47] + "..."
+        except:
+            first_cell_text = f"Row {i}"
+        
+        # Row text
+        tk.Label(row_table_frame, text=first_cell_text, font=("Arial", 9), width=30, anchor="w").grid(row=i+1, column=1, padx=5, pady=2, sticky="w")
+        
+        # Row name entry
+        row_name_entry = tk.Entry(row_table_frame, font=("Arial", 9), width=20)
+        row_name_entry.grid(row=i+1, column=2, padx=5, pady=2, sticky="w")
+        row_name_entry.insert(0, row_name_text)
+        row_entries.append(row_name_entry)
+    122
+    # Column labels section
+    col_frame = tk.LabelFrame(main_frame, text="Column Labels", font=("Arial", 12, "bold"))
+    col_frame.pack(fill=tk.X, pady=(0, 20))
+    
+    # Save column labels checkbox
+    save_col_labels_var = tk.BooleanVar(value=True)
+    save_col_labels_checkbox = tk.Checkbutton(col_frame, text="Save column labels", 
+                                             variable=save_col_labels_var,
+                                             font=("Arial", 10))
+    save_col_labels_checkbox.pack(anchor="w", padx=10, pady=(5, 10))
+    
+    # Column labels table
+    col_table_frame = tk.Frame(col_frame)
+    col_table_frame.pack(fill=tk.X, padx=10, pady=10)
+    
+    # Column table headers (no checkbox column)
+    tk.Label(col_table_frame, text="Col Index", font=("Arial", 10, "bold")).grid(row=0, column=0, padx=5, pady=5, sticky="w")
+    tk.Label(col_table_frame, text="Col Text (50 chars max)", font=("Arial", 10, "bold")).grid(row=0, column=1, padx=5, pady=5, sticky="w")
+    tk.Label(col_table_frame, text="Col Name", font=("Arial", 10, "bold")).grid(row=0, column=2, padx=5, pady=5, sticky="w")
+    
+    # Populate with actual column data
+    col_entries = []
+    for i in range(current_table.Table.Columns.Count):
+        # Column index
+        tk.Label(col_table_frame, text=f"{i}", font=("Arial", 9)).grid(row=i+1, column=0, padx=5, pady=2, sticky="w")
+        
+        # Get first non-merged cell text from each column
+        first_cell_text = ""
+        col_name_text = f"Col {i}"
+        try:
+            for j in range(1, current_table.Table.Columns(i+1).Cells.Count + 1):
+                cell_text = current_table.Table.Columns(i+1).Cells(j).Shape.TextFrame.TextRange.Text.strip()
+                if cell_text:  # Found first non-empty cell
+                    first_cell_text = cell_text
+                    col_name_text = cell_text
+                    break
+            # Truncate to 50 characters
+            if len(first_cell_text) > 50:
+                first_cell_text = first_cell_text[:47] + "..."
+        except:
+            first_cell_text = f"Col {i}"
+        
+        # Column text
+        tk.Label(col_table_frame, text=first_cell_text, font=("Arial", 9), width=30, anchor="w").grid(row=i+1, column=1, padx=5, pady=2, sticky="w")
+        
+        # Column name entry
+        col_name_entry = tk.Entry(col_table_frame, font=("Arial", 9), width=20)
+        col_name_entry.grid(row=i+1, column=2, padx=5, pady=2, sticky="w")
+        col_name_entry.insert(0, col_name_text)
+        col_entries.append(col_name_entry)
+    
+    # Custom groups section
+    custom_frame = tk.LabelFrame(main_frame, text="Custom Groups", font=("Arial", 12, "bold"))
+    custom_frame.pack(fill=tk.X, pady=(0, 20))
+    
+    # Custom groups table
+    custom_table_frame = tk.Frame(custom_frame)
+    custom_table_frame.pack(fill=tk.X, padx=10, pady=10)
+    
+    # Custom groups headers
+    tk.Label(custom_table_frame, text="Rows/Cols", font=("Arial", 10, "bold")).grid(row=0, column=0, padx=5, pady=5, sticky="w")
+    tk.Label(custom_table_frame, text="Start Index", font=("Arial", 10, "bold")).grid(row=0, column=1, padx=5, pady=5, sticky="w")
+    tk.Label(custom_table_frame, text="End Index", font=("Arial", 10, "bold")).grid(row=0, column=2, padx=5, pady=5, sticky="w")
+    tk.Label(custom_table_frame, text="Group Name", font=("Arial", 10, "bold")).grid(row=0, column=3, padx=5, pady=5, sticky="w")
+    tk.Label(custom_table_frame, text="Action", font=("Arial", 10, "bold")).grid(row=0, column=4, padx=5, pady=5, sticky="w")
+    
+    # Store custom group rows for management (each item is a dict with frame and data)
+    custom_group_rows = []
+    
+    def add_custom_group():
+        """Add a new custom group row"""
+        row_num = len(custom_group_rows) + 1
+        
+        # Create new row frame
+        custom_row_frame = tk.Frame(custom_table_frame)
+        custom_row_frame.grid(row=row_num, column=0, columnspan=5, sticky="ew", padx=5, pady=2)
+        
+        # Radio buttons for rows/cols
+        row_col_var = tk.StringVar(value="rows")
+        tk.Radiobutton(custom_row_frame, text="Rows", variable=row_col_var, value="rows").pack(side=tk.LEFT, padx=(0, 10))
+        tk.Radiobutton(custom_row_frame, text="Cols", variable=row_col_var, value="cols").pack(side=tk.LEFT, padx=(0, 10))
+        
+        # Start and end index entries
+        start_entry = tk.Entry(custom_row_frame, font=("Arial", 9), width=10)
+        start_entry.pack(side=tk.LEFT, padx=(0, 10))
+        start_entry.insert(0, "0")
+        
+        end_entry = tk.Entry(custom_row_frame, font=("Arial", 9), width=10)
+        end_entry.pack(side=tk.LEFT, padx=(0, 10))
+        end_entry.insert(0, "2")
+        
+        # Group name entry
+        group_name_entry = tk.Entry(custom_row_frame, font=("Arial", 9), width=20)
+        group_name_entry.pack(side=tk.LEFT, padx=(0, 10))
+        group_name_entry.insert(0, f"Group {row_num}")
+        
+        # Remove button
+        def remove_this_group():
+            custom_row_frame.destroy()
+            for group_data in custom_group_rows:
+                if group_data['frame'] == custom_row_frame:
+                    custom_group_rows.remove(group_data)
+                    break
+        
+        remove_btn = tk.Button(custom_row_frame, text="Remove", font=("Arial", 9), 
+                              bg="#F44336", fg="white", width=8, command=remove_this_group)
+        remove_btn.pack(side=tk.LEFT, padx=(0, 10))
+        
+        # Store the row frame and its data for management
+        custom_group_rows.append({
+            'frame': custom_row_frame,
+            'row_col_var': row_col_var,
+            'start_entry': start_entry,
+            'end_entry': end_entry,
+            'group_name_entry': group_name_entry
+        })
+    
+    # Add button
+    add_btn = tk.Button(custom_frame, text="Add Group", font=("Arial", 10), 
+                       bg="#4CAF50", fg="white", width=12, command=add_custom_group)
+    add_btn.pack(pady=10)
+    
+    # Pack canvas and scrollbar
+    canvas.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
     
     # Buttons frame
-    buttons_frame = tk.Frame(main_frame)
-    buttons_frame.pack(fill=tk.X, pady=(20, 0))
+    buttons_frame = tk.Frame(table_dialog)
+    buttons_frame.pack(fill=tk.X, pady=10)
     
-    # OK button
-    ok_btn = tk.Button(buttons_frame, text="OK", 
-                      command=lambda: finish_table_labeling(table_dialog),
-                      bg="#4CAF50", fg="white",
-                      width=12, height=2)
-    ok_btn.pack(side=tk.LEFT, padx=(0, 10))
+    # Navigation buttons
+    nav_frame = tk.Frame(buttons_frame)
+    nav_frame.pack(side=tk.LEFT, padx=(20, 10))
     
-    # Cancel button
-    cancel_btn = tk.Button(buttons_frame, text="Cancel", 
-                          command=lambda: cancel_table_labeling(table_dialog),
-                          bg="#F44336", fg="white",
-                          width=12, height=2)
-    cancel_btn.pack(side=tk.LEFT)
+    # Previous button (only show if not first table)
+    if table_index > 0:
+        prev_btn = tk.Button(nav_frame, text="Previous", 
+                            command=lambda: (table_dialog.destroy(), show_table_form_with_data(tables, table_index - 1)),
+                            bg="#FF9800", fg="white",
+                            width=10, height=2)
+        prev_btn.pack(side=tk.LEFT, padx=(0, 5))
     
-    # Focus on OK button
-    table_dialog.after(100, lambda: ok_btn.focus())
+    # Next button (only show if not last table)
+    if table_index < len(tables) - 1:
+        next_btn = tk.Button(nav_frame, text="Next", 
+                            command=lambda: (table_dialog.destroy(), show_table_form_with_data(tables, table_index + 1)),
+                            bg="#2196F3", fg="white",
+                            width=10, height=2)
+        next_btn.pack(side=tk.LEFT, padx=(0, 5))
     
-    # Bind Enter key to OK
-    table_dialog.bind('<Return>', lambda e: finish_table_labeling(table_dialog))
+    # Save and go to next table button
+    save_next_btn = tk.Button(buttons_frame, text="Save and go to next table", 
+                             command=lambda: save_and_go_to_next_table(table_dialog, tables, table_index, current_table,
+                                                                      save_row_labels_var, row_entries,
+                                                                      save_col_labels_var, col_entries,
+                                                                      custom_group_rows),
+                             bg="#4CAF50", fg="white",
+                             width=20, height=2)
+    save_next_btn.pack(side=tk.RIGHT, padx=(10, 20))
     
-    # Bind Escape key to Cancel
-    table_dialog.bind('<Escape>', lambda e: cancel_table_labeling(table_dialog))
+    # Skip this table button
+    skip_table_btn = tk.Button(buttons_frame, text="Skip this table and go to next table", 
+                              command=lambda: skip_table_and_go_to_next(table_dialog, tables, table_index),
+                              bg="#FF9800", fg="white",
+                              width=25, height=2)
+    skip_table_btn.pack(side=tk.RIGHT, padx=(0, 10))
+    
+    # Focus on Save button
+    table_dialog.after(100, lambda: save_next_btn.focus())
+    
+    # Bind Enter key to Save and go to next table
+    table_dialog.bind('<Return>', lambda e: save_and_go_to_next_table(table_dialog, tables, table_index, current_table,
+                                                                      save_row_labels_var, row_entries,
+                                                                      save_col_labels_var, col_entries,
+                                                                      custom_group_rows))
+    
+    # Bind Escape key to Skip table
+    table_dialog.bind('<Escape>', lambda e: skip_table_and_go_to_next(table_dialog, tables, table_index))
+    
+    # Handle window close (X button) - save and quit
+    def on_table_closing():
+        # Finish the table labeling process
+        table_dialog.destroy()
+        finish_text_labeling_process()
+    
+    table_dialog.protocol("WM_DELETE_WINDOW", on_table_closing)
+
+def save_and_go_to_next_table(dialog, tables, current_index, current_table, 
+                             save_row_labels_var, row_entries,
+                             save_col_labels_var, col_entries,
+                             custom_group_rows):
+    """Save current table and go to next table"""
+    table_shape_id = str(current_table.Id)
+    
+    # 1. Save row labels if checked
+    if save_row_labels_var.get():
+        num_rows = current_table.Table.Rows.Count
+        num_cols = current_table.Table.Columns.Count
+        
+        for i in range(num_rows):
+            # Get text from all cells in the row
+            row_text_parts = []
+            for j in range(1, num_cols + 1):
+                try:
+                    cell_text = current_table.Table.Rows(i+1).Cells(j).Shape.TextFrame.TextRange.Text.strip()
+                    row_text_parts.append(cell_text)
+                except:
+                    pass
+            
+            # Concatenate with spaces
+            row_text = " ".join(row_text_parts)
+            
+            # Create cells array
+            cells = [f"{i}.{j}" for j in range(num_cols)]
+            
+            # Get label from textbox
+            label = row_entries[i].get() if i < len(row_entries) else f"Row {i}"
+            
+            # Add to data model
+            table_labels_list.append({
+                'shape_name': table_shape_id,
+                'text': row_text,
+                'cells': cells,
+                'label': label
+            })
+            print(f"Saved row {i}: {label}")
+    
+    # 2. Save column labels if checked
+    if save_col_labels_var.get():
+        num_rows = current_table.Table.Rows.Count
+        num_cols = current_table.Table.Columns.Count
+        
+        for j in range(num_cols):
+            # Get text from all cells in the column
+            col_text_parts = []
+            for i in range(1, num_rows + 1):
+                try:
+                    cell_text = current_table.Table.Columns(j+1).Cells(i).Shape.TextFrame.TextRange.Text.strip()
+                    col_text_parts.append(cell_text)
+                except:
+                    pass
+            
+            # Concatenate with spaces
+            col_text = " ".join(col_text_parts)
+            
+            # Create cells array
+            cells = [f"{i}.{j}" for i in range(num_rows)]
+            
+            # Get label from textbox
+            label = col_entries[j].get() if j < len(col_entries) else f"Col {j}"
+            
+            # Add to data model
+            table_labels_list.append({
+                'shape_name': table_shape_id,
+                'text': col_text,
+                'cells': cells,
+                'label': label
+            })
+            print(f"Saved column {j}: {label}")
+    
+    # 3. Save custom groups
+    num_rows = current_table.Table.Rows.Count
+    num_cols = current_table.Table.Columns.Count
+    
+    for group_data in custom_group_rows:
+        # Get values from stored widgets
+        row_col_type = group_data['row_col_var'].get()  # "rows" or "cols"
+        start_index = int(group_data['start_entry'].get())
+        end_index = int(group_data['end_entry'].get())
+        group_name = group_data['group_name_entry'].get()
+        
+        # Get text from all cells in the group
+        text_parts = []
+        cells = []
+        
+        if row_col_type == "rows":
+            # Multiple rows
+            for i in range(start_index, end_index + 1):
+                if i < num_rows:
+                    for j in range(num_cols):
+                        try:
+                            cell_text = current_table.Table.Rows(i+1).Cells(j+1).Shape.TextFrame.TextRange.Text.strip()
+                            text_parts.append(cell_text)
+                            cells.append(f"{i}.{j}")
+                        except:
+                            pass
+        else:  # "cols"
+            # Multiple columns
+            for j in range(start_index, end_index + 1):
+                if j < num_cols:
+                    for i in range(num_rows):
+                        try:
+                            cell_text = current_table.Table.Columns(j+1).Cells(i+1).Shape.TextFrame.TextRange.Text.strip()
+                            text_parts.append(cell_text)
+                            cells.append(f"{i}.{j}")
+                        except:
+                            pass
+        
+        # Concatenate with spaces
+        group_text = " ".join(text_parts)
+        
+        # Add to data model
+        table_labels_list.append({
+            'shape_name': table_shape_id,
+            'text': group_text,
+            'cells': cells,
+            'label': group_name
+        })
+        print(f"Saved custom group: {group_name} ({row_col_type} {start_index}-{end_index})")
+    
+    print(f"Saved table {current_index + 1}")
+    dialog.destroy()
+    
+    # Go to next table or finish if this was the last one
+    if current_index + 1 < len(tables):
+        show_table_form_with_data(tables, current_index + 1)
+    else:
+        finish_text_labeling_process()
+
+def skip_table_and_go_to_next(dialog, tables, current_index):
+    """Skip current table and go to next table"""
+    print(f"Skipped table {current_index + 1}")
+    dialog.destroy()
+    
+    # Go to next table or finish if this was the last one
+    if current_index + 1 < len(tables):
+        show_table_form_with_data(tables, current_index + 1)
+    else:
+        finish_text_labeling_process()
 
 def finish_table_labeling(dialog):
     """Complete the table labeling process"""
