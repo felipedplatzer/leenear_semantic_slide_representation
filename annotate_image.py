@@ -3,20 +3,19 @@ from PIL import Image, ImageDraw, ImageFont
 import base
 
 def draw_section(draw, section, slide_width, slide_height, relative_coordinates):
-    if relative_coordinates:
-        if len(section['shape_id']) == 0: # relements which couldn't be associated with a shape
-            return
-        x1 = int(section['left'] * slide_width)
-        y1 = int(section['top'] * slide_height)
-        x2 = int(section['right'] * slide_width)
-        y2 = int(section['bottom'] * slide_height)
-    else:
-        if len(section['shape_id']) == 0: # relements which couldn't be associated with a shape
-            return
-        x1 = int(section['left'])
-        y1 = int(section['top'])
-        x2 = int(section['right'])
-        y2 = int(section['bottom'])
+    try:
+        if relative_coordinates:
+            x1 = int(section['left'] * slide_width)
+            y1 = int(section['top'] * slide_height)
+            x2 = int(section['right'] * slide_width)
+            y2 = int(section['bottom'] * slide_height)
+        else:
+            x1 = int(section['left'])
+            y1 = int(section['top'])
+            x2 = int(section['right'])
+            y2 = int(section['bottom'])
+    except:
+        return
     # Draw rectangle border
     draw.rectangle([x1, y1, x2, y2], outline='red', width=3)
     # Draw label

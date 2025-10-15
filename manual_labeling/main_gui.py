@@ -511,6 +511,78 @@ def save_and_finish_text(shape_id, start_char, end_char, name, dialog):
 def finish_text_labeling(dialog):
     """Finish text labeling without saving"""
     dialog.destroy()
+    show_table_labeling_form()
+
+def show_table_labeling_form():
+    """Show table labeling form for table rows/columns"""
+    # Create new table labeling dialog
+    table_dialog = tk.Tk()
+    table_dialog.title("Label Table Rows / Cols")
+    table_dialog.geometry("400x300")
+    table_dialog.resizable(False, False)
+    
+    # Center on screen
+    table_dialog.update_idletasks()
+    x = (table_dialog.winfo_screenwidth() // 2) - (400 // 2)
+    y = (table_dialog.winfo_screenheight() // 2) - (300 // 2)
+    table_dialog.geometry(f"400x300+{x}+{y}")
+    
+    # Bring dialog to foreground
+    table_dialog.lift()
+    table_dialog.attributes('-topmost', True)
+    table_dialog.after_idle(lambda: table_dialog.attributes('-topmost', False))
+    table_dialog.focus_force()
+    
+    # Main frame
+    main_frame = tk.Frame(table_dialog, padx=20, pady=20)
+    main_frame.pack(fill=tk.BOTH, expand=True)
+    
+    # Title
+    title_label = tk.Label(main_frame, text="Label Table Rows / Cols", 
+                          font=("Arial", 14, "bold"))
+    title_label.pack(pady=(0, 20))
+    
+    # Placeholder content (blank for now)
+    placeholder_label = tk.Label(main_frame, text="Table labeling functionality will be implemented here", 
+                                fg="gray", wraplength=350, justify="center")
+    placeholder_label.pack(pady=(50, 20))
+    
+    # Buttons frame
+    buttons_frame = tk.Frame(main_frame)
+    buttons_frame.pack(fill=tk.X, pady=(20, 0))
+    
+    # OK button
+    ok_btn = tk.Button(buttons_frame, text="OK", 
+                      command=lambda: finish_table_labeling(table_dialog),
+                      bg="#4CAF50", fg="white",
+                      width=12, height=2)
+    ok_btn.pack(side=tk.LEFT, padx=(0, 10))
+    
+    # Cancel button
+    cancel_btn = tk.Button(buttons_frame, text="Cancel", 
+                          command=lambda: cancel_table_labeling(table_dialog),
+                          bg="#F44336", fg="white",
+                          width=12, height=2)
+    cancel_btn.pack(side=tk.LEFT)
+    
+    # Focus on OK button
+    table_dialog.after(100, lambda: ok_btn.focus())
+    
+    # Bind Enter key to OK
+    table_dialog.bind('<Return>', lambda e: finish_table_labeling(table_dialog))
+    
+    # Bind Escape key to Cancel
+    table_dialog.bind('<Escape>', lambda e: cancel_table_labeling(table_dialog))
+
+def finish_table_labeling(dialog):
+    """Complete the table labeling process"""
+    dialog.destroy()
+    finish_text_labeling_process()
+
+def cancel_table_labeling(dialog):
+    """Cancel table labeling and go back to text labeling"""
+    dialog.destroy()
+    # For now, just finish the process
     finish_text_labeling_process()
 
 def finish_text_labeling_process():

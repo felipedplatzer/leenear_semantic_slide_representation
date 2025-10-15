@@ -1,0 +1,19 @@
+test_index,index,label,shape_id,start_char,end_char,text,top,left,right,bottom,width,height,slide_height,slide_width
+11,1,design element,"[""553""]",,,,-0.007874016,312.5433044,720,33.84252119,407.4566956,33.8503952,405,720
+11,2,title,"[""556""]",,,Several industry trends were identified.,39.33826828,36,687,63.50362206,651,24.16535378,405,720
+11,3,key industry trends,"[""557""]",,,"Key industry trends\Geographic diversification of supply chain\Industry recovery and normalization\Increased cyberthreats\Partnerships between automotive and semiconductor companies\Talent shortage\Innovations in manufacturing and design process\Advanced node technologies\Semiconductor demand growth driven by AV/EVs\Growth of generative AI\ESG and sustainability improvements\Metaverse growth",76.13220215,36,667.2519531,320.3369293,631.2519531,244.2047272,405,720
+11,3.01,Header,"[""557""]",0,20,"Key industry trends\",,,,,,,405,720
+11,3.02,Trend 1: Geographic diversification of supply chain,"[""557""]",20,62,Geographic diversification of supply chain,,,,,,,405,720
+11,3.03,"Trend 2: Industry recovery and normalization","[""557""]",62,99,"\Industry recovery and normalization\",,,,,,,405,720
+11,3.04,"Trend 3: Increased cyberthreats","[""557""]",99,122,"Increased cyberthreats\",,,,,,,405,720
+11,3.05,Trend 4: Partnerships between automotive and semiconductor companies,"[""557""]",122,181,Partnerships between automotive and semiconductor companies,,,,,,,405,720
+11,3.06,"Trend 5: Talent shortage","[""557""]",181,198,"\Talent shortage\",,,,,,,405,720
+11,3.07,Trend 6: Innovations in manufacturing and design process,"[""557""]",198,245,Innovations in manufacturing and design process,,,,,,,405,720
+11,3.08,"Trend 7: Advanced node technologies","[""557""]",245,272,"\Advanced node technologies",,,,,,,405,720
+11,3.09,"Trend 8: Semiconductor demand growth driven by AV/EVs","[""557""]",272,317,"\Semiconductor demand growth driven by AV/EVs",,,,,,,405,720
+11,3.1,"Trend 9: Growth of generative AI","[""557""]",317,342,"\Growth of generative AI\",,,,,,,405,720
+11,3.11,Trend 10: ESG and sustainability improvements,"[""557""]",342,377,ESG and sustainability improvements,,,,,,,405,720
+11,3.12,"Trend 11: Metaverse growth","[""557""]",377,394,"\Metaverse growth",,,,,,,405,720
+11,4,footnote - approach clarification,"[""558""]",,,"Trends were identified using a compendium of documents representing analyst coverage\, media coverage\, and thought leadership articles from professional services firms",324.7522888,27.93102455,684.0097599,361.1066208,656.0787354,36.35433197,405,720
+11,5,page number,"[""555""]",,,1,373.2991333,36,79.20472336,386.9999208,43.20472336,13.70078754,405,720
+11,6,manifold logo,"[""554""]",,,,373.2991333,642.2775879,696.189476,384.7163773,53.91188812,11.41724396,405,720
