@@ -81,7 +81,32 @@ def add_text_sections(dl, text_section_list):
     return dl_new
 
 
-def add_table_sections(dl, table_labels_list):
+def get_next_child_index_for_parent(sections_list, parent_index):
+    """
+    Get the next available child index for a given parent.
+    E.g., if parent is "01.01" and existing children are "01.01.01", "01.01.02",
+    this returns "03".
+    """
+    # Find all children of this parent
+    existing_children = []
+    for section in sections_list:
+        if 'index' in section and section['index'].startswith(parent_index + '.'):
+            # Extract the immediate child index
+            child_part = section['index'][len(parent_index) + 1:]
+            # Get only the first level (in case of deeper nesting)
+            if '.' in child_part:
+                child_part = child_part.split('.')[0]
+            existing_children.append(child_part)
+    
+    # Find the next available number
+    if not existing_children:
+        return "01"
+    
+    # Convert to integers, find max, and increment
+    max_child = max([int(c) for c in existing_children if c.isdigit()])
+    return str(max_child + 1).zfill(2)
+
+def add_table_sections(dl, table_labels_list, individual_shape_label_map=None):
     # Group into shape names (table shape IDs)
     shape_names_with_tables = list(set([x['shape_name'] for x in table_labels_list]))
     dl_new = dl.copy()
@@ -100,19 +125,97 @@ def add_table_sections(dl, table_labels_list):
         if 'index' not in parent_shape:
             print(f"Warning: Parent table {x} does not have an index")
             continue
-        # Add prefix 
+        # Add prefix and handle overlaid shapes
+        sections_with_overlaid = []
         for y in sections_in_table: 
             y['index'] = parent_shape['index'] + '.' + y['index']
-            y['shape_id'] = [y['shape_name']] # fix - convert shape_name to shape_id
+            # Note: shape_id is already set as an array in main_gui.py
+            sections_with_overlaid.append(y)
+            
+            # If this section has overlaid shapes, add them as children
+            if 'overlaid_shapes' in y and y['overlaid_shapes']:
+                for overlaid_shape_id in y['overlaid_shapes']:
+                    # Find the original shape in dl_new to copy its attributes
+                    original_shape = None
+                    for shape in dl_new:
+                        if isinstance(shape.get('shape_id'), list) and overlaid_shape_id in shape['shape_id']:
+                            original_shape = shape
+                            break
+                        elif shape.get('shape_id') == overlaid_shape_id:
+                            original_shape = shape
+                            break
+                    
+                    if original_shape:
+                        # Create a copy of the shape as a child of this section
+                        child_shape = original_shape.copy()
+                        # Get next child index for this parent
+                        child_index = get_next_child_index_for_parent(sections_with_overlaid, y['index'])
+                        child_shape['index'] = y['index'] + '.' + child_index
+                        
+                        # Apply label from individual_shape_label_map if available
+                        if individual_shape_label_map:
+                            # Check if this shape_id has a label
+                            if overlaid_shape_id in individual_shape_label_map:
+                                child_shape['label'] = individual_shape_label_map[overlaid_shape_id]
+                        
+                        sections_with_overlaid.append(child_shape)
+                
+                # Remove overlaid_shapes attribute so it doesn't appear in CSV
+                del y['overlaid_shapes']
+        
         # Insert into array
-        dl_new[parent_shape_i:parent_shape_i] = sections_in_table
+        dl_new[parent_shape_i:parent_shape_i] = sections_with_overlaid
     return dl_new   
 
+
+def remove_ungrouped_individual_shapes(dl):
+    """
+    Remove individual shapes that don't belong to any group.
+    Individual shapes are those with section_type='individual_shape' that:
+    - Have only 1 shape_id in their shape_id array
+    - Are at the root level (index has only 2 digits like "01", not "01.01")
+    
+    These shapes should be removed if they haven't been used elsewhere in the tree.
+    """
+    # Collect all shape_ids that are referenced as children (non-root level)
+    referenced_shape_ids = set()
+    for item in dl:
+        if 'index' in item and item['index'].count('.') > 0:  # Not a root-level item
+            if 'shape_id' in item and isinstance(item['shape_id'], list):
+                referenced_shape_ids.update(item['shape_id'])
+    
+    # Filter out individual shapes that are root-level and not referenced elsewhere
+    filtered_dl = []
+    for item in dl:
+        # Check if this is a root-level individual shape
+        is_root_individual = (
+            item.get('section_type') == 'individual_shape' and
+            'index' in item and 
+            item['index'].count('.') == 0  # Root level (e.g., "01" not "01.01")
+        )
+        
+        if is_root_individual:
+            # Check if any of its shape_ids are referenced elsewhere
+            item_shape_ids = item.get('shape_id', [])
+            if isinstance(item_shape_ids, list):
+                # If any shape_id is referenced elsewhere, keep it
+                if any(sid in referenced_shape_ids for sid in item_shape_ids):
+                    filtered_dl.append(item)
+                # Otherwise, skip it (don't add to filtered_dl)
+            else:
+                # Single shape_id (not a list)
+                if item_shape_ids in referenced_shape_ids:
+                    filtered_dl.append(item)
+        else:
+            # Not a root-level individual shape, keep it
+            filtered_dl.append(item)
+    
+    return filtered_dl
 
 def save_to_csv(dl, test_index):
     df = pd.DataFrame(dl)
     # add missing cols
-    col_list = ["test_index", "index",  "label", "shape_id", "section_type", "start_char", "end_char", "cells", "overlaid_shapes", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]
+    col_list = ["test_index", "index",  "label", "shape_id", "section_type", "start_char", "end_char", "cells", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]
     for x in col_list:
         if x not in df.columns:
             df[x] = ''
@@ -123,10 +226,7 @@ def save_to_csv(dl, test_index):
     # Handle cells array (convert to JSON string if it's a list)
     if 'cells' in df.columns:
         df["cells"] = df["cells"].apply(lambda x: json.dumps(x) if isinstance(x, list) else x)
-    # Handle overlaid_shapes array (convert to JSON string if it's a list)
-    if 'overlaid_shapes' in df.columns:
-        df["overlaid_shapes"] = df["overlaid_shapes"].apply(lambda x: json.dumps(x) if isinstance(x, list) else x)
-    for x in ["shape_id", "cells", "overlaid_shapes", "text", "label"]:
+    for x in ["shape_id", "cells", "text", "label"]:
         if x in df.columns:
             df[x] = df[x].str.replace('"', '""').apply(lambda y: f'"{y}"')
     
@@ -135,7 +235,7 @@ def save_to_csv(dl, test_index):
         if x in df.columns:
             df[x] = df[x].round(2)
     #reorder cols
-    df = df[["test_index", "index",  "label", "shape_id", "section_type", "start_char", "end_char", "cells", "overlaid_shapes", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]]
+    df = df[["test_index", "index",  "label", "shape_id", "section_type", "start_char", "end_char", "cells", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]]
     # Get filename and save
     test_index_str = str(test_index).zfill(3)
     filename = f"test_{str(test_index_str)}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"

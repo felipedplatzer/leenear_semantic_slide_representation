@@ -19,6 +19,7 @@ listener_active = False
 ppt_app = None
 selection_monitor_thread = None
 group_list = []
+individual_shape_labels = []  # Store individual shape labels
 text_section_list = []
 table_labels_list = []
 last_selection_ref = None
@@ -195,24 +196,24 @@ def show_group_naming_dialog(selection):
     buttons_frame = tk.Frame(main_frame)
     buttons_frame.pack(fill=tk.X, pady=(0, 10))
     
-    # Go to Next Group button
-    next_group_btn = tk.Button(buttons_frame, text="Go to Next Group", 
-                             command=lambda: go_to_next_group(name_entry.get().strip(), selection, dialog_root),
-                             bg="#2196F3", fg="white",
-                             width=15, height=3)
-    next_group_btn.pack(side=tk.LEFT, padx=(0, 10))
+    # Save button (save and listen for next group)
+    save_btn = tk.Button(buttons_frame, text="Save", 
+                         command=lambda: go_to_next_group(name_entry.get().strip(), selection, dialog_root),
+                         bg="#4CAF50", fg="white",
+                         width=15, height=3)
+    save_btn.pack(side=tk.LEFT, padx=(0, 10))
     
-    # Go to Text Sections button
-    text_sections_btn = tk.Button(buttons_frame, text="Go to Text Sections", 
-                                 command=lambda: go_to_text_sections(name_entry.get().strip(), selection, dialog_root),
-                                 bg="#4CAF50", fg="white",
+    # Go to Next Section button (with save confirmation)
+    next_section_btn = tk.Button(buttons_frame, text="Go to Next Section\n(Individual Shapes)", 
+                                 command=lambda: go_to_next_section_individual(dialog_root, name_entry, selection),
+                                 bg="#2196F3", fg="white",
                                  width=15, height=3)
-    text_sections_btn.pack(side=tk.LEFT)
+    next_section_btn.pack(side=tk.LEFT)
     
     # Focus on textbox after dialog is created
     dialog_root.after(100, lambda: name_entry.focus())
     
-    # Bind Enter key to Go to Next Group
+    # Bind Enter key to Save
     name_entry.bind('<Return>', lambda e: go_to_next_group(name_entry.get().strip(), selection, dialog_root))
     
     # Bind Escape key to skip (go to next group without saving)
@@ -225,7 +226,7 @@ def show_group_naming_dialog(selection):
             widget.bind('<Return>', lambda e: widget.invoke())
     
     # Apply focus binding to all buttons
-    for button in [next_group_btn, text_sections_btn]:
+    for button in [save_btn, next_section_btn]:
         button.bind('<FocusIn>', on_button_focus)
     
     # Handle window close (X button) - save and quit
@@ -251,20 +252,219 @@ def go_to_next_group(group_name, selection, dialog_root):
     dialog_root.destroy()
     print("Listening for next group")
 
+def go_to_next_section_individual(dialog_root, name_entry, selection):
+    """Go to individual shapes section with confirmation"""
+    # Check if there's unsaved content
+    group_name = name_entry.get().strip()
+    if group_name:
+        # Show confirmation popup
+        from tkinter import messagebox
+        result = messagebox.askyesnocancel("Save Changes?", 
+                                          "Do you want to save changes before going to the next section?\n\n" +
+                                          "Yes = Save and continue\n" +
+                                          "No = Don't save and continue\n" +
+                                          "Cancel = Stay on this page")
+        if result is None:  # Cancel
+            return
+        elif result:  # Yes - save
+            print("Saving group before going to next section")
+            save(group_name, selection)
+        else:  # No - don't save
+            print("Going to next section - not saving group")
+    else:
+        print("Going to next section - no content to save")
+    
+    dialog_root.destroy()
+    show_individual_shapes_form()
+
 def go_to_text_sections(group_name, selection, dialog_root):
-    """Go to text sections, saving current group if name is provided"""
+    """Go to individual shapes labeling, saving current group if name is provided"""
     if group_name and group_name.strip():
         save(group_name, selection)
     else:
         print("Group name is blank - not saving group")
     dialog_root.destroy()
-    show_text_labeling_form(selection)
+    show_individual_shapes_form()
 
 def skip_labeling(dialog_root):
     """Skip this selection and continue labeling"""
     dialog_root.destroy()
     # Status updates are not needed since main window is hidden
     print("Skipped selection - listening for next group")
+
+def get_unlabeled_shapes():
+    """Get list of shape IDs that have not been labeled yet"""
+    # Get all labeled shape IDs
+    labeled_ids = set()
+    
+    # Add shapes from groups (including single-shape groups)
+    for group in group_list:
+        if isinstance(group.get('shape_id'), list):
+            labeled_ids.update(group['shape_id'])
+        else:
+            labeled_ids.add(group['shape_id'])
+    
+    # Add individually labeled shapes
+    for shape_label in individual_shape_labels:
+        labeled_ids.add(shape_label['shape_id'])
+    
+    # Get all shape IDs from shape_data
+    all_shape_ids = [shape['shape_id'] for shape in shape_data]
+    
+    # Find unlabeled shapes
+    unlabeled = [shape_id for shape_id in all_shape_ids if shape_id not in labeled_ids]
+    
+    return unlabeled
+
+def show_individual_shapes_form():
+    """Show form for labeling individual shapes"""
+    global listener_active
+    listener_active = False  # Stop listening for selections
+    
+    # Create dialog
+    dialog_root = tk.Toplevel()
+    dialog_root.title("Label Individual Shapes")
+    dialog_root.geometry("500x400")
+    
+    # Bring to front
+    dialog_root.lift()
+    dialog_root.attributes('-topmost', True)
+    dialog_root.after_idle(lambda: dialog_root.attributes('-topmost', False))
+    dialog_root.focus_force()
+    
+    # Main frame
+    main_frame = tk.Frame(dialog_root, padx=20, pady=20)
+    main_frame.pack(fill=tk.BOTH, expand=True)
+    
+    # Title
+    title_label = tk.Label(main_frame, text="Label Individual Shapes", 
+                           font=("Arial", 14, "bold"))
+    title_label.pack(pady=(0, 10))
+    
+    # Instructions
+    instructions = tk.Label(main_frame, 
+                           text="Select shapes in PowerPoint and enter a label.\nEach selected shape will be labeled individually with the same label.",
+                           font=("Arial", 10), wraplength=450, justify="left")
+    instructions.pack(pady=(0, 15))
+    
+    # Unlabeled shapes info
+    unlabeled_shapes = get_unlabeled_shapes()
+    unlabeled_frame = tk.LabelFrame(main_frame, text="Unlabeled Shapes", font=("Arial", 10, "bold"))
+    unlabeled_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 15))
+    
+    # Scrollable text widget for unlabeled shapes
+    unlabeled_text = tk.Text(unlabeled_frame, height=8, width=50, font=("Arial", 9), wrap=tk.WORD)
+    unlabeled_scroll = tk.Scrollbar(unlabeled_frame, command=unlabeled_text.yview)
+    unlabeled_text.configure(yscrollcommand=unlabeled_scroll.set)
+    unlabeled_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+    unlabeled_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    
+    if unlabeled_shapes:
+        unlabeled_text.insert('1.0', f"Remaining shapes ({len(unlabeled_shapes)}): {', '.join(unlabeled_shapes)}")
+    else:
+        unlabeled_text.insert('1.0', "All shapes have been labeled!")
+    unlabeled_text.config(state='disabled')
+    
+    # Label input
+    label_frame = tk.Frame(main_frame)
+    label_frame.pack(fill=tk.X, pady=(0, 20))
+    
+    tk.Label(label_frame, text="Label for selected shapes (NOT IN PLURAL - this is a label for individual shapes to be repeated across elements, not for a group):", 
+             font=("Arial", 10), wraplength=450, justify="left").pack(anchor="w", pady=(0, 5))
+    label_entry = tk.Entry(label_frame, font=("Arial", 10), width=40)
+    label_entry.pack(fill=tk.X)
+    label_entry.focus()
+    
+    # Buttons
+    buttons_frame = tk.Frame(main_frame)
+    buttons_frame.pack(fill=tk.X)
+    
+    def save_individual_shapes():
+        label = label_entry.get().strip()
+        if not label:
+            print("Label is blank - not saving")
+            return
+        
+        try:
+            selection = ppt_app.ActiveWindow.Selection
+            if selection.Type != 2:  # ppSelectionShapes
+                print("No shapes selected")
+                return
+            
+            # Save each shape individually with the same label
+            for i in range(1, selection.ShapeRange.Count + 1):
+                shape = selection.ShapeRange.Item(i)
+                shape_id = str(shape.Id)
+                
+                individual_shape_labels.append({
+                    'shape_id': shape_id,
+                    'label': label
+                })
+                print(f"Labeled shape {shape_id} as '{label}'")
+            
+            # Update unlabeled shapes display
+            unlabeled_shapes = get_unlabeled_shapes()
+            unlabeled_text.config(state='normal')
+            unlabeled_text.delete('1.0', tk.END)
+            if unlabeled_shapes:
+                unlabeled_text.insert('1.0', f"Remaining shapes ({len(unlabeled_shapes)}): {', '.join(unlabeled_shapes)}")
+            else:
+                unlabeled_text.insert('1.0', "All shapes have been labeled!")
+            unlabeled_text.config(state='disabled')
+            
+            # Clear label entry for next input
+            label_entry.delete(0, tk.END)
+            label_entry.focus()
+            
+        except Exception as e:
+            print(f"Error saving individual shapes: {e}")
+    
+    def go_to_previous_section_from_individual():
+        """Go back to group naming (listening mode)"""
+        dialog_root.destroy()
+        # Restart group listening - just close the form and the listener will continue
+        print("Going back to group selection")
+    
+    def go_to_text_sections_from_individual():
+        """Go to text sections with confirmation if there's unsaved work"""
+        # Check if label entry has unsaved content
+        label_text = label_entry.get().strip()
+        if label_text:
+            from tkinter import messagebox
+            result = messagebox.askyesno("Unsaved Label", 
+                                        f"You have an unsaved label: '{label_text}'\n\n" +
+                                        "Do you want to continue to the next section without saving?")
+            if not result:  # User chose No - stay on page
+                return
+        
+        dialog_root.destroy()
+        show_text_labeling_form(None)
+    
+    # Go to Previous Section button
+    prev_section_btn = tk.Button(buttons_frame, text="Go to Previous Section\n(Groups)", 
+                                 command=go_to_previous_section_from_individual,
+                                 bg="#FF9800", fg="white", width=20, height=2)
+    prev_section_btn.pack(side=tk.LEFT, padx=(0, 10))
+    
+    save_btn = tk.Button(buttons_frame, text="Save", 
+                        command=save_individual_shapes,
+                        bg="#4CAF50", fg="white", width=20, height=2)
+    save_btn.pack(side=tk.LEFT, padx=(0, 10))
+    
+    next_section_btn = tk.Button(buttons_frame, text="Go to Next Section\n(Text Sections)", 
+                          command=go_to_text_sections_from_individual,
+                          bg="#2196F3", fg="white", width=20, height=2)
+    next_section_btn.pack(side=tk.LEFT)
+    
+    # Bind Enter key
+    label_entry.bind('<Return>', lambda e: save_individual_shapes())
+    
+    # Handle window close
+    def on_closing():
+        dialog_root.destroy()
+        show_text_labeling_form(None)
+    
+    dialog_root.protocol("WM_DELETE_WINDOW", on_closing)
 
 def save(group_name, selection):
     if group_name is not None and group_name != '':
@@ -410,7 +610,7 @@ def show_text_labeling_form(selection):
     inputs_frame.pack(fill=tk.X, pady=(0, 20))
     
     # Shape ID input with updated label
-    shape_id_label = tk.Label(inputs_frame, text="Leave blank to not save text section, e.g., if you made a mistake with the selection:", 
+    shape_id_label = tk.Label(inputs_frame, text="Shape ID:", 
                              font=("Arial", 10), wraplength=300, justify="left")
     shape_id_label.grid(row=0, column=0, sticky="w", pady=(0, 5))
     shape_id_entry = tk.Entry(inputs_frame, font=("Arial", 11), width=30)
@@ -444,27 +644,30 @@ def show_text_labeling_form(selection):
     buttons_frame = tk.Frame(main_frame)
     buttons_frame.pack(fill=tk.X, pady=(20, 0))
     
-    # Go to Next Text Section button
-    next_text_btn = tk.Button(buttons_frame, text="Go to Next Text Section", 
-                             command=lambda: go_to_next_text_section(shape_id_entry.get().strip(), 
-                                                                   start_char_entry.get().strip(),
-                                                                   end_char_entry.get().strip(),
-                                                                   name_entry.get().strip(),
-                                                                   text_dialog),
-                             bg="#2196F3", fg="white",
-                             width=18, height=2)
-    next_text_btn.pack(side=tk.LEFT, padx=(0, 10))
+    # Go to Previous Section button (Individual Shapes)
+    prev_section_btn = tk.Button(buttons_frame, text="Go to Previous Section\n(Individual Shapes)", 
+                                 command=lambda: go_to_previous_section_from_text(shape_id_entry, start_char_entry, end_char_entry, name_entry, text_dialog),
+                                 bg="#FF9800", fg="white",
+                                 width=18, height=2)
+    prev_section_btn.pack(side=tk.LEFT, padx=(0, 10))
     
-    # Go to Tables button
-    go_to_tables_btn = tk.Button(buttons_frame, text="Go to Tables", 
-                                command=lambda: go_to_tables(shape_id_entry.get().strip(), 
-                                                           start_char_entry.get().strip(),
-                                                           end_char_entry.get().strip(),
-                                                           name_entry.get().strip(),
-                                                           text_dialog),
-                                bg="#4CAF50", fg="white",
+    # Save button (save and clear for next text section)
+    save_btn = tk.Button(buttons_frame, text="Save", 
+                         command=lambda: go_to_next_text_section(shape_id_entry.get().strip(), 
+                                                               start_char_entry.get().strip(),
+                                                               end_char_entry.get().strip(),
+                                                               name_entry.get().strip(),
+                                                               text_dialog),
+                         bg="#4CAF50", fg="white",
+                         width=18, height=2)
+    save_btn.pack(side=tk.LEFT, padx=(0, 10))
+    
+    # Go to Next Section button (Tables)
+    next_section_btn = tk.Button(buttons_frame, text="Go to Next Section\n(Tables)", 
+                                command=lambda: go_to_tables_with_confirmation(shape_id_entry, start_char_entry, end_char_entry, name_entry, text_dialog),
+                                bg="#2196F3", fg="white",
                                 width=15, height=2)
-    go_to_tables_btn.pack(side=tk.LEFT)
+    next_section_btn.pack(side=tk.LEFT)
     
     # Focus on first input
     text_dialog.after(100, lambda: shape_id_entry.focus())
@@ -530,6 +733,51 @@ def save_and_next_text(shape_id, start_char, end_char, name, dialog):
                         # Focus on end_char field
                         entries[2].focus()
                         break
+
+def go_to_previous_section_from_text(shape_id_entry, start_char_entry, end_char_entry, name_entry, dialog):
+    """Go back to individual shapes section"""
+    # Check if there's unsaved content
+    shape_id = shape_id_entry.get().strip()
+    start_char = start_char_entry.get().strip()
+    end_char = end_char_entry.get().strip()
+    name = name_entry.get().strip()
+    
+    if shape_id or start_char or end_char or name:
+        from tkinter import messagebox
+        result = messagebox.askyesno("Unsaved Changes", 
+                                    "You have unsaved changes.\n\n" +
+                                    "Do you want to continue to the previous section without saving?")
+        if not result:  # User chose No - stay on page
+            return
+    
+    dialog.destroy()
+    show_individual_shapes_form()
+
+def go_to_tables_with_confirmation(shape_id_entry, start_char_entry, end_char_entry, name_entry, dialog):
+    """Go to tables section with save confirmation"""
+    # Check if there's unsaved content
+    shape_id = shape_id_entry.get().strip()
+    start_char = start_char_entry.get().strip()
+    end_char = end_char_entry.get().strip()
+    name = name_entry.get().strip()
+    
+    if shape_id and start_char and end_char and name:
+        from tkinter import messagebox
+        result = messagebox.askyesnocancel("Save Changes?", 
+                                          "Do you want to save changes before going to the next section?\n\n" +
+                                          "Yes = Save and continue\n" +
+                                          "No = Don't save and continue\n" +
+                                          "Cancel = Stay on this page")
+        if result is None:  # Cancel
+            return
+        elif result:  # Yes - save
+            go_to_tables(shape_id, start_char, end_char, name, dialog)
+            return
+        # else: No - don't save, just continue
+    
+    # No unsaved content or user chose not to save
+    dialog.destroy()
+    show_table_labeling_form()
 
 def save_and_finish_text(shape_id, start_char, end_char, name, dialog):
     """Save text section and finish"""
@@ -974,9 +1222,21 @@ def show_table_form_with_data(tables, table_index):
     buttons_frame = tk.Frame(table_dialog)
     buttons_frame.pack(fill=tk.X, pady=10)
     
+    # Left side buttons
+    left_buttons_frame = tk.Frame(buttons_frame)
+    left_buttons_frame.pack(side=tk.LEFT, padx=(20, 10))
+    
+    # Go to Previous Section button (only show on first table)
+    if table_index == 0:
+        prev_section_btn = tk.Button(left_buttons_frame, text="Go to Previous Section\n(Text Sections)", 
+                                     command=lambda: go_to_previous_section_from_tables(table_dialog),
+                                     bg="#FF9800", fg="white",
+                                     width=18, height=2)
+        prev_section_btn.pack(side=tk.LEFT, padx=(0, 5))
+    
     # Navigation buttons
-    nav_frame = tk.Frame(buttons_frame)
-    nav_frame.pack(side=tk.LEFT, padx=(20, 10))
+    nav_frame = tk.Frame(left_buttons_frame)
+    nav_frame.pack(side=tk.LEFT, padx=(0, 10))
     
     # Previous button (only show if not first table)
     if table_index > 0:
@@ -994,33 +1254,33 @@ def show_table_form_with_data(tables, table_index):
                             width=10, height=2)
         next_btn.pack(side=tk.LEFT, padx=(0, 5))
     
-    # Save and go to next table button
-    save_next_btn = tk.Button(buttons_frame, text="Save and go to next table", 
-                             command=lambda: save_and_go_to_next_table(table_dialog, tables, table_index, current_table,
-                                                                      save_row_labels_var, row_entries, add_row_overlaid_shapes_var, row_tolerance_entry,
-                                                                      save_col_labels_var, col_entries, add_col_overlaid_shapes_var, col_tolerance_entry,
-                                                                      custom_group_rows),
-                             bg="#4CAF50", fg="white",
-                             width=20, height=2)
-    save_next_btn.pack(side=tk.RIGHT, padx=(10, 20))
+    # Save button (save and go to next table)
+    save_btn = tk.Button(buttons_frame, text="Save", 
+                         command=lambda: save_and_go_to_next_table(table_dialog, tables, table_index, current_table,
+                                                                  save_row_labels_var, row_entries, add_row_overlaid_shapes_var, row_tolerance_entry,
+                                                                  save_col_labels_var, col_entries, add_col_overlaid_shapes_var, col_tolerance_entry,
+                                                                  custom_group_rows),
+                         bg="#4CAF50", fg="white",
+                         width=15, height=2)
+    save_btn.pack(side=tk.RIGHT, padx=(10, 20))
     
-    # Skip this table button
-    skip_table_btn = tk.Button(buttons_frame, text="Skip this table and go to next table", 
-                              command=lambda: skip_table_and_go_to_next(table_dialog, tables, table_index),
-                              bg="#FF9800", fg="white",
-                              width=25, height=2)
-    skip_table_btn.pack(side=tk.RIGHT, padx=(0, 10))
+    # Skip button (skip and go to next table)
+    skip_btn = tk.Button(buttons_frame, text="Skip", 
+                        command=lambda: skip_table_and_go_to_next(table_dialog, tables, table_index),
+                        bg="#FF9800", fg="white",
+                        width=15, height=2)
+    skip_btn.pack(side=tk.RIGHT, padx=(0, 10))
     
     # Focus on Save button
-    table_dialog.after(100, lambda: save_next_btn.focus())
+    table_dialog.after(100, lambda: save_btn.focus())
     
-    # Bind Enter key to Save and go to next table
+    # Bind Enter key to Save
     table_dialog.bind('<Return>', lambda e: save_and_go_to_next_table(table_dialog, tables, table_index, current_table,
                                                                       save_row_labels_var, row_entries, add_row_overlaid_shapes_var, row_tolerance_entry,
                                                                       save_col_labels_var, col_entries, add_col_overlaid_shapes_var, col_tolerance_entry,
                                                                       custom_group_rows))
     
-    # Bind Escape key to Skip table
+    # Bind Escape key to Skip
     table_dialog.bind('<Escape>', lambda e: skip_table_and_go_to_next(table_dialog, tables, table_index))
     
     # Handle window close (X button) - save and quit
@@ -1181,9 +1441,15 @@ def save_and_go_to_next_table(dialog, tables, current_index, current_table,
                     tolerance = 5
                 overlaid_shapes = get_overlaid_shapes_in_bounds(bounds, tolerance)
             
+            # Build shape_id array: cell IDs + overlaid shape IDs
+            # Cell ID format: table_shape_id.row_index.col_index
+            cell_ids = [f"{table_shape_id}.{i}.{j}" for j in range(num_cols)]
+            shape_id_array = cell_ids + overlaid_shapes
+            
             # Add to data model
             row_data = {
                 'shape_name': table_shape_id,
+                'shape_id': shape_id_array,
                 'text': row_text,
                 'cells': cells,
                 'label': label,
@@ -1237,9 +1503,15 @@ def save_and_go_to_next_table(dialog, tables, current_index, current_table,
                     tolerance = 5
                 overlaid_shapes = get_overlaid_shapes_in_bounds(bounds, tolerance)
             
+            # Build shape_id array: cell IDs + overlaid shape IDs
+            # Cell ID format: table_shape_id.row_index.col_index
+            cell_ids = [f"{table_shape_id}.{i}.{j}" for i in range(num_rows)]
+            shape_id_array = cell_ids + overlaid_shapes
+            
             # Add to data model
             col_data = {
                 'shape_name': table_shape_id,
+                'shape_id': shape_id_array,
                 'text': col_text,
                 'cells': cells,
                 'label': label,
@@ -1304,9 +1576,14 @@ def save_and_go_to_next_table(dialog, tables, current_index, current_table,
         # Determine section_type based on row_col_type
         section_type = 'group_of_rows' if row_col_type == 'rows' else 'group_of_cols'
         
+        # Build shape_id array: cell IDs for all cells in this group
+        # Cell ID format: table_shape_id.row_index.col_index
+        cell_ids = [f"{table_shape_id}.{cell}" for cell in cells]
+        
         # Add to data model
         table_labels_list.append({
             'shape_name': table_shape_id,
+            'shape_id': cell_ids,
             'text': group_text,
             'cells': cells,
             'label': group_name,
@@ -1340,6 +1617,11 @@ def skip_table_and_go_to_next(dialog, tables, current_index):
     else:
         finish_text_labeling_process()
 
+def go_to_previous_section_from_tables(dialog):
+    """Go back to text sections"""
+    dialog.destroy()
+    show_text_labeling_form(None)
+
 def finish_table_labeling(dialog):
     """Complete the table labeling process"""
     dialog.destroy()
@@ -1370,11 +1652,59 @@ def finish_text_labeling_process():
     for x in shape_data:
         x['section_type'] = 'orphan_shape'
     
+    # Convert individual_shape_labels into single-element groups
+    individual_groups = []
+    for shape_label in individual_shape_labels:
+        # Find the shape data for this shape
+        shape_info = None
+        for shape in shape_data:
+            if shape['shape_id'] == shape_label['shape_id']:
+                shape_info = shape.copy()
+                break
+        
+        if shape_info:
+            # Create a single-element group
+            individual_group = {
+                'shape_id': [shape_label['shape_id']],
+                'label': shape_label['label'],
+                'section_type': 'individual_shape',
+                'text': shape_info.get('text', ''),
+                'top': shape_info['top'],
+                'left': shape_info['left'],
+                'right': shape_info['right'],
+                'bottom': shape_info['bottom'],
+                'width': shape_info['width'],
+                'height': shape_info['height']
+            }
+            individual_groups.append(individual_group)
+    
     # table_labels_list already has section_type added in save_and_go_to_next_table
     
-    # Step 3: Combine shape_data and group_list
+    # Step 3: Remove orphan shapes that have been labeled (in groups or individually)
+    # Collect all labeled shape IDs
+    labeled_shape_ids = set()
+    for group in group_list:
+        if isinstance(group.get('shape_id'), list):
+            labeled_shape_ids.update(group['shape_id'])
+        else:
+            labeled_shape_ids.add(group['shape_id'])
+    for indiv_group in individual_groups:
+        if isinstance(indiv_group.get('shape_id'), list):
+            labeled_shape_ids.update(indiv_group['shape_id'])
+        else:
+            labeled_shape_ids.add(indiv_group['shape_id'])
+    
+    # Filter shape_data to remove labeled shapes and rename remaining as individual_shape
+    filtered_shape_data = []
+    for shape in shape_data:
+        if shape['shape_id'] not in labeled_shape_ids:
+            shape_copy = shape.copy()
+            shape_copy['section_type'] = 'individual_shape'  # Rename from orphan_shape
+            filtered_shape_data.append(shape_copy)
+    
+    # Combine filtered_shape_data, group_list, and individual_groups
     # (text_section_list and table_labels_list will be inserted later)
-    dl = shape_data.copy() + group_list.copy()
+    dl = filtered_shape_data + group_list.copy() + individual_groups
     
     # Ensure all items have shape_id as a list
     for x in dl:
@@ -1385,13 +1715,23 @@ def finish_text_labeling_process():
     # This arranges shapes and groups based on top, left, bottom, right
     dl = structure_shapes.generate_structure_main(dl)
     
+    # Create a mapping of shape_id -> label from individual_shape_labels
+    individual_shape_label_map = {}
+    for shape_label in individual_shape_labels:
+        individual_shape_label_map[shape_label['shape_id']] = shape_label['label']
+    
     # Insert text sections as tree structures based on char indices
     # This re-arranges text sections within their parent shapes
     dl = basic.add_text_sections(dl, text_section_list)
     
     # Insert table sections as tree structures based on cells
     # This re-arranges table sections within their parent tables
-    dl = basic.add_table_sections(dl, table_labels_list)
+    # Pass the label map so overlaid shapes can get their labels
+    dl = basic.add_table_sections(dl, table_labels_list, individual_shape_label_map)
+    
+    # Remove individual shapes that don't belong to any group
+    # (They've been copied into the tree structure where needed)
+    dl = basic.remove_ungrouped_individual_shapes(dl)
     
     # Add metadata
     for x in dl:
