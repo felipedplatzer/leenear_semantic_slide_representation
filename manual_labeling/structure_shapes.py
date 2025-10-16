@@ -69,5 +69,7 @@ def generate_structure_main(dict_list):
     dict_list = get_parents(dict_list)
     dict_list = generate_tree_indexes(dict_list)
     for d in dict_list:
-        d['index'] = re.sub(r'\d+', lambda m: m.group().zfill(2), d['index'])
+        # Only format index if it exists
+        if 'index' in d:
+            d['index'] = re.sub(r'\d+', lambda m: m.group().zfill(2), d['index'])
     return dict_list

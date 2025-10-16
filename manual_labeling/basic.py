@@ -64,7 +64,14 @@ def add_text_sections(dl, text_section_list):
         # Get tree structure
         sections_in_shape = structure_text.structure_text_sections(sections_in_shape)
         # Get parent shape
-        parent_shape_i, parent_shape = get_parent_shape(x, dl)
+        result = get_parent_shape(x, dl)
+        if result is None:
+            print(f"Warning: Could not find parent shape for text section with shape_id={x}")
+            continue
+        parent_shape_i, parent_shape = result
+        if 'index' not in parent_shape:
+            print(f"Warning: Parent shape {x} does not have an index")
+            continue
         # Add prefix 
         for y in sections_in_shape: 
             y['index'] = parent_shape['index'] + '.' + y['index']
@@ -85,7 +92,14 @@ def add_table_sections(dl, table_labels_list):
         # Get tree structure
         sections_in_table = structure_table.structure_table_sections(sections_in_table)
         # Get parent shape
-        parent_shape_i, parent_shape = get_parent_shape(x, dl)
+        result = get_parent_shape(x, dl)
+        if result is None:
+            print(f"Warning: Could not find parent table for table section with shape_name={x}")
+            continue
+        parent_shape_i, parent_shape = result
+        if 'index' not in parent_shape:
+            print(f"Warning: Parent table {x} does not have an index")
+            continue
         # Add prefix 
         for y in sections_in_table: 
             y['index'] = parent_shape['index'] + '.' + y['index']
@@ -98,7 +112,7 @@ def add_table_sections(dl, table_labels_list):
 def save_to_csv(dl, test_index):
     df = pd.DataFrame(dl)
     # add missing cols
-    col_list = ["test_index", "index",  "label", "shape_id", "start_char", "end_char", "cells", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]
+    col_list = ["test_index", "index",  "label", "shape_id", "section_type", "start_char", "end_char", "cells", "overlaid_shapes", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]
     for x in col_list:
         if x not in df.columns:
             df[x] = ''
@@ -109,7 +123,10 @@ def save_to_csv(dl, test_index):
     # Handle cells array (convert to JSON string if it's a list)
     if 'cells' in df.columns:
         df["cells"] = df["cells"].apply(lambda x: json.dumps(x) if isinstance(x, list) else x)
-    for x in ["shape_id", "cells", "text", "label"]:
+    # Handle overlaid_shapes array (convert to JSON string if it's a list)
+    if 'overlaid_shapes' in df.columns:
+        df["overlaid_shapes"] = df["overlaid_shapes"].apply(lambda x: json.dumps(x) if isinstance(x, list) else x)
+    for x in ["shape_id", "cells", "overlaid_shapes", "text", "label"]:
         if x in df.columns:
             df[x] = df[x].str.replace('"', '""').apply(lambda y: f'"{y}"')
     
@@ -118,7 +135,7 @@ def save_to_csv(dl, test_index):
         if x in df.columns:
             df[x] = df[x].round(2)
     #reorder cols
-    df = df[["test_index", "index",  "label", "shape_id", "start_char", "end_char", "cells", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]]
+    df = df[["test_index", "index",  "label", "shape_id", "section_type", "start_char", "end_char", "cells", "overlaid_shapes", "text", "top", "left", "right", "bottom", "width", "height", "slide_height", "slide_width"]]
     # Get filename and save
     test_index_str = str(test_index).zfill(3)
     filename = f"test_{str(test_index_str)}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"

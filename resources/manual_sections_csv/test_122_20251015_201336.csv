@@ -1,0 +1,70 @@
+test_index,index,label,shape_id,section_type,start_char,end_char,cells,text,top,left,right,bottom,width,height,slide_height,slide_width
+122,1,,"[""565""]",orphan_shape,,,,,0.0,312.5,720.0,33.8,407.5,33.9,405,720
+122,2,,"[""568""]",orphan_shape,,,,4 priority trends were identified based on impact on the industry and on KPMG’s business lines.122,39.3,36.0,687.0,63.5,651.0,24.2,405,720
+122,2.01,header,"[""568""]",text_section,0,6,,4 prio,,,,,,,405,720
+122,2.02,title,"[""568""]",text_section,6,66,,rity trends were identified based on impact on the industry ,,,,,,,405,720
+122,3,,"[""564""]",orphan_shape,,,,,92.6,36.0,619.4,327.5,583.4,234.9,405,720
+122,3.01,Trend,"[""564""]",col,,,"[""0.0""\, ""1.0""\, ""2.0""\, ""3.0""\, ""4.0""\, ""5.0""\, ""6.0""\, ""7.0""\, ""8.0""\, ""9.0""\, ""10.0""\, ""11.0""\, ""12.0""\, ""13.0""]",Trend Geographic diversification of supply chain Industry recovery and normalization Increased cyberthreats Automotive/semiconductor partnerships Talent shortage Innovations in manufacturing & design (incl. application of AI) Advanced node technologies Demand growth from automotive sector (AV/EV) Demand growth from edge computing Demand growth from 5G / 6G Demand growth from generative AI ESG and sustainability improvements Metaverse growth,92.6,36.0,320.5,327.5,284.5,234.9,405,720
+122,3.02,Impact onsemiconductor industry,"[""564""]",col,,,"[""0.1""\, ""1.1""\, ""2.1""\, ""3.1""\, ""4.1""\, ""5.1""\, ""6.1""\, ""7.1""\, ""8.1""\, ""9.1""\, ""10.1""\, ""11.1""\, ""12.1""\, ""13.1""]",Impact onsemiconductor industry             ,92.6,320.5,470.0,327.5,149.5,234.9,405,720
+122,3.03,Impact onKPMG’s business lines,"[""564""]",col,,,"[""0.2""\, ""1.2""\, ""2.2""\, ""3.2""\, ""4.2""\, ""5.2""\, ""6.2""\, ""7.2""\, ""8.2""\, ""9.2""\, ""10.2""\, ""11.2""\, ""12.2""\, ""13.2""]",Impact onKPMG’s business lines             ,92.6,470.0,619.4,327.5,149.5,234.9,405,720
+122,3.04,Group 1,"[""564""]",group_of_rows,,,"[""0.0""\, ""0.1""\, ""0.2""\, ""1.0""\, ""1.1""\, ""1.2""\, ""2.0""\, ""2.1""\, ""2.2""]",Trend Impact onsemiconductor industry Impact onKPMG’s business lines Geographic diversification of supply chain   Industry recovery and normalization  ,92.6,36.0,619.4,154.3,583.4,61.7,405,720
+122,03.04.01,Trend,"[""564""]",row,,,"[""0.0""\, ""0.1""\, ""0.2""]",Trend Impact onsemiconductor industry Impact onKPMG’s business lines,92.6,36.0,619.4,122.8,583.4,30.2,405,720
+122,03.04.02,Geographic diversification of supply chain,"[""564""]",row,,,"[""1.0""\, ""1.1""\, ""1.2""]",Geographic diversification of supply chain  ,122.8,36.0,619.4,138.5,583.4,15.8,405,720
+122,03.04.03,Industry recovery and normalization,"[""564""]",row,,,"[""2.0""\, ""2.1""\, ""2.2""]",Industry recovery and normalization  ,138.5,36.0,619.4,154.3,583.4,15.8,405,720
+122,3.05,Increased cyberthreats,"[""564""]",row,,,"[""3.0""\, ""3.1""\, ""3.2""]",Increased cyberthreats  ,154.3,36.0,619.4,170.0,583.4,15.8,405,720
+122,3.06,Automotive/semiconductor partnerships,"[""564""]",row,,,"[""4.0""\, ""4.1""\, ""4.2""]",Automotive/semiconductor partnerships  ,170.0,36.0,619.4,185.8,583.4,15.8,405,720
+122,3.07,Talent shortage,"[""564""]",row,,,"[""5.0""\, ""5.1""\, ""5.2""]",Talent shortage  ,185.8,36.0,619.4,201.5,583.4,15.8,405,720
+122,3.08,Innovations in manufacturing & design (incl. application of AI),"[""564""]",row,,,"[""6.0""\, ""6.1""\, ""6.2""]",Innovations in manufacturing & design (incl. application of AI)  ,201.5,36.0,619.4,217.3,583.4,15.8,405,720
+122,3.09,Advanced node technologies,"[""564""]",row,,,"[""7.0""\, ""7.1""\, ""7.2""]",Advanced node technologies  ,217.3,36.0,619.4,233.0,583.4,15.8,405,720
+122,3.1,Demand growth from automotive sector (AV/EV),"[""564""]",row,,,"[""8.0""\, ""8.1""\, ""8.2""]",Demand growth from automotive sector (AV/EV)  ,233.0,36.0,619.4,248.8,583.4,15.8,405,720
+122,3.11,Demand growth from edge computing,"[""564""]",row,,,"[""9.0""\, ""9.1""\, ""9.2""]",Demand growth from edge computing  ,248.8,36.0,619.4,264.5,583.4,15.8,405,720
+122,3.12,Demand growth from 5G / 6G,"[""564""]",row,,,"[""10.0""\, ""10.1""\, ""10.2""]",Demand growth from 5G / 6G  ,264.5,36.0,619.4,280.3,583.4,15.8,405,720
+122,3.13,Demand growth from generative AI,"[""564""]",row,,,"[""11.0""\, ""11.1""\, ""11.2""]",Demand growth from generative AI  ,280.3,36.0,619.4,296.0,583.4,15.8,405,720
+122,3.14,ESG and sustainability improvements,"[""564""]",row,,,"[""12.0""\, ""12.1""\, ""12.2""]",ESG and sustainability improvements  ,296.0,36.0,619.4,311.8,583.4,15.8,405,720
+122,3.15,Metaverse growth,"[""564""]",row,,,"[""13.0""\, ""13.1""\, ""13.2""]",Metaverse growth  ,311.8,36.0,619.4,327.5,583.4,15.8,405,720
+122,4,,"[""597""]",orphan_shape,,,,,119.9,628.8,628.8,189.5,0.0,69.6,405,720
+122,5,,"[""569""]",orphan_shape,,,,,122.0,384.5,400.9,138.3,16.3,16.3,405,720
+122,6,,"[""571""]",orphan_shape,,,,,122.0,532.9,549.2,138.3,16.3,16.3,405,720
+122,7,,"[""563""]",orphan_shape,,,,Prioritized for further analysis,133.0,628.9,711.0,183.9,82.1,50.9,405,720
+122,8,,"[""589""]",orphan_shape,,,,,137.8,532.9,549.2,154.1,16.3,16.3,405,720
+122,9,,"[""570""]",orphan_shape,,,,,137.8,384.5,400.9,154.1,16.3,16.3,405,720
+122,10,,"[""574""]",orphan_shape,,,,,153.5,384.5,400.9,169.9,16.3,16.3,405,720
+122,11,,"[""572""]",orphan_shape,,,,,153.5,532.9,549.2,169.9,16.3,16.3,405,720
+122,12,,"[""590""]",orphan_shape,,,,,169.3,384.5,400.9,185.6,16.3,16.3,405,720
+122,13,,"[""573""]",orphan_shape,,,,,169.3,532.9,549.2,185.6,16.3,16.3,405,720
+122,14,,"[""575""]",orphan_shape,,,,,185.1,384.5,400.9,201.4,16.3,16.3,405,720
+122,15,,"[""587""]",orphan_shape,,,,,185.1,532.9,549.2,201.4,16.3,16.3,405,720
+122,16,,"[""576""]",orphan_shape,,,,,200.9,384.5,400.9,217.2,16.3,16.3,405,720
+122,17,,"[""586""]",orphan_shape,,,,,200.9,532.9,549.2,217.2,16.3,16.3,405,720
+122,18,,"[""577""]",orphan_shape,,,,,216.7,384.5,400.9,233.0,16.3,16.3,405,720
+122,19,,"[""585""]",orphan_shape,,,,,216.7,532.9,549.2,233.0,16.3,16.3,405,720
+122,20,,"[""578""]",orphan_shape,,,,,232.5,384.5,400.9,248.8,16.3,16.3,405,720
+122,21,,"[""584""]",orphan_shape,,,,,232.5,532.9,549.2,248.8,16.3,16.3,405,720
+122,22,,"[""600""]",orphan_shape,,,,,248.2,384.5,400.9,264.6,16.3,16.3,405,720
+122,23,,"[""603""]",orphan_shape,,,,,248.2,532.9,549.2,264.6,16.3,16.3,405,720
+122,24,,"[""579""]",orphan_shape,,,,,264.0,384.5,400.9,280.3,16.3,16.3,405,720
+122,25,,"[""583""]",orphan_shape,,,,,264.0,532.9,549.2,280.3,16.3,16.3,405,720
+122,26,,"[""601""]",orphan_shape,,,,,279.8,384.5,400.9,296.1,16.3,16.3,405,720
+122,27,,"[""602""]",orphan_shape,,,,,279.8,532.9,549.2,296.1,16.3,16.3,405,720
+122,28,,"[""580""]",orphan_shape,,,,,295.6,384.5,400.9,311.9,16.3,16.3,405,720
+122,29,,"[""588""]",orphan_shape,,,,,295.6,532.9,549.2,311.9,16.3,16.3,405,720
+122,30,,"[""581""]",orphan_shape,,,,,311.4,384.5,400.9,327.7,16.3,16.3,405,720
+122,31,,"[""582""]",orphan_shape,,,,,311.4,532.9,549.2,327.7,16.3,16.3,405,720
+122,32,,"[""598""]",orphan_shape,,,,Impact on semiconductor industry and relevance for KPMG’s business lines are based on qualitative analyses. Impact on semiconductor industry considers likelihood and impact of each trend,328.3,28.6,370.6,371.9,342.0,43.6,405,720
+122,33,legend,"[""591""\, ""592""\, ""593""\, ""594""\, ""595""\, ""596""\, ""599""]",shape_group,,,,"High\
+\
+\
+Medium\
+\
+\
+Low",336.7,401.0,621.9,363.4,221.0,26.7,405,720
+122,33.01,,"[""599""]",orphan_shape,,,,,336.7,401.0,621.9,363.4,221.0,26.7,405,720
+122,33.02,high,"[""591""\, ""594""]",shape_group,,,,High,339.2,408.9,469.7,361.0,60.8,21.8,405,720
+122,33.02.01,,"[""594""]",orphan_shape,,,,High,339.2,422.6,469.7,361.0,47.2,21.8,405,720
+122,33.02.02,,"[""591""]",orphan_shape,,,,,340.2,408.9,428.6,359.9,19.7,19.7,405,720
+122,33.03,,"[""595""]",orphan_shape,,,,Medium,339.2,492.0,559.6,361.0,67.7,21.8,405,720
+122,33.04,,"[""596""]",orphan_shape,,,,Low,339.2,579.4,621.9,361.0,42.5,21.8,405,720
+122,33.05,,"[""592""]",orphan_shape,,,,,340.2,477.8,497.5,359.9,19.7,19.7,405,720
+122,33.06,,"[""593""]",orphan_shape,,,,,340.2,564.6,584.4,359.9,19.7,19.7,405,720
+122,34,,"[""567""]",orphan_shape,,,,1,373.3,36.0,79.2,387.0,43.2,13.7,405,720
+122,35,,"[""566""]",orphan_shape,,,,,373.3,642.3,696.2,384.7,53.9,11.4,405,720

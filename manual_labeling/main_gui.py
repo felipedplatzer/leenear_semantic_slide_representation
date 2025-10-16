@@ -679,6 +679,9 @@ def show_table_form_with_data(tables, table_index):
                           font=("Arial", 16, "bold"))
     title_label.pack(pady=(0, 20))
     
+    # Build cell coordinates map for this table (needed for overlay counts)
+    cell_coords = get_cell_coordinates_map(current_table)
+    
     # Row labels section
     row_frame = tk.LabelFrame(main_frame, text="Row Labels", font=("Arial", 12, "bold"))
     row_frame.pack(fill=tk.X, pady=(0, 20))
@@ -688,19 +691,46 @@ def show_table_form_with_data(tables, table_index):
     save_row_labels_checkbox = tk.Checkbutton(row_frame, text="Save row labels", 
                                              variable=save_row_labels_var,
                                              font=("Arial", 10))
-    save_row_labels_checkbox.pack(anchor="w", padx=10, pady=(5, 10))
+    save_row_labels_checkbox.pack(anchor="w", padx=10, pady=(5, 5))
+    
+    # Add overlaid shapes checkbox and tolerance for rows
+    row_overlay_frame = tk.Frame(row_frame)
+    row_overlay_frame.pack(anchor="w", padx=10, pady=(0, 10))
+    
+    add_row_overlaid_shapes_var = tk.BooleanVar(master=table_dialog, value=False)
+    add_row_overlaid_shapes_checkbox = tk.Checkbutton(row_overlay_frame, text="Add overlaid shapes", 
+                                                      variable=add_row_overlaid_shapes_var,
+                                                      font=("Arial", 10))
+    add_row_overlaid_shapes_checkbox.pack(side=tk.LEFT)
+    
+    tk.Label(row_overlay_frame, text="  Tolerance for overlay:", font=("Arial", 10)).pack(side=tk.LEFT, padx=(10, 5))
+    row_tolerance_entry = tk.Entry(row_overlay_frame, font=("Arial", 10), width=5, state='disabled')
+    row_tolerance_entry.insert(0, "5")
+    row_tolerance_entry.pack(side=tk.LEFT)
+    
+    def toggle_row_tolerance():
+        if add_row_overlaid_shapes_var.get():
+            row_tolerance_entry.config(state='normal')
+            update_row_overlay_counts()
+        else:
+            row_tolerance_entry.config(state='disabled')
+            update_row_overlay_counts()
+    
+    add_row_overlaid_shapes_checkbox.config(command=toggle_row_tolerance)
     
     # Row labels table
     row_table_frame = tk.Frame(row_frame)
     row_table_frame.pack(fill=tk.X, padx=10, pady=10)
     
-    # Row table headers (no checkbox column)
+    # Row table headers
     tk.Label(row_table_frame, text="Row Index", font=("Arial", 10, "bold")).grid(row=0, column=0, padx=5, pady=5, sticky="w")
     tk.Label(row_table_frame, text="Row Text (50 chars max)", font=("Arial", 10, "bold")).grid(row=0, column=1, padx=5, pady=5, sticky="w")
     tk.Label(row_table_frame, text="Row Name", font=("Arial", 10, "bold")).grid(row=0, column=2, padx=5, pady=5, sticky="w")
+    tk.Label(row_table_frame, text="# Overlaid", font=("Arial", 10, "bold")).grid(row=0, column=3, padx=5, pady=5, sticky="w")
     
     # Populate with actual row data
     row_entries = []
+    row_overlay_labels = []  # Store labels for overlay counts
     for i in range(current_table.Table.Rows.Count):
         # Row index
         tk.Label(row_table_frame, text=f"{i}", font=("Arial", 9)).grid(row=i+1, column=0, padx=5, pady=2, sticky="w")
@@ -729,6 +759,35 @@ def show_table_form_with_data(tables, table_index):
         row_name_entry.grid(row=i+1, column=2, padx=5, pady=2, sticky="w")
         row_name_entry.insert(0, row_name_text)
         row_entries.append(row_name_entry)
+        
+        # Overlay count label
+        overlay_count_label = tk.Label(row_table_frame, text="0", font=("Arial", 9), width=8, anchor="center")
+        overlay_count_label.grid(row=i+1, column=3, padx=5, pady=2, sticky="w")
+        row_overlay_labels.append(overlay_count_label)
+    
+    # Function to update row overlay counts
+    def update_row_overlay_counts():
+        if not add_row_overlaid_shapes_var.get():
+            # Clear counts when disabled
+            for label in row_overlay_labels:
+                label.config(text="0")
+            return
+        
+        try:
+            tolerance = float(row_tolerance_entry.get())
+        except:
+            tolerance = 5
+        
+        num_cols = current_table.Table.Columns.Count
+        for i in range(current_table.Table.Rows.Count):
+            cells = [f"{i}.{j}" for j in range(num_cols)]
+            bounds = calculate_section_bounds(cells, cell_coords)
+            overlaid_shapes = get_overlaid_shapes_in_bounds(bounds, tolerance)
+            row_overlay_labels[i].config(text=str(len(overlaid_shapes)))
+    
+    # Bind tolerance entry to update counts on change
+    row_tolerance_entry.bind('<KeyRelease>', lambda e: update_row_overlay_counts())
+    
     122
     # Column labels section
     col_frame = tk.LabelFrame(main_frame, text="Column Labels", font=("Arial", 12, "bold"))
@@ -739,19 +798,46 @@ def show_table_form_with_data(tables, table_index):
     save_col_labels_checkbox = tk.Checkbutton(col_frame, text="Save column labels", 
                                              variable=save_col_labels_var,
                                              font=("Arial", 10))
-    save_col_labels_checkbox.pack(anchor="w", padx=10, pady=(5, 10))
+    save_col_labels_checkbox.pack(anchor="w", padx=10, pady=(5, 5))
+    
+    # Add overlaid shapes checkbox and tolerance for columns
+    col_overlay_frame = tk.Frame(col_frame)
+    col_overlay_frame.pack(anchor="w", padx=10, pady=(0, 10))
+    
+    add_col_overlaid_shapes_var = tk.BooleanVar(master=table_dialog, value=False)
+    add_col_overlaid_shapes_checkbox = tk.Checkbutton(col_overlay_frame, text="Add overlaid shapes", 
+                                                      variable=add_col_overlaid_shapes_var,
+                                                      font=("Arial", 10))
+    add_col_overlaid_shapes_checkbox.pack(side=tk.LEFT)
+    
+    tk.Label(col_overlay_frame, text="  Tolerance for overlay:", font=("Arial", 10)).pack(side=tk.LEFT, padx=(10, 5))
+    col_tolerance_entry = tk.Entry(col_overlay_frame, font=("Arial", 10), width=5, state='disabled')
+    col_tolerance_entry.insert(0, "5")
+    col_tolerance_entry.pack(side=tk.LEFT)
+    
+    def toggle_col_tolerance():
+        if add_col_overlaid_shapes_var.get():
+            col_tolerance_entry.config(state='normal')
+            update_col_overlay_counts()
+        else:
+            col_tolerance_entry.config(state='disabled')
+            update_col_overlay_counts()
+    
+    add_col_overlaid_shapes_checkbox.config(command=toggle_col_tolerance)
     
     # Column labels table
     col_table_frame = tk.Frame(col_frame)
     col_table_frame.pack(fill=tk.X, padx=10, pady=10)
     
-    # Column table headers (no checkbox column)
+    # Column table headers
     tk.Label(col_table_frame, text="Col Index", font=("Arial", 10, "bold")).grid(row=0, column=0, padx=5, pady=5, sticky="w")
     tk.Label(col_table_frame, text="Col Text (50 chars max)", font=("Arial", 10, "bold")).grid(row=0, column=1, padx=5, pady=5, sticky="w")
     tk.Label(col_table_frame, text="Col Name", font=("Arial", 10, "bold")).grid(row=0, column=2, padx=5, pady=5, sticky="w")
+    tk.Label(col_table_frame, text="# Overlaid", font=("Arial", 10, "bold")).grid(row=0, column=3, padx=5, pady=5, sticky="w")
     
     # Populate with actual column data
     col_entries = []
+    col_overlay_labels = []  # Store labels for overlay counts
     for i in range(current_table.Table.Columns.Count):
         # Column index
         tk.Label(col_table_frame, text=f"{i}", font=("Arial", 9)).grid(row=i+1, column=0, padx=5, pady=2, sticky="w")
@@ -780,6 +866,34 @@ def show_table_form_with_data(tables, table_index):
         col_name_entry.grid(row=i+1, column=2, padx=5, pady=2, sticky="w")
         col_name_entry.insert(0, col_name_text)
         col_entries.append(col_name_entry)
+        
+        # Overlay count label
+        overlay_count_label = tk.Label(col_table_frame, text="0", font=("Arial", 9), width=8, anchor="center")
+        overlay_count_label.grid(row=i+1, column=3, padx=5, pady=2, sticky="w")
+        col_overlay_labels.append(overlay_count_label)
+    
+    # Function to update column overlay counts
+    def update_col_overlay_counts():
+        if not add_col_overlaid_shapes_var.get():
+            # Clear counts when disabled
+            for label in col_overlay_labels:
+                label.config(text="0")
+            return
+        
+        try:
+            tolerance = float(col_tolerance_entry.get())
+        except:
+            tolerance = 5
+        
+        num_rows = current_table.Table.Rows.Count
+        for j in range(current_table.Table.Columns.Count):
+            cells = [f"{i}.{j}" for i in range(num_rows)]
+            bounds = calculate_section_bounds(cells, cell_coords)
+            overlaid_shapes = get_overlaid_shapes_in_bounds(bounds, tolerance)
+            col_overlay_labels[j].config(text=str(len(overlaid_shapes)))
+    
+    # Bind tolerance entry to update counts on change
+    col_tolerance_entry.bind('<KeyRelease>', lambda e: update_col_overlay_counts())
     
     # Custom groups section
     custom_frame = tk.LabelFrame(main_frame, text="Custom Groups", font=("Arial", 12, "bold"))
@@ -883,8 +997,8 @@ def show_table_form_with_data(tables, table_index):
     # Save and go to next table button
     save_next_btn = tk.Button(buttons_frame, text="Save and go to next table", 
                              command=lambda: save_and_go_to_next_table(table_dialog, tables, table_index, current_table,
-                                                                      save_row_labels_var, row_entries,
-                                                                      save_col_labels_var, col_entries,
+                                                                      save_row_labels_var, row_entries, add_row_overlaid_shapes_var, row_tolerance_entry,
+                                                                      save_col_labels_var, col_entries, add_col_overlaid_shapes_var, col_tolerance_entry,
                                                                       custom_group_rows),
                              bg="#4CAF50", fg="white",
                              width=20, height=2)
@@ -902,8 +1016,8 @@ def show_table_form_with_data(tables, table_index):
     
     # Bind Enter key to Save and go to next table
     table_dialog.bind('<Return>', lambda e: save_and_go_to_next_table(table_dialog, tables, table_index, current_table,
-                                                                      save_row_labels_var, row_entries,
-                                                                      save_col_labels_var, col_entries,
+                                                                      save_row_labels_var, row_entries, add_row_overlaid_shapes_var, row_tolerance_entry,
+                                                                      save_col_labels_var, col_entries, add_col_overlaid_shapes_var, col_tolerance_entry,
                                                                       custom_group_rows))
     
     # Bind Escape key to Skip table
@@ -917,12 +1031,119 @@ def show_table_form_with_data(tables, table_index):
     
     table_dialog.protocol("WM_DELETE_WINDOW", on_table_closing)
 
+def get_cell_coordinates_map(table_shape):
+    """
+    Build a map of cell coordinates for all cells in a table.
+    Returns a dictionary where keys are "row.col" strings and values are coordinate dicts.
+    """
+    cell_coords = {}
+    num_rows = table_shape.Table.Rows.Count
+    num_cols = table_shape.Table.Columns.Count
+    
+    for i in range(num_rows):
+        for j in range(num_cols):
+            try:
+                cell_shape = table_shape.Table.Cell(i+1, j+1).Shape
+                top = cell_shape.Top
+                left = cell_shape.Left
+                width = cell_shape.Width
+                height = cell_shape.Height
+                bottom = top + height
+                right = left + width
+                
+                cell_coords[f"{i}.{j}"] = {
+                    'top': top,
+                    'left': left,
+                    'right': right,
+                    'bottom': bottom,
+                    'width': width,
+                    'height': height
+                }
+            except:
+                pass
+    
+    return cell_coords
+
+def calculate_section_bounds(cells, cell_coords):
+    """
+    Calculate the bounding box for a section based on its cells.
+    cells: list of cell coordinate strings like ["0.0", "0.1"]
+    cell_coords: map from cell strings to coordinate dicts
+    Returns: dict with top, left, right, bottom, width, height
+    """
+    if not cells:
+        return {'top': 0, 'left': 0, 'right': 0, 'bottom': 0, 'width': 0, 'height': 0}
+    
+    # Get coordinates for all cells in this section
+    valid_cells = [cell_coords[c] for c in cells if c in cell_coords]
+    
+    if not valid_cells:
+        return {'top': 0, 'left': 0, 'right': 0, 'bottom': 0, 'width': 0, 'height': 0}
+    
+    # Calculate bounds
+    left = min(c['left'] for c in valid_cells)
+    right = max(c['right'] for c in valid_cells)
+    top = min(c['top'] for c in valid_cells)
+    bottom = max(c['bottom'] for c in valid_cells)
+    width = right - left
+    height = bottom - top
+    
+    return {
+        'top': top,
+        'left': left,
+        'right': right,
+        'bottom': bottom,
+        'width': width,
+        'height': height
+    }
+
+def get_overlaid_shapes_in_bounds(bounds, tolerance=0):
+    """
+    Get all shapes and groups that are fully contained within the given bounds (with tolerance).
+    bounds: dict with 'top', 'left', 'right', 'bottom'
+    tolerance: expand the bounds by this amount in all directions
+    Returns: list of shape_ids that are fully contained
+    """
+    overlaid_shape_ids = []
+    
+    # Apply tolerance to bounds (expand bounds)
+    expanded_top = bounds['top'] - tolerance
+    expanded_left = bounds['left'] - tolerance
+    expanded_right = bounds['right'] + tolerance
+    expanded_bottom = bounds['bottom'] + tolerance
+    
+    # Check shape_data (individual shapes)
+    for shape in shape_data:
+        if (shape['top'] >= expanded_top and 
+            shape['left'] >= expanded_left and 
+            shape['right'] <= expanded_right and 
+            shape['bottom'] <= expanded_bottom):
+            overlaid_shape_ids.append(shape['shape_id'])
+    
+    # Check group_list (shape groups)
+    for group in group_list:
+        # Groups have their bounds already calculated
+        if (group.get('top', 0) >= expanded_top and 
+            group.get('left', 0) >= expanded_left and 
+            group.get('right', 0) <= expanded_right and 
+            group.get('bottom', 0) <= expanded_bottom):
+            # For groups, get all shape_ids
+            if isinstance(group.get('shape_id'), list):
+                overlaid_shape_ids.extend(group['shape_id'])
+            else:
+                overlaid_shape_ids.append(group['shape_id'])
+    
+    return overlaid_shape_ids
+
 def save_and_go_to_next_table(dialog, tables, current_index, current_table, 
-                             save_row_labels_var, row_entries,
-                             save_col_labels_var, col_entries,
+                             save_row_labels_var, row_entries, add_row_overlaid_shapes_var, row_tolerance_entry,
+                             save_col_labels_var, col_entries, add_col_overlaid_shapes_var, col_tolerance_entry,
                              custom_group_rows):
     """Save current table and go to next table"""
     table_shape_id = str(current_table.Id)
+    
+    # Build cell coordinates map for this table
+    cell_coords = get_cell_coordinates_map(current_table)
     
     # 1. Save row labels if checked
     if save_row_labels_var.get():
@@ -948,14 +1169,37 @@ def save_and_go_to_next_table(dialog, tables, current_index, current_table,
             # Get label from textbox
             label = row_entries[i].get() if i < len(row_entries) else f"Row {i}"
             
+            # Calculate bounds for this row
+            bounds = calculate_section_bounds(cells, cell_coords)
+            
+            # Get overlaid shapes if checkbox is checked
+            overlaid_shapes = []
+            if add_row_overlaid_shapes_var.get():
+                try:
+                    tolerance = float(row_tolerance_entry.get())
+                except:
+                    tolerance = 5
+                overlaid_shapes = get_overlaid_shapes_in_bounds(bounds, tolerance)
+            
             # Add to data model
-            table_labels_list.append({
+            row_data = {
                 'shape_name': table_shape_id,
                 'text': row_text,
                 'cells': cells,
-                'label': label
-            })
-            print(f"Saved row {i}: {label}")
+                'label': label,
+                'section_type': 'row',
+                'top': bounds['top'],
+                'left': bounds['left'],
+                'right': bounds['right'],
+                'bottom': bounds['bottom'],
+                'width': bounds['width'],
+                'height': bounds['height']
+            }
+            if overlaid_shapes:
+                row_data['overlaid_shapes'] = overlaid_shapes
+            
+            table_labels_list.append(row_data)
+            print(f"Saved row {i}: {label}" + (f" (with {len(overlaid_shapes)} overlaid shapes)" if overlaid_shapes else ""))
     
     # 2. Save column labels if checked
     if save_col_labels_var.get():
@@ -971,7 +1215,7 @@ def save_and_go_to_next_table(dialog, tables, current_index, current_table,
                     col_text_parts.append(cell_text)
                 except:
                     pass
-            
+            122
             # Concatenate with spaces
             col_text = " ".join(col_text_parts)
             
@@ -981,14 +1225,37 @@ def save_and_go_to_next_table(dialog, tables, current_index, current_table,
             # Get label from textbox
             label = col_entries[j].get() if j < len(col_entries) else f"Col {j}"
             
+            # Calculate bounds for this column
+            bounds = calculate_section_bounds(cells, cell_coords)
+            
+            # Get overlaid shapes if checkbox is checked
+            overlaid_shapes = []
+            if add_col_overlaid_shapes_var.get():
+                try:
+                    tolerance = float(col_tolerance_entry.get())
+                except:
+                    tolerance = 5
+                overlaid_shapes = get_overlaid_shapes_in_bounds(bounds, tolerance)
+            
             # Add to data model
-            table_labels_list.append({
+            col_data = {
                 'shape_name': table_shape_id,
                 'text': col_text,
                 'cells': cells,
-                'label': label
-            })
-            print(f"Saved column {j}: {label}")
+                'label': label,
+                'section_type': 'col',
+                'top': bounds['top'],
+                'left': bounds['left'],
+                'right': bounds['right'],
+                'bottom': bounds['bottom'],
+                'width': bounds['width'],
+                'height': bounds['height']
+            }
+            if overlaid_shapes:
+                col_data['overlaid_shapes'] = overlaid_shapes
+            
+            table_labels_list.append(col_data)
+            print(f"Saved column {j}: {label}" + (f" (with {len(overlaid_shapes)} overlaid shapes)" if overlaid_shapes else ""))
     
     # 3. Save custom groups
     num_rows = current_table.Table.Rows.Count
@@ -1031,12 +1298,25 @@ def save_and_go_to_next_table(dialog, tables, current_index, current_table,
         # Concatenate with spaces
         group_text = " ".join(text_parts)
         
+        # Calculate bounds for this custom group
+        bounds = calculate_section_bounds(cells, cell_coords)
+        
+        # Determine section_type based on row_col_type
+        section_type = 'group_of_rows' if row_col_type == 'rows' else 'group_of_cols'
+        
         # Add to data model
         table_labels_list.append({
             'shape_name': table_shape_id,
             'text': group_text,
             'cells': cells,
-            'label': group_name
+            'label': group_name,
+            'section_type': section_type,
+            'top': bounds['top'],
+            'left': bounds['left'],
+            'right': bounds['right'],
+            'bottom': bounds['bottom'],
+            'width': bounds['width'],
+            'height': bounds['height']
         })
         print(f"Saved custom group: {group_name} ({row_col_type} {start_index}-{end_index})")
     
@@ -1076,14 +1356,49 @@ def finish_text_labeling_process():
     global listener_active
     listener_active = False
     print("Text labeling finished - stopping listener")
-    dl = basic.add_unnamed_shapes(shape_data, group_list)
+    
+    # Step 1 & 2: Add section_type to all lists
+    # Add section_type to group_list
+    for x in group_list:
+        x['section_type'] = 'shape_group'
+    
+    # Add section_type to text_section_list
+    for x in text_section_list:
+        x['section_type'] = 'text_section'
+    
+    # Add section_type to shape_data
+    for x in shape_data:
+        x['section_type'] = 'orphan_shape'
+    
+    # table_labels_list already has section_type added in save_and_go_to_next_table
+    
+    # Step 3: Combine shape_data and group_list
+    # (text_section_list and table_labels_list will be inserted later)
+    dl = shape_data.copy() + group_list.copy()
+    
+    # Ensure all items have shape_id as a list
+    for x in dl:
+        if 'shape_id' in x and not isinstance(x['shape_id'], list):
+            x['shape_id'] = [x['shape_id']]
+    
+    # Step 4: Run generate_structure_main to arrange into tree based on spatial coordinates
+    # This arranges shapes and groups based on top, left, bottom, right
     dl = structure_shapes.generate_structure_main(dl)
+    
+    # Insert text sections as tree structures based on char indices
+    # This re-arranges text sections within their parent shapes
     dl = basic.add_text_sections(dl, text_section_list)
+    
+    # Insert table sections as tree structures based on cells
+    # This re-arranges table sections within their parent tables
     dl = basic.add_table_sections(dl, table_labels_list)
+    
+    # Add metadata
     for x in dl:
         x['slide_height'] = slide_dimensions['height']
         x['slide_width'] = slide_dimensions['width']
         x['test_index'] = test_index  
+    
     df = basic.save_to_csv(dl, test_index)  # Saves as CSV
     print("Done")   
     print("Finished labeling process")
