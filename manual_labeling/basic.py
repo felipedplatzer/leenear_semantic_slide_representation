@@ -168,49 +168,56 @@ def add_table_sections(dl, table_labels_list, individual_shape_label_map=None):
     return dl_new   
 
 
+def get_exclude_bool(x, dl):
+    """
+    Check if an individual shape should be excluded.
+    Returns True if the shape should be excluded (is referenced elsewhere).
+    Only applies to root-level items (index without a dot).
+    """
+    # If not an individual_shape, don't exclude
+    if x.get('section_type') != 'individual_shape':
+        return False
+    
+    # Only exclude root-level items (index without a dot)
+    # If index has a dot, it's a nested item - don't remove it
+    index = x.get('index', '')
+    if '.' in index:
+        return False
+    
+    # Get the first shape_id from this item
+    shape_ids = x.get('shape_id', [])
+    if not shape_ids:
+        return False
+    
+    if isinstance(shape_ids, list):
+        target_shape_id = shape_ids[0]
+    else:
+        target_shape_id = shape_ids
+    
+    # Check if this shape_id appears in any other item in dl
+    for y in dl:
+        # Skip comparing with itself
+        if y is x:
+            continue
+        
+        y_shape_ids = y.get('shape_id', [])
+        if isinstance(y_shape_ids, list):
+            if target_shape_id in y_shape_ids:
+                return True
+        else:
+            if target_shape_id == y_shape_ids:
+                return True
+    
+    return False
+
 def remove_ungrouped_individual_shapes(dl):
     """
     Remove individual shapes that don't belong to any group.
-    Individual shapes are those with section_type='individual_shape' that:
-    - Have only 1 shape_id in their shape_id array
-    - Are at the root level (index has only 2 digits like "01", not "01.01")
-    
-    These shapes should be removed if they haven't been used elsewhere in the tree.
+    Individual shapes that appear in other groups/sections will be excluded.
     """
-    # Collect all shape_ids that are referenced as children (non-root level)
-    referenced_shape_ids = set()
-    for item in dl:
-        if 'index' in item and item['index'].count('.') > 0:  # Not a root-level item
-            if 'shape_id' in item and isinstance(item['shape_id'], list):
-                referenced_shape_ids.update(item['shape_id'])
-    
-    # Filter out individual shapes that are root-level and not referenced elsewhere
-    filtered_dl = []
-    for item in dl:
-        # Check if this is a root-level individual shape
-        is_root_individual = (
-            item.get('section_type') == 'individual_shape' and
-            'index' in item and 
-            item['index'].count('.') == 0  # Root level (e.g., "01" not "01.01")
-        )
-        
-        if is_root_individual:
-            # Check if any of its shape_ids are referenced elsewhere
-            item_shape_ids = item.get('shape_id', [])
-            if isinstance(item_shape_ids, list):
-                # If any shape_id is referenced elsewhere, keep it
-                if any(sid in referenced_shape_ids for sid in item_shape_ids):
-                    filtered_dl.append(item)
-                # Otherwise, skip it (don't add to filtered_dl)
-            else:
-                # Single shape_id (not a list)
-                if item_shape_ids in referenced_shape_ids:
-                    filtered_dl.append(item)
-        else:
-            # Not a root-level individual shape, keep it
-            filtered_dl.append(item)
-    
-    return filtered_dl
+    indices_to_remove = [i for i, x in enumerate(dl) if get_exclude_bool(x, dl) == True]
+    dl_new = [x for i, x in enumerate(dl) if i not in indices_to_remove]
+    return dl_new
 
 def save_to_csv(dl, test_index):
     df = pd.DataFrame(dl)
