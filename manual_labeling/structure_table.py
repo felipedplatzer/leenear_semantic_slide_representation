@@ -9,7 +9,22 @@ def _contains(parent, child):
     child_cells = set(child['cells'])
     
     # Parent must contain all child cells plus at least one more
-    return child_cells.issubset(parent_cells) and len(child_cells) < len(parent_cells)
+    is_subset = child_cells.issubset(parent_cells)
+    is_smaller = len(child_cells) < len(parent_cells)
+    result = is_subset and is_smaller
+    
+    # Debug output for Group 1 and Big 4 columns
+    if parent.get('label') == 'Group 1' and 'Big 4' in child.get('label', ''):
+        print(f"  DEBUG _contains: Checking if Group 1 contains {child.get('label')}")
+        print(f"    Parent cells (first 10): {sorted(list(parent_cells))[:10]}")
+        print(f"    Child cells (first 10): {sorted(list(child_cells))[:10]}")
+        print(f"    is_subset={is_subset}, is_smaller={is_smaller}, result={result}")
+    
+    # Debug output for successful containment
+    if result:
+        print(f"  DEBUG _contains: '{parent.get('label', '?')}' ({len(parent['cells'])} cells) CONTAINS '{child.get('label', '?')}' ({len(child['cells'])} cells)")
+    
+    return result
 
 def _get_next_root_index(tree):
     """Get next root level index (01, 02, 03, ...)"""
@@ -57,29 +72,48 @@ def structure_table_sections(table_sections):
     # This ensures parent sections come before their children
     sections.sort(key=lambda x: -len(x['cells']))
     
+    # Debug: Print first few cells of sections including some columns
+    print("\nDEBUG: Cell contents for sections:")
+    col_sections = [s for s in sections if s.get('section_type') in ['col', 'group_of_cols']]
+    row_sections = [s for s in sections if s.get('section_type') in ['row', 'group_of_rows']]
+    
+    if col_sections:
+        print(f"  Group/Col example: '{col_sections[0].get('label', '?')}' ({col_sections[0].get('section_type', '?')}): {col_sections[0]['cells'][:5]}...")
+        if len(col_sections) > 1:
+            print(f"  Col example: '{col_sections[1].get('label', '?')}' ({col_sections[1].get('section_type', '?')}): {col_sections[1]['cells'][:5]}...")
+    if row_sections:
+        print(f"  Row example: '{row_sections[0].get('label', '?')}' ({row_sections[0].get('section_type', '?')}): {row_sections[0]['cells'][:5]}...")
+    
     # Build tree structure
     tree = []
-    stack = []  # Stack to track parent sections
     
     for section in sections:
-        # Remove sections from stack that don't contain this section
-        while stack and not _contains(stack[-1], section):
-            stack.pop()
+        # Find the best parent for this section
+        # Check all previously processed sections (not just a stack)
+        # Find the smallest section that contains this one
+        best_parent = None
+        best_parent_size = float('inf')
+        
+        for potential_parent in tree:
+            if _contains(potential_parent, section):
+                parent_size = len(potential_parent['cells'])
+                if parent_size < best_parent_size:
+                    best_parent = potential_parent
+                    best_parent_size = parent_size
         
         # Add to tree with appropriate index
-        if stack:
-            # This section is nested under the top of stack
-            parent_index = stack[-1]['index']
+        if best_parent:
+            # This section is nested under the best parent
+            parent_index = best_parent['index']
             section['index'] = _get_next_child_index(tree, parent_index)
+            print(f"DEBUG structure_table: Section '{section.get('label', '?')}' ({section.get('section_type', '?')}, {len(section['cells'])} cells) nested under parent '{best_parent.get('label', '?')}' index {parent_index}")
         else:
             # This is a root level section
             section['index'] = _get_next_root_index(tree)
+            print(f"DEBUG structure_table: Section '{section.get('label', '?')}' ({section.get('section_type', '?')}, {len(section['cells'])} cells) at root level, index {section['index']}")
         
         # Add to tree
         tree.append(section)
-        
-        # Push to stack if this section could contain others
-        stack.append(section)
     
     return tree
 

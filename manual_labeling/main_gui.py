@@ -1542,7 +1542,7 @@ def show_table_form_with_data(tables, table_index):
         custom_row_frame.grid(row=row_num, column=0, columnspan=5, sticky="ew", padx=5, pady=2)
         
         # Radio buttons for rows/cols
-        row_col_var = tk.StringVar(value="rows")
+        row_col_var = tk.StringVar(master=table_dialog, value="rows")
         tk.Radiobutton(custom_row_frame, text="Rows", variable=row_col_var, value="rows").pack(side=tk.LEFT, padx=(0, 10))
         tk.Radiobutton(custom_row_frame, text="Cols", variable=row_col_var, value="cols").pack(side=tk.LEFT, padx=(0, 10))
         
@@ -1853,7 +1853,7 @@ def save_and_go_to_next_table(dialog, tables, current_index, current_table,
                     col_text_parts.append(cell_text)
                 except:
                     pass
-            122
+            
             # Concatenate with spaces
             col_text = " ".join(col_text_parts)
             
@@ -1911,6 +1911,8 @@ def save_and_go_to_next_table(dialog, tables, current_index, current_table,
         start_index = int(group_data['start_entry'].get())
         end_index = int(group_data['end_entry'].get())
         group_name = group_data['group_name_entry'].get()
+        
+        print(f"DEBUG: Processing group '{group_name}': type={row_col_type}, start={start_index}, end={end_index}")
         
         # Get text from all cells in the group
         text_parts = []
