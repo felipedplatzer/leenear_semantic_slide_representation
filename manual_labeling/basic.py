@@ -168,10 +168,103 @@ def add_table_sections(dl, table_labels_list, individual_shape_label_map=None):
     return dl_new   
 
 
+def is_shape_fully_contained(child_shape, parent_shape, tolerance=0):
+    """
+    Check if child shape is fully contained within parent shape.
+    """
+    # Apply tolerance
+    parent_top = parent_shape['top'] - tolerance
+    parent_left = parent_shape['left'] - tolerance
+    parent_bottom = parent_shape['bottom'] + tolerance
+    parent_right = parent_shape['right'] + tolerance
+    
+    # Check containment
+    return (child_shape['top'] >= parent_top and
+            child_shape['left'] >= parent_left and
+            child_shape['bottom'] <= parent_bottom and
+            child_shape['right'] <= parent_right)
+
+def add_unlabeled_shapes_to_groups(dl):
+    """
+    Find unlabeled individual shapes that are contained in groups 
+    and add them as children to those groups.
+    """
+    dl_new = []
+    
+    # Separate individual_shapes from other items
+    individual_shapes = []
+    other_items = []
+    
+    for item in dl:
+        if item.get('section_type') == 'individual_shape':
+            # Check if it's root-level (no dot in index) and has no label
+            index = item.get('index', '')
+            if '.' not in index and 'label' not in item:
+                individual_shapes.append(item)
+                continue
+        other_items.append(item)
+    
+    # Track which unlabeled shapes have been added to groups
+    shapes_added_to_groups = set()
+    
+    # For each item in the tree, check if any unlabeled individual shapes are contained
+    for item in other_items:
+        dl_new.append(item)
+        
+        # Check if this item can contain shapes (has spatial coordinates)
+        if not all(k in item for k in ['top', 'left', 'bottom', 'right']):
+            continue
+        
+        # Find all unlabeled shapes contained in this item
+        contained_shapes = []
+        for shape in individual_shapes:
+            if is_shape_fully_contained(shape, item, tolerance=5):
+                # Create a copy as a child
+                child_shape = shape.copy()
+                shape_id = shape['shape_id'][0] if isinstance(shape['shape_id'], list) else shape['shape_id']
+                contained_shapes.append((shape_id, child_shape))
+                # Track that this shape was added to a group
+                shapes_added_to_groups.add(id(shape))
+        
+        # Add contained shapes as children of this item
+        if contained_shapes:
+            item_index = item.get('index', '')
+            if item_index:
+                # Get existing children to determine next index
+                existing_child_indices = []
+                for other in dl_new:
+                    other_index = other.get('index', '')
+                    if other_index.startswith(item_index + '.'):
+                        # Extract immediate child index
+                        child_part = other_index[len(item_index) + 1:]
+                        if '.' in child_part:
+                            child_part = child_part.split('.')[0]
+                        if child_part.isdigit():
+                            existing_child_indices.append(int(child_part))
+                
+                # Determine starting index for new children
+                if existing_child_indices:
+                    next_index = max(existing_child_indices) + 1
+                else:
+                    next_index = 1
+                
+                # Add each contained shape as a child
+                for shape_id, child_shape in contained_shapes:
+                    child_shape['index'] = f"{item_index}.{str(next_index).zfill(2)}"
+                    dl_new.append(child_shape)
+                    next_index += 1
+    
+    # Add back unlabeled shapes that were NOT added to any group
+    for shape in individual_shapes:
+        if id(shape) not in shapes_added_to_groups:
+            dl_new.append(shape)
+    
+    return dl_new
+
 def get_exclude_bool(x, dl):
     """
     Check if an individual shape should be excluded.
-    Returns True if the shape should be excluded (is referenced elsewhere).
+    Returns True if the shape should be excluded (is unlabeled and referenced elsewhere).
     Only applies to root-level items (index without a dot).
     """
     # If not an individual_shape, don't exclude
@@ -182,6 +275,11 @@ def get_exclude_bool(x, dl):
     # If index has a dot, it's a nested item - don't remove it
     index = x.get('index', '')
     if '.' in index:
+        return False
+    
+    # NEW: Only exclude if the shape is UNLABELED
+    # If it has a label, keep it even if it appears in groups
+    if 'label' in x and x['label']:
         return False
     
     # Get the first shape_id from this item
@@ -212,8 +310,12 @@ def get_exclude_bool(x, dl):
 
 def remove_ungrouped_individual_shapes(dl):
     """
-    Remove individual shapes that don't belong to any group.
-    Individual shapes that appear in other groups/sections will be excluded.
+    Remove individual shapes that are unlabeled AND contained in groups.
+    This prevents duplication - the unlabeled shape has been copied into the group,
+    so we remove the root-level copy.
+    
+    Unlabeled shapes NOT in any group are kept.
+    Labeled shapes are always kept (even if in groups).
     """
     indices_to_remove = [i for i, x in enumerate(dl) if get_exclude_bool(x, dl) == True]
     dl_new = [x for i, x in enumerate(dl) if i not in indices_to_remove]

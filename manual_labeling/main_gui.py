@@ -206,7 +206,7 @@ def show_group_naming_dialog(selection):
     # Go to Next Section button (with save confirmation)
     next_section_btn = tk.Button(buttons_frame, text="Go to Next Section\n(Individual Shapes)", 
                                  command=lambda: go_to_next_section_individual(dialog_root, name_entry, selection),
-                                 bg="#2196F3", fg="white",
+                            bg="#2196F3", fg="white",
                                  width=15, height=3)
     next_section_btn.pack(side=tk.LEFT)
     
@@ -572,14 +572,13 @@ def show_text_labeling_form(selection):
     # Create new text labeling dialog
     text_dialog = tk.Tk()
     text_dialog.title("Label Text Sections")
-    text_dialog.geometry("500x400")
-    text_dialog.resizable(False, False)
     
-    # Center on screen
-    text_dialog.update_idletasks()
-    x = (text_dialog.winfo_screenwidth() // 2) - (500 // 2)
-    y = (text_dialog.winfo_screenheight() // 2) - (400 // 2)
-    text_dialog.geometry(f"500x400+{x}+{y}")
+    # Get screen dimensions and make fullscreen
+    screen_width = text_dialog.winfo_screenwidth()
+    screen_height = text_dialog.winfo_screenheight()
+    text_dialog.geometry(f"{screen_width}x{screen_height}+0+0")
+    text_dialog.state('zoomed')  # Maximize window on Windows
+    text_dialog.resizable(True, True)
     
     # Bring dialog to foreground
     text_dialog.lift()
@@ -587,111 +586,484 @@ def show_text_labeling_form(selection):
     text_dialog.after_idle(lambda: text_dialog.attributes('-topmost', False))
     text_dialog.focus_force()
     
-    # Main frame
-    main_frame = tk.Frame(text_dialog, padx=20, pady=20)
+    # Create main scrollable frame
+    canvas = tk.Canvas(text_dialog, highlightthickness=0)
+    scrollbar = tk.Scrollbar(text_dialog, orient="vertical", command=canvas.yview)
+    scrollable_frame = tk.Frame(canvas)
+    
+    # Bind to update scroll region
+    def on_main_frame_configure(event):
+        canvas.configure(scrollregion=canvas.bbox("all"))
+    
+    scrollable_frame.bind("<Configure>", on_main_frame_configure)
+    
+    # Create window that expands to canvas width
+    main_canvas_window = canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+    
+    # Bind canvas resize to update frame width
+    def on_main_canvas_configure(event):
+        # Make the scrollable_frame fill the canvas width
+        canvas.itemconfig(main_canvas_window, width=event.width)
+    
+    canvas.bind("<Configure>", on_main_canvas_configure)
+    canvas.configure(yscrollcommand=scrollbar.set)
+    
+    # Main frame - reduce horizontal padding to maximize table width
+    main_frame = tk.Frame(scrollable_frame, padx=20, pady=30)
     main_frame.pack(fill=tk.BOTH, expand=True)
     
     # Title
     title_label = tk.Label(main_frame, text="Label Text Sections", 
-                          font=("Arial", 14, "bold"))
+                          font=("Arial", 18, "bold"))
     title_label.pack(pady=(0, 20))
     
-    # Text preview panel
-    preview_frame = tk.Frame(main_frame, relief="sunken", bd=2, bg="white")
-    preview_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 20))
+    # 1. Shape Index textbox
+    shape_index_frame = tk.Frame(main_frame)
+    shape_index_frame.pack(fill=tk.X, pady=(0, 10))
+    tk.Label(shape_index_frame, text="Shape ID:", font=("Arial", 12, "bold")).pack(side=tk.LEFT, padx=(0, 15))
+    shape_id_entry = tk.Entry(shape_index_frame, font=("Arial", 12), width=25)
+    shape_id_entry.pack(side=tk.LEFT)
     
-    preview_label = tk.Label(preview_frame, text="Text preview will appear here", 
-                            fg="gray", wraplength=450, justify="left", 
-                            bg="white", anchor="nw")
-    preview_label.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
+    # Shape text preview (below shape ID)
+    shape_text_frame = tk.Frame(main_frame)
+    shape_text_frame.pack(fill=tk.X, pady=(0, 20))
+    tk.Label(shape_text_frame, text="Shape Text:", font=("Arial", 11, "bold")).pack(side=tk.LEFT, padx=(0, 15))
+    shape_text_label = tk.Label(shape_text_frame, text="", font=("Arial", 11), fg="gray", anchor="w", justify="left")
+    shape_text_label.pack(side=tk.LEFT, fill=tk.X, expand=True)
     
-    # Input fields frame
-    inputs_frame = tk.Frame(main_frame)
-    inputs_frame.pack(fill=tk.X, pady=(0, 20))
+    # Store for text section rows (needed by functions below)
+    text_section_rows = []
     
-    # Shape ID input with updated label
-    shape_id_label = tk.Label(inputs_frame, text="Shape ID:", 
-                             font=("Arial", 10), wraplength=300, justify="left")
-    shape_id_label.grid(row=0, column=0, sticky="w", pady=(0, 5))
-    shape_id_entry = tk.Entry(inputs_frame, font=("Arial", 11), width=30)
-    shape_id_entry.grid(row=0, column=1, sticky="ew", pady=(0, 5))
-    shape_id_entry.bind('<FocusOut>', lambda e: update_text_preview(preview_label, shape_id_entry, start_char_entry, end_char_entry, selection))
+    # 2. Break by panel
+    break_by_frame = tk.LabelFrame(main_frame, text="Break By", font=("Arial", 13, "bold"))
+    break_by_frame.pack(fill=tk.X, pady=(0, 20))
     
-    # Start char input
-    start_char_label = tk.Label(inputs_frame, text="Start Char (0-indexed):", font=("Arial", 10))
-    start_char_label.grid(row=1, column=0, sticky="w", pady=(0, 5))
-    start_char_entry = tk.Entry(inputs_frame, font=("Arial", 11), width=30)
-    start_char_entry.grid(row=1, column=1, sticky="ew", pady=(0, 5))
-    start_char_entry.bind('<FocusOut>', lambda e: update_text_preview(preview_label, shape_id_entry, start_char_entry, end_char_entry, selection))
+    break_by_inner = tk.Frame(break_by_frame, padx=15, pady=15)
+    break_by_inner.pack(fill=tk.X)
     
-    # End char input
-    end_char_label = tk.Label(inputs_frame, text="End Char (0-indexed):", font=("Arial", 10))
-    end_char_label.grid(row=2, column=0, sticky="w", pady=(0, 5))
-    end_char_entry = tk.Entry(inputs_frame, font=("Arial", 11), width=30)
-    end_char_entry.grid(row=2, column=1, sticky="ew", pady=(0, 5))
-    end_char_entry.bind('<FocusOut>', lambda e: update_text_preview(preview_label, shape_id_entry, start_char_entry, end_char_entry, selection))
+    # Checkboxes for break by options
+    linebreaks_var = tk.BooleanVar(master=text_dialog, value=False)
+    format_changes_var = tk.BooleanVar(master=text_dialog, value=False)
+    custom_char_var = tk.BooleanVar(master=text_dialog, value=False)
     
-    # Name of text section input
-    name_label = tk.Label(inputs_frame, text="Name of Text Section:", font=("Arial", 10))
-    name_label.grid(row=3, column=0, sticky="w", pady=(0, 5))
-    name_entry = tk.Entry(inputs_frame, font=("Arial", 11), width=30)
-    name_entry.grid(row=3, column=1, sticky="ew", pady=(0, 5))
+    # Custom char entry (create early so it can be referenced)
+    custom_char_frame = tk.Frame(break_by_inner)
+    custom_char_entry = tk.Entry(custom_char_frame, font=("Arial", 11), width=8, state='disabled')
     
-    # Configure grid weights
-    inputs_frame.columnconfigure(1, weight=1)
+    # 3. Text sections panel
+    text_sections_frame = tk.LabelFrame(main_frame, text="Text Sections", font=("Arial", 13, "bold"))
+    text_sections_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 20))
     
-    # Buttons frame
-    buttons_frame = tk.Frame(main_frame)
-    buttons_frame.pack(fill=tk.X, pady=(20, 0))
+    # Table frame with scrollbar - minimize padding to maximize width
+    table_container = tk.Frame(text_sections_frame)
+    table_container.pack(fill=tk.BOTH, expand=True, padx=5, pady=10)
     
-    # Go to Previous Section button (Individual Shapes)
-    prev_section_btn = tk.Button(buttons_frame, text="Go to Previous Section\n(Individual Shapes)", 
-                                 command=lambda: go_to_previous_section_from_text(shape_id_entry, start_char_entry, end_char_entry, name_entry, text_dialog),
-                                 bg="#FF9800", fg="white",
-                                 width=18, height=2)
-    prev_section_btn.pack(side=tk.LEFT, padx=(0, 10))
+    table_canvas = tk.Canvas(table_container, highlightthickness=0)
+    table_scrollbar = tk.Scrollbar(table_container, orient="vertical", command=table_canvas.yview)
+    table_frame = tk.Frame(table_canvas)
     
-    # Save button (save and clear for next text section)
-    save_btn = tk.Button(buttons_frame, text="Save", 
-                         command=lambda: go_to_next_text_section(shape_id_entry.get().strip(), 
-                                                               start_char_entry.get().strip(),
-                                                               end_char_entry.get().strip(),
-                                                               name_entry.get().strip(),
-                                                               text_dialog),
-                         bg="#4CAF50", fg="white",
-                         width=18, height=2)
-    save_btn.pack(side=tk.LEFT, padx=(0, 10))
+    # Bind to update scroll region
+    def on_frame_configure(event):
+        table_canvas.configure(scrollregion=table_canvas.bbox("all"))
     
-    # Go to Next Section button (Tables)
-    next_section_btn = tk.Button(buttons_frame, text="Go to Next Section\n(Tables)", 
-                                command=lambda: go_to_tables_with_confirmation(shape_id_entry, start_char_entry, end_char_entry, name_entry, text_dialog),
-                                bg="#2196F3", fg="white",
+    table_frame.bind("<Configure>", on_frame_configure)
+    
+    # Create window that expands to canvas width
+    canvas_window = table_canvas.create_window((0, 0), window=table_frame, anchor="nw")
+    
+    # Bind canvas resize to update frame width
+    def on_canvas_configure(event):
+        # Make the frame fill the canvas width
+        table_canvas.itemconfig(canvas_window, width=event.width)
+    
+    table_canvas.bind("<Configure>", on_canvas_configure)
+    table_canvas.configure(yscrollcommand=table_scrollbar.set)
+    
+    table_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+    table_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    
+    # Table headers - using grid for better width control
+    headers_frame = tk.Frame(table_frame)
+    headers_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 5))
+    
+    tk.Label(headers_frame, text="Start Char", font=("Arial", 10, "bold"), width=12, anchor="w").grid(row=0, column=0, padx=5, sticky="ew")
+    tk.Label(headers_frame, text="End Char", font=("Arial", 10, "bold"), width=12, anchor="w").grid(row=0, column=1, padx=5, sticky="ew")
+    tk.Label(headers_frame, text="Text", font=("Arial", 10, "bold"), anchor="w").grid(row=0, column=2, padx=5, sticky="ew")
+    tk.Label(headers_frame, text="Name", font=("Arial", 10, "bold"), anchor="w").grid(row=0, column=3, padx=5, sticky="ew")
+    tk.Label(headers_frame, text="Action", font=("Arial", 10, "bold"), width=10, anchor="w").grid(row=0, column=4, padx=5, sticky="ew")
+    
+    # Configure column weights to make them expand to fill available width
+    headers_frame.columnconfigure(0, minsize=100)  # Start char minimum
+    headers_frame.columnconfigure(1, minsize=100)  # End char minimum
+    headers_frame.columnconfigure(2, weight=4, minsize=400)  # Text column - largest
+    headers_frame.columnconfigure(3, weight=3, minsize=300)  # Name column - large
+    headers_frame.columnconfigure(4, minsize=100)  # Action minimum
+    
+    def format_text_with_ellipsis(text, max_len=50):
+        """Format text with ellipsis in the middle if too long"""
+        if len(text) <= max_len:
+            return text
+        # Show beginning and end with [...] in middle
+        chars_per_side = (max_len - 5) // 2  # 5 chars for " [...] "
+        return text[:chars_per_side] + " [...] " + text[-chars_per_side:]
+    
+    def add_text_section_row(start_val="", end_val="", text_val="", name_val=""):
+        """Add a new row to the text sections table"""
+        row_frame = tk.Frame(table_frame)
+        row_frame.pack(fill=tk.BOTH, expand=True, pady=3)
+        
+        # Start char entry (int only)
+        start_entry = tk.Entry(row_frame, font=("Arial", 10), width=12)
+        start_entry.grid(row=0, column=0, padx=5, sticky="ew")
+        if start_val:
+            start_entry.insert(0, str(start_val))
+        
+        # End char entry (int only)
+        end_entry = tk.Entry(row_frame, font=("Arial", 10), width=12)
+        end_entry.grid(row=0, column=1, padx=5, sticky="ew")
+        if end_val:
+            end_entry.insert(0, str(end_val))
+        
+        # Text label (capped to 50 chars with ellipsis in middle)
+        text_display = format_text_with_ellipsis(text_val, 50)
+        text_label = tk.Label(row_frame, text=text_display, font=("Arial", 10), anchor="w", bg="white", relief="sunken")
+        text_label.grid(row=0, column=2, padx=5, sticky="ew")
+        
+        # Name entry (pre-populated with text, capped at 50 chars)
+        name_entry = tk.Entry(row_frame, font=("Arial", 10))
+        name_entry.grid(row=0, column=3, padx=5, sticky="ew")
+        name_text = name_val if name_val else text_val
+        if len(name_text) > 50:
+            name_text = name_text[:50]
+        name_entry.insert(0, name_text)
+        
+        # Remove button
+        def remove_row():
+            row_frame.destroy()
+            text_section_rows.remove(row_data)
+        
+        remove_btn = tk.Button(row_frame, text="Remove", font=("Arial", 9), command=remove_row, width=10)
+        remove_btn.grid(row=0, column=4, padx=5, sticky="ew")
+        
+        # Configure column weights to match headers
+        row_frame.columnconfigure(0, minsize=100)  # Start char minimum
+        row_frame.columnconfigure(1, minsize=100)  # End char minimum
+        row_frame.columnconfigure(2, weight=4, minsize=400)  # Text column - largest
+        row_frame.columnconfigure(3, weight=3, minsize=300)  # Name column - large
+        row_frame.columnconfigure(4, minsize=100)  # Action minimum
+        
+        # Store row data
+        row_data = {
+            'frame': row_frame,
+            'start_entry': start_entry,
+            'end_entry': end_entry,
+            'text_label': text_label,
+            'name_entry': name_entry,
+            'text_val': text_val
+        }
+        text_section_rows.append(row_data)
+        
+        # Update text display when start/end change
+        def update_text_display(*args):
+            try:
+                shape_id = shape_id_entry.get().strip()
+                start = start_entry.get().strip()
+                end = end_entry.get().strip()
+                
+                if shape_id and start and end:
+                    start_int = int(start)
+                    end_int = int(end)
+                    
+                    # Find shape and get text
+                    for shape in ppt_app.ActiveWindow.View.Slide.Shapes:
+                        if str(shape.Id) == shape_id:
+                            if hasattr(shape, 'TextFrame') and shape.HasTextFrame:
+                                full_text = shape.TextFrame.TextRange.Text
+                                if start_int >= 0 and end_int <= len(full_text) and start_int < end_int:
+                                    text_segment = full_text[start_int:end_int]
+                                    row_data['text_val'] = text_segment
+                                    display_text = format_text_with_ellipsis(text_segment, 50)
+                                    text_label.config(text=display_text)
+                                    # Update name if it's empty
+                                    if not name_entry.get().strip():
+                                        name_entry.delete(0, tk.END)
+                                        name_text = text_segment[:50] if len(text_segment) > 50 else text_segment
+                                        name_entry.insert(0, name_text)
+                            break
+            except:
+                pass
+        
+        start_entry.bind('<KeyRelease>', update_text_display)
+        end_entry.bind('<KeyRelease>', update_text_display)
+        
+        return row_data
+    
+    # Add section button
+    add_section_btn = tk.Button(text_sections_frame, text="Add Section", font=("Arial", 11, "bold"), 
+                                command=lambda: add_text_section_row(), bg="#4CAF50", fg="white",
                                 width=15, height=2)
-    next_section_btn.pack(side=tk.LEFT)
+    add_section_btn.pack(pady=(10, 15))
     
-    # Focus on first input
+    def update_shape_text_preview():
+        """Update the shape text preview label"""
+        shape_id = shape_id_entry.get().strip()
+        if not shape_id:
+            shape_text_label.config(text="Enter a Shape ID to see text preview", fg="gray")
+            return
+        
+        # Find the shape
+        target_shape = None
+        for shape in ppt_app.ActiveWindow.View.Slide.Shapes:
+            if str(shape.Id) == shape_id:
+                target_shape = shape
+                break
+        
+        if not target_shape or not hasattr(target_shape, 'TextFrame') or not target_shape.HasTextFrame:
+            shape_text_label.config(text="Shape not found or has no text", fg="red")
+            return
+        
+        full_text = target_shape.TextFrame.TextRange.Text
+        display_text = format_text_with_ellipsis(full_text, 50)
+        shape_text_label.config(text=display_text, fg="black")
+    
+    # Define populate_sections_by_breaks with actual implementation
+    def populate_sections_by_breaks():
+        """Auto-populate text sections based on selected break options"""
+        shape_id = shape_id_entry.get().strip()
+        if not shape_id:
+            # Clear existing rows
+            for row in text_section_rows[:]:
+                row['frame'].destroy()
+            text_section_rows.clear()
+            return
+        
+        # Find the shape
+        target_shape = None
+        for shape in ppt_app.ActiveWindow.View.Slide.Shapes:
+            if str(shape.Id) == shape_id:
+                target_shape = shape
+                break
+        
+        if not target_shape or not hasattr(target_shape, 'TextFrame') or not target_shape.HasTextFrame:
+            # Clear existing rows
+            for row in text_section_rows[:]:
+                row['frame'].destroy()
+            text_section_rows.clear()
+            return
+        
+        full_text = target_shape.TextFrame.TextRange.Text
+        
+        # Clear existing rows ALWAYS when this function is called
+        for row in text_section_rows[:]:
+            row['frame'].destroy()
+        text_section_rows.clear()
+        
+        # Check if any break option is selected
+        if not (linebreaks_var.get() or custom_char_var.get() or format_changes_var.get()):
+            # No break options selected, don't populate
+            return
+        
+        # Determine break points
+        break_points = [0]
+        
+        if linebreaks_var.get():
+            # Break by linebreaks (\n, \r, \r\n)
+            for i, char in enumerate(full_text):
+                if char in ['\n', '\r']:
+                    if i + 1 not in break_points:
+                        break_points.append(i + 1)
+        
+        if custom_char_var.get():
+            custom_char = custom_char_entry.get()
+            if custom_char:
+                for i, char in enumerate(full_text):
+                    if char == custom_char:
+                        if i + 1 not in break_points:
+                            break_points.append(i + 1)
+        
+        if format_changes_var.get():
+            # Break by format changes (requires checking TextRange.Runs)
+            try:
+                runs = target_shape.TextFrame.TextRange.Runs()
+                current_pos = 0
+                for i in range(1, runs.Count + 1):
+                    run = runs(i)
+                    run_length = len(run.Text)
+                    if current_pos > 0 and current_pos not in break_points:
+                        break_points.append(current_pos)
+                    current_pos += run_length
+            except:
+                pass
+        
+        # Sort and deduplicate break points
+        break_points = sorted(set(break_points))
+        if len(full_text) not in break_points:
+            break_points.append(len(full_text))
+        
+        # Create sections from break points
+        for i in range(len(break_points) - 1):
+            start = break_points[i]
+            end = break_points[i + 1]
+            text_segment = full_text[start:end]
+            if text_segment.strip():  # Only add non-empty sections
+                add_text_section_row(start, end, text_segment, text_segment.strip())
+    
+    # Now create the checkbox command functions and wire them up
+    def on_linebreaks_toggle():
+        populate_sections_by_breaks()
+    
+    def on_format_changes_toggle():
+        populate_sections_by_breaks()
+    
+    def on_custom_char_toggle():
+        if custom_char_var.get():
+            custom_char_entry.config(state='normal')
+        else:
+            custom_char_entry.config(state='disabled')
+        populate_sections_by_breaks()
+    
+    # Create and pack the checkboxes
+    linebreaks_check = tk.Checkbutton(break_by_inner, text="Linebreaks", variable=linebreaks_var, 
+                                     font=("Arial", 11), command=on_linebreaks_toggle)
+    linebreaks_check.pack(anchor="w", pady=5)
+    
+    format_changes_check = tk.Checkbutton(break_by_inner, text="Format changes", variable=format_changes_var, 
+                                         font=("Arial", 11), command=on_format_changes_toggle)
+    format_changes_check.pack(anchor="w", pady=5)
+    
+    # Pack custom char frame and checkbox
+    custom_char_frame.pack(anchor="w", pady=5)
+    custom_char_check = tk.Checkbutton(custom_char_frame, text="Custom character:", variable=custom_char_var, 
+                                      font=("Arial", 11), command=on_custom_char_toggle)
+    custom_char_check.pack(side=tk.LEFT)
+    custom_char_entry.pack(side=tk.LEFT, padx=(10, 0))
+    
+    # Bind shape ID changes to update preview and populate
+    def on_shape_id_change(event):
+        update_shape_text_preview()
+        populate_sections_by_breaks()
+    
+    shape_id_entry.bind('<FocusOut>', on_shape_id_change)
+    
+    # Bind custom char entry to trigger populate when typing
+    custom_char_entry.bind('<KeyRelease>', lambda e: populate_sections_by_breaks())
+    
+    # 4. Buttons
+    buttons_frame = tk.Frame(main_frame)
+    buttons_frame.pack(fill=tk.X, pady=(10, 0))
+    
+    def go_to_previous_section():
+        """Go back to individual shapes"""
+        text_dialog.destroy()
+        show_individual_shapes_form()
+    
+    def save_and_continue():
+        """Save current sections and stay on form"""
+        shape_id = shape_id_entry.get().strip()
+        if not shape_id:
+            print("No shape ID specified")
+            return
+        
+        # Save all sections
+        for row in text_section_rows:
+            try:
+                start = int(row['start_entry'].get().strip())
+                end = int(row['end_entry'].get().strip())
+                name = row['name_entry'].get().strip()
+                text = row['text_val']
+                
+                if start >= 0 and end > start and name:
+                    text_section_list.append({
+                        'shape_id': shape_id,
+                        'start_char': start,
+                        'end_char': end,
+                        'label': name,
+                        'text': text
+                    })
+                    print(f"Saved text section: {name} ({start}-{end})")
+            except:
+                pass
+        
+        # Clear form for next shape
+        shape_id_entry.delete(0, tk.END)
+        linebreaks_var.set(False)
+        format_changes_var.set(False)
+        custom_char_var.set(False)
+        custom_char_entry.delete(0, tk.END)
+        for row in text_section_rows[:]:
+            row['frame'].destroy()
+        text_section_rows.clear()
+        shape_id_entry.focus()
+    
+    def go_to_next_section():
+        """Save and go to tables"""
+        # Save current sections first
+        shape_id = shape_id_entry.get().strip()
+        if shape_id:
+            for row in text_section_rows:
+                try:
+                    start = int(row['start_entry'].get().strip())
+                    end = int(row['end_entry'].get().strip())
+                    name = row['name_entry'].get().strip()
+                    text = row['text_val']
+                    
+                    if start >= 0 and end > start and name:
+                        text_section_list.append({
+                            'shape_id': shape_id,
+                            'start_char': start,
+                            'end_char': end,
+                            'label': name,
+                            'text': text
+                        })
+                        print(f"Saved text section: {name} ({start}-{end})")
+                except:
+                    pass
+        
+        text_dialog.destroy()
+        show_table_labeling_form()
+    
+    prev_btn = tk.Button(buttons_frame, text="Go to Previous Section", command=go_to_previous_section,
+                        bg="#FF9800", fg="white", font=("Arial", 11, "bold"), width=22, height=2)
+    prev_btn.pack(side=tk.LEFT, padx=(0, 15))
+    
+    save_btn = tk.Button(buttons_frame, text="Save", command=save_and_continue,
+                        bg="#4CAF50", fg="white", font=("Arial", 11, "bold"), width=22, height=2)
+    save_btn.pack(side=tk.LEFT, padx=(0, 15))
+    
+    next_btn = tk.Button(buttons_frame, text="Go to Next Section", command=go_to_next_section,
+                        bg="#2196F3", fg="white", font=("Arial", 11, "bold"), width=22, height=2)
+    next_btn.pack(side=tk.LEFT)
+    
+    # Pack canvas and scrollbar
+    canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+    
+    # Focus on shape ID entry
     text_dialog.after(100, lambda: shape_id_entry.focus())
-    
-    # Bind Enter key to Go to Next Text Section
-    text_dialog.bind('<Return>', lambda e: go_to_next_text_section(shape_id_entry.get().strip(), 
-                                                                  start_char_entry.get().strip(),
-                                                                  end_char_entry.get().strip(),
-                                                                  name_entry.get().strip(),
-                                                                  text_dialog))
     
     # Handle window close (X button) - save and quit
     def on_text_closing():
-        # Save current text section if all fields are filled
+        # Save current sections
         shape_id = shape_id_entry.get().strip()
-        start_char = start_char_entry.get().strip()
-        end_char = end_char_entry.get().strip()
-        name = name_entry.get().strip()
+        if shape_id:
+            for row in text_section_rows:
+                try:
+                    start = int(row['start_entry'].get().strip())
+                    end = int(row['end_entry'].get().strip())
+                    name = row['name_entry'].get().strip()
+                    text = row['text_val']
+                    
+                    if start >= 0 and end > start and name:
+                        text_section_list.append({
+                            'shape_id': shape_id,
+                            'start_char': start,
+                            'end_char': end,
+                            'label': name,
+                            'text': text
+                        })
+                except:
+                    pass
         
-        if shape_id and start_char and end_char and name:
-            text_section_list.append(get_text_dict(shape_id, start_char, end_char, name))
-            print(f"Auto-saved text section: Shape ID={shape_id}, Start={start_char}, End={end_char}, Name={name}")
-        
-        # Finish the text labeling process
         text_dialog.destroy()
         finish_text_labeling_process()
     
@@ -1728,6 +2100,9 @@ def finish_text_labeling_process():
     # This re-arranges table sections within their parent tables
     # Pass the label map so overlaid shapes can get their labels
     dl = basic.add_table_sections(dl, table_labels_list, individual_shape_label_map)
+    
+    # Add unlabeled individual shapes to groups where they are contained
+    dl = basic.add_unlabeled_shapes_to_groups(dl)
     
     # Remove individual shapes that don't belong to any group
     # (They've been copied into the tree structure where needed)
