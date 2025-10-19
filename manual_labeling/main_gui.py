@@ -1356,15 +1356,48 @@ def show_table_form_with_data(tables, table_index):
         tk.Label(row_table_frame, text=f"{i}", font=("Arial", 9)).grid(row=i+1, column=0, padx=5, pady=2, sticky="w")
         
         # Get first non-merged cell text from each row
+        # Check each cell's position to detect merging
         first_cell_text = ""
         row_name_text = f"Row {i}"
         try:
-            for j in range(1, current_table.Table.Rows(i+1).Cells.Count + 1):
-                cell_text = current_table.Table.Rows(i+1).Cells(j).Shape.TextFrame.TextRange.Text.strip()
-                if cell_text:  # Found first non-empty cell
-                    first_cell_text = cell_text
-                    row_name_text = cell_text
-                    break
+            for j in range(current_table.Table.Columns.Count):
+                try:
+                    cell = current_table.Table.Cell(i + 1, j + 1)
+                    cell_text = cell.Shape.TextFrame.TextRange.Text.strip()
+                    
+                    if not cell_text:
+                        continue
+                    
+                    # Check if merged vertically by comparing top position with adjacent cells
+                    is_merged_vertically = False
+                    cell_top = cell.Shape.Top
+                    
+                    # Check cell above (if exists)
+                    if i > 0:
+                        try:
+                            cell_above = current_table.Table.Cell(i, j + 1)
+                            if abs(cell_above.Shape.Top - cell_top) < 1:  # Same top = merged
+                                is_merged_vertically = True
+                        except:
+                            pass
+                    
+                    # Check cell below (if exists)
+                    if not is_merged_vertically and i < current_table.Table.Rows.Count - 1:
+                        try:
+                            cell_below = current_table.Table.Cell(i + 2, j + 1)
+                            if abs(cell_below.Shape.Top - cell_top) < 1:  # Same top = merged
+                                is_merged_vertically = True
+                        except:
+                            pass
+                    
+                    # Use this cell if not merged vertically
+                    if not is_merged_vertically:
+                        first_cell_text = cell_text
+                        row_name_text = cell_text
+                        break
+                except:
+                    continue
+            
             # Truncate to 50 characters
             if len(first_cell_text) > 50:
                 first_cell_text = first_cell_text[:47] + "..."
@@ -1408,7 +1441,6 @@ def show_table_form_with_data(tables, table_index):
     # Bind tolerance entry to update counts on change
     row_tolerance_entry.bind('<KeyRelease>', lambda e: update_row_overlay_counts())
     
-    122
     # Column labels section
     col_frame = tk.LabelFrame(main_frame, text="Column Labels", font=("Arial", 12, "bold"))
     col_frame.pack(fill=tk.X, pady=(0, 20))
@@ -1463,15 +1495,48 @@ def show_table_form_with_data(tables, table_index):
         tk.Label(col_table_frame, text=f"{i}", font=("Arial", 9)).grid(row=i+1, column=0, padx=5, pady=2, sticky="w")
         
         # Get first non-merged cell text from each column
+        # Check each cell's position to detect merging
         first_cell_text = ""
         col_name_text = f"Col {i}"
         try:
-            for j in range(1, current_table.Table.Columns(i+1).Cells.Count + 1):
-                cell_text = current_table.Table.Columns(i+1).Cells(j).Shape.TextFrame.TextRange.Text.strip()
-                if cell_text:  # Found first non-empty cell
-                    first_cell_text = cell_text
-                    col_name_text = cell_text
-                    break
+            for j in range(current_table.Table.Rows.Count):
+                try:
+                    cell = current_table.Table.Cell(j + 1, i + 1)
+                    cell_text = cell.Shape.TextFrame.TextRange.Text.strip()
+                    
+                    if not cell_text:
+                        continue
+                    
+                    # Check if merged horizontally by comparing left position with adjacent cells
+                    is_merged_horizontally = False
+                    cell_left = cell.Shape.Left
+                    
+                    # Check cell to the left (if exists)
+                    if i > 0:
+                        try:
+                            cell_left_neighbor = current_table.Table.Cell(j + 1, i)
+                            if abs(cell_left_neighbor.Shape.Left - cell_left) < 1:  # Same left = merged
+                                is_merged_horizontally = True
+                        except:
+                            pass
+                    
+                    # Check cell to the right (if exists)
+                    if not is_merged_horizontally and i < current_table.Table.Columns.Count - 1:
+                        try:
+                            cell_right_neighbor = current_table.Table.Cell(j + 1, i + 2)
+                            if abs(cell_right_neighbor.Shape.Left - cell_left) < 1:  # Same left = merged
+                                is_merged_horizontally = True
+                        except:
+                            pass
+                    
+                    # Use this cell if not merged horizontally
+                    if not is_merged_horizontally:
+                        first_cell_text = cell_text
+                        col_name_text = cell_text
+                        break
+                except:
+                    continue
+            
             # Truncate to 50 characters
             if len(first_cell_text) > 50:
                 first_cell_text = first_cell_text[:47] + "..."
@@ -1518,6 +1583,11 @@ def show_table_form_with_data(tables, table_index):
     # Custom groups section
     custom_frame = tk.LabelFrame(main_frame, text="Custom Groups", font=("Arial", 12, "bold"))
     custom_frame.pack(fill=tk.X, pady=(0, 20))
+    
+    # Note about indexing
+    note_label = tk.Label(custom_frame, text="Note: Use index 0 for first row/column", 
+                         font=("Arial", 9, "italic"), fg="gray")
+    note_label.pack(anchor="w", padx=10, pady=(5, 0))
     
     # Custom groups table
     custom_table_frame = tk.Frame(custom_frame)
