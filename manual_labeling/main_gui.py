@@ -2092,93 +2092,94 @@ def finish_text_labeling_process():
     for x in text_section_list:
         x['section_type'] = 'text_section'
     
-    # Add section_type to shape_data
+    # Add section_type to shape_data and set labels from individual_shape_labels
+    # Create a mapping of shape_id -> label from individual_shape_labels
+    individual_shape_label_map = {}
+    for shape_label in individual_shape_labels:
+        individual_shape_label_map[shape_label['shape_id']] = shape_label['label']
+    
     for x in shape_data:
         x['section_type'] = 'orphan_shape'
-    
-    # Convert individual_shape_labels into single-element groups
-    individual_groups = []
-    for shape_label in individual_shape_labels:
-        # Find the shape data for this shape
-        shape_info = None
-        for shape in shape_data:
-            if shape['shape_id'] == shape_label['shape_id']:
-                shape_info = shape.copy()
-                break
-        
-        if shape_info:
-            # Create a single-element group
-            individual_group = {
-                'shape_id': [shape_label['shape_id']],
-                'label': shape_label['label'],
-                'section_type': 'individual_shape',
-                'text': shape_info.get('text', ''),
-                'top': shape_info['top'],
-                'left': shape_info['left'],
-                'right': shape_info['right'],
-                'bottom': shape_info['bottom'],
-                'width': shape_info['width'],
-                'height': shape_info['height']
-            }
-            individual_groups.append(individual_group)
+        # Set label if found in individual_shape_labels, otherwise leave blank
+        if x['shape_id'] in individual_shape_label_map:
+            x['label'] = individual_shape_label_map[x['shape_id']]
+        else:
+            x['label'] = ''
     
     # table_labels_list already has section_type added in save_and_go_to_next_table
     
-    # Step 3: Remove orphan shapes that have been labeled (in groups or individually)
-    # Collect all labeled shape IDs
-    labeled_shape_ids = set()
+    # Step 3: Remove orphan shapes that have been labeled in groups
+    # Collect all labeled shape IDs from groups only
+    """labeled_shape_ids = set()
     for group in group_list:
         if isinstance(group.get('shape_id'), list):
             labeled_shape_ids.update(group['shape_id'])
         else:
             labeled_shape_ids.add(group['shape_id'])
-    for indiv_group in individual_groups:
-        if isinstance(indiv_group.get('shape_id'), list):
-            labeled_shape_ids.update(indiv_group['shape_id'])
-        else:
-            labeled_shape_ids.add(indiv_group['shape_id'])
     
-    # Filter shape_data to remove labeled shapes and rename remaining as individual_shape
+    # Filter shape_data to remove shapes that are in groups, rename remaining as individual_shape
     filtered_shape_data = []
     for shape in shape_data:
         if shape['shape_id'] not in labeled_shape_ids:
             shape_copy = shape.copy()
             shape_copy['section_type'] = 'individual_shape'  # Rename from orphan_shape
-            filtered_shape_data.append(shape_copy)
+            filtered_shape_data.append(shape_copy)"""
     
-    # Combine filtered_shape_data, group_list, and individual_groups
+    # Combine filtered_shape_data and group_list
     # (text_section_list and table_labels_list will be inserted later)
-    dl = filtered_shape_data + group_list.copy() + individual_groups
+    dl = shape_data + group_list.copy()
     
     # Ensure all items have shape_id as a list
     for x in dl:
         if 'shape_id' in x and not isinstance(x['shape_id'], list):
             x['shape_id'] = [x['shape_id']]
     
-    # Step 4: Run generate_structure_main to arrange into tree based on spatial coordinates
-    # This arranges shapes and groups based on top, left, bottom, right
-    dl = structure_shapes.generate_structure_main(dl)
+    # Remove duplicates based on shape_id (comparing as sets, regardless of order)
+    # Keep the instance with longer label
+    seen_shape_ids = {}  # Maps frozenset of shape_ids to item
+    filtered_dl = []
+    for item in dl:
+        shape_id_set = frozenset(item.get('shape_id', []))
+        
+        if shape_id_set in seen_shape_ids:
+            # Duplicate found - keep the one with longer label
+            existing_item = seen_shape_ids[shape_id_set]
+            existing_label = existing_item.get('label', '')
+            current_label = item.get('label', '')
+            
+            if len(current_label) > len(existing_label):
+                # Replace with current item (has longer label)
+                seen_shape_ids[shape_id_set] = item
+                # Update in filtered_dl
+                for i, x in enumerate(filtered_dl):
+                    if frozenset(x.get('shape_id', [])) == shape_id_set:
+                        filtered_dl[i] = item
+                        break
+        else:
+            # New shape_id set
+            seen_shape_ids[shape_id_set] = item
+            filtered_dl.append(item)
     
-    # Create a mapping of shape_id -> label from individual_shape_labels
-    individual_shape_label_map = {}
-    for shape_label in individual_shape_labels:
-        individual_shape_label_map[shape_label['shape_id']] = shape_label['label']
+    dl = filtered_dl
     
     # Insert text sections as tree structures based on char indices
     # This re-arranges text sections within their parent shapes
     dl = basic.add_text_sections(dl, text_section_list)
     
-    # Insert table sections as tree structures based on cells
-    # This re-arranges table sections within their parent tables
-    # Pass the label map so overlaid shapes can get their labels
-    dl = basic.add_table_sections(dl, table_labels_list, individual_shape_label_map)
+    # Add table sections to the data list
+    # Overlaid shapes are already merged into shape_id
+    dl = basic.add_table_sections(dl, table_labels_list)
+    
+    # Step 4: Run generate_structure_main to arrange into tree based on spatial coordinates
+    # This arranges shapes and groups based on top, left, bottom, right
+    dl = structure_shapes.generate_structure_main(dl)
     
     # Add unlabeled individual shapes to groups where they are contained
-    dl = basic.add_unlabeled_shapes_to_groups(dl)
+    # dl = basic.add_unlabeled_shapes_to_groups(dl)
     
     # Remove individual shapes that don't belong to any group
     # (They've been copied into the tree structure where needed)
-    dl = basic.remove_ungrouped_individual_shapes(dl)
+    # dl = basic.remove_ungrouped_individual_shapes(dl)
     
     # Add metadata
     for x in dl:

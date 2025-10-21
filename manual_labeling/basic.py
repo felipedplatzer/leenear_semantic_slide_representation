@@ -107,65 +107,27 @@ def get_next_child_index_for_parent(sections_list, parent_index):
     return str(max_child + 1).zfill(2)
 
 def add_table_sections(dl, table_labels_list, individual_shape_label_map=None):
-    # Group into shape names (table shape IDs)
-    shape_names_with_tables = list(set([x['shape_name'] for x in table_labels_list]))
-    dl_new = dl.copy()
-    # For each table shape ID, get tree structure
-    for x in shape_names_with_tables:
-        # Get all sections in this table
-        sections_in_table = [y for y in table_labels_list if y['shape_name'] == x]
-        # Get tree structure
-        sections_in_table = structure_table.structure_table_sections(sections_in_table)
-        # Get parent shape
-        result = get_parent_shape(x, dl)
-        if result is None:
-            print(f"Warning: Could not find parent table for table section with shape_name={x}")
-            continue
-        parent_shape_i, parent_shape = result
-        if 'index' not in parent_shape:
-            print(f"Warning: Parent table {x} does not have an index")
-            continue
-        # Add prefix and handle overlaid shapes
-        sections_with_overlaid = []
-        for y in sections_in_table: 
-            y['index'] = parent_shape['index'] + '.' + y['index']
-            # Note: shape_id is already set as an array in main_gui.py
-            sections_with_overlaid.append(y)
-            
-            # If this section has overlaid shapes, add them as children
-            if 'overlaid_shapes' in y and y['overlaid_shapes']:
-                for overlaid_shape_id in y['overlaid_shapes']:
-                    # Find the original shape in dl_new to copy its attributes
-                    original_shape = None
-                    for shape in dl_new:
-                        if isinstance(shape.get('shape_id'), list) and overlaid_shape_id in shape['shape_id']:
-                            original_shape = shape
-                            break
-                        elif shape.get('shape_id') == overlaid_shape_id:
-                            original_shape = shape
-                            break
-                    
-                    if original_shape:
-                        # Create a copy of the shape as a child of this section
-                        child_shape = original_shape.copy()
-                        # Get next child index for this parent
-                        child_index = get_next_child_index_for_parent(sections_with_overlaid, y['index'])
-                        child_shape['index'] = y['index'] + '.' + child_index
-                        
-                        # Apply label from individual_shape_label_map if available
-                        if individual_shape_label_map:
-                            # Check if this shape_id has a label
-                            if overlaid_shape_id in individual_shape_label_map:
-                                child_shape['label'] = individual_shape_label_map[overlaid_shape_id]
-                        
-                        sections_with_overlaid.append(child_shape)
-                
-                # Remove overlaid_shapes attribute so it doesn't appear in CSV
-                del y['overlaid_shapes']
+    """
+    Add table sections to the data list. 
+    Overlaid_shapes should already be in shape_id (added in main_gui when creating sections).
+    Does not structure or assign indices - that's handled by generate_structure_main.
+    The shape_name field indicates which table each section belongs to.
+    """
+    # Process each table section
+    for section in table_labels_list:
+        # Remove overlaid_shapes attribute if it exists
+        # (overlaid shapes should already be in shape_id from main_gui)
+        if 'overlaid_shapes' in section:
+            del section['overlaid_shapes']
         
-        # Insert into array
-        dl_new[parent_shape_i:parent_shape_i] = sections_with_overlaid
-    return dl_new   
+        # Ensure shape_id is a list
+        if 'shape_id' in section and not isinstance(section['shape_id'], list):
+            section['shape_id'] = [section['shape_id']]
+        
+        # Add section to dl
+        dl.append(section)
+    
+    return dl   
 
 
 def is_shape_fully_contained(child_shape, parent_shape, tolerance=0):
