@@ -1,0 +1,56 @@
+[
+  {
+    "name": "KPIs",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-25-52_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
+    "slide_number": 4,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      2
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.0275,
+        0.1727,
+        0.9378,
+        0.7611
+      ]
+    ],
+    "color_rgb": [
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      ""
+    ]
+  },
+  {
+    "name": "KPIs",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-25-52_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
+    "slide_number": 4,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
+    "selection_type": "table_cols",
+    "shape_ids": 2,
+    "table_rows": "",
+    "table_cols": "1",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.0275,
+        0.1727,
+        0.1525,
+        0.7611
+      ]
+    ],
+    "color_rgb": [],
+    "text": []
+  }
+]

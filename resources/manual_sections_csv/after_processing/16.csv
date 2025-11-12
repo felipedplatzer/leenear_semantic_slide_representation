@@ -1,24 +1,0 @@
-test_index,index,label,shape_id,section_type,start_char,end_char,cells,text,top,left,right,bottom,width,height,slide_height,slide_width
-16,01,"Design element","[""1283""]",shape_group,,,"","",-0.01,312.54,720.0,33.84,407.46,33.85,405.0,720.0
-16,02,"Title","[""1286""]",shape_group,,,"","All Big 4 firms are present in the semiconductor audit space\, with EY and KPMG seeming to have a bigger presence.",39.34,36.0,688.35,63.5,652.35,24.17,405.0,720.0
-16,03,"Audit clients by firm","[""1287""\, ""1288""\, ""1289""\, ""1290""\, ""1291""]",shape_group,,,"","Deloitte\Arm\Marvell\TSMC\Winbond\\\
-\
-\
-KPMG\Applied Materials\ASM\GlobalFoundries\Infineon\
-\
-\
-EY\Advantest\Analog Devices\AMD\Intel\MediaTek\
-\
-\
-PwC\Amkor\ASML\Broadcom\Teradyne\
-\
-\
-Audit clients by firm1",93.27,28.36,683.99,279.49,655.63,186.22,405.0,720.0
-16,03.01,"Header","[""1291""]",shape_group,,,"","Audit clients by firm1",93.27,28.36,397.65,117.51,369.28,24.24,405.0,720.0
-16,03.02,"Deloitte clients","[""1287""]",shape_group,,,"","Deloitte\Arm\Marvell\TSMC\Winbond\\",119.5,36.0,189.59,279.49,153.59,159.99,405.0,720.0
-16,03.03,"EY client","[""1289""]",shape_group,,,"","EY\Advantest\Analog Devices\AMD\Intel\MediaTek",119.5,179.8,341.99,279.49,162.19,159.99,405.0,720.0
-16,03.04,"PwC clients","[""1290""]",shape_group,,,"","PwC\Amkor\ASML\Broadcom\Teradyne",119.5,375.2,528.79,279.49,153.59,159.99,405.0,720.0
-16,03.05,"KPMG clients","[""1288""]",shape_group,,,"","KPMG\Applied Materials\ASM\GlobalFoundries\Infineon",119.5,530.4,683.99,279.49,153.59,159.99,405.0,720.0
-16,04,"Footnote","[""1292""]",shape_group,,,"","1. Source: Companies’ 10k reports from latest fiscal year",372.55,65.45,687.0,389.51,621.54,16.96,405.0,720.0
-16,05,"Page number","[""1285""]",shape_group,,,"","1",373.3,36.0,79.2,387.0,43.2,13.7,405.0,720.0
-16,06,"Manifold logo","[""1284""]",shape_group,,,"","",373.3,642.28,696.19,384.72,53.91,11.42,405.0,720.0

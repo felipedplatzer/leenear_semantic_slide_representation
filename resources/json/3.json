@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Title",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-01-52_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
+    "slide_number": 1,
+    "selection_type": "shape",
+    "shape_ids": [
+      6
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        26.375118255615234,
+        18.801733016967773,
+        910.1248779296875,
+        43.20551300048828
+      ]
+    ],
+    "color_rgb": [
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "WakeMed – CSIC Data Quality Overview"
+    ]
+  }
+]

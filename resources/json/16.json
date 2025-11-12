@@ -1,0 +1,60 @@
+[
+  {
+    "name": "headers",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-23-42_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
+    "slide_number": 3,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      4,
+      8,
+      9
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.3508,
+        0.1835,
+        0.2921,
+        0.08
+      ],
+      [
+        0.6881,
+        0.1858,
+        0.2921,
+        0.08
+      ],
+      [
+        0.0228,
+        0.1858,
+        0.2921,
+        0.08
+      ]
+    ],
+    "color_rgb": [
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "Preventive maintenance",
+      "Other",
+      "Corrective maintenance"
+    ]
+  }
+]

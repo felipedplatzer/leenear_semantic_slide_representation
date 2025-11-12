@@ -1,43 +1,0 @@
-test_index,index,label,shape_id,start_char,end_char,text,top,left,right,bottom,width,height,slide_height,slide_width
-10,1,Design element,"[""465""]",,,nan,-0.01,312.54,720,33.84,407.46,33.85,405,720
-10,2,Header / chapter name,"[""470""\, ""471""]",,,nan,1.72,36,311,31.02,275,29.3,405,720
-10,2.01,Icon,"[""471""]",,,nan,1.72,36,65.3,31.02,29.3,29.3,405,720
-10,2.02,Header,"[""470""]",,,nan,8.8,68.87,311,24.2,242.13,15.4,405,720
-10,3,Title,"[""468""]",,,nan,39.34,36,687,63.5,651,24.17,405,720
-10,4,Semiconductor market shares by product type,"[""473""\, ""475""]",,,nan,74.33,29.11,363.52,370.26,334.41,295.93,405,720
-10,4.01,Header,"[""473""]",,,nan,74.33,29.11,345.6,115.53,316.49,41.2,405,720
-10,4.02,Chart - semiconductor market share by product type,"[""475""]",,,nan,119.51,36.52,363.52,370.26,327,250.75,405,720
-10,5,Product type descriptions,"[""472""\, ""474""]",,,nan,74.33,370.51,687,350.94,316.49,276.61,405,720
-10,5.01,Header,"[""474""]",,,nan,74.33,370.51,687,98.57,316.49,24.24,405,720
-10,5.02,Product type descriptions,"[""472""]",,,nan,112.17,372.58,686.99,350.94,314.41,238.77,405,720
-10,05.02.01,Logic,"[""472""]",0,113,"Logic: Main building blocks of digital circuits. They perform basic logical operations like AND\, OR\, NOT\, and XOR",,,,,,,405,720
-10,05.02.01.01,Header,"[""472""]",0,7,Logic: ,,,,,,,405,720
-10,05.02.01.02,Description,"[""472""]",7,113,"Main building blocks of digital circuits. They perform basic logical operations like AND\, OR\, NOT\, and XOR",,,,,,,405,720
-10,05.02.02,Memory,"[""472""]",113,220,"\Memory: Store data. Includes volatile memory (like RAM) and non-volatile memory (like flash memory and ROM",,,,,,,405,720
-10,05.02.02.01,Header,"[""472""]",113,122,"\Memory: ",,,,,,,405,720
-10,05.02.02.02,Description,"[""472""]",122,220,Store data. Includes volatile memory (like RAM) and non-volatile memory (like flash memory and ROM,,,,,,,405,720
-10,05.02.03,Analog,"[""472""]",221,327,"\Analog: Process analog signals. Used in audio amplification\, radio transmission\, and signal processing. \",,,,,,,405,720
-10,05.02.03.01,Header,"[""472""]",221,229,"\Analog:",,,,,,,405,720
-10,05.02.03.02,Description,"[""472""]",229,327," Process analog signals. Used in audio amplification\, radio transmission\, and signal processing. \",,,,,,,405,720
-10,05.02.04,Microprocessor Units (MPU),"[""472""]",327,460,"Microprocessor Units (MPU): Umbrella term that includes central processing units (CPUs)\, graphics processing units (GPUs)\, and others",,,,,,,405,720
-10,05.02.04.01,Header,"[""472""]",327,355,Microprocessor Units (MPU): ,,,,,,,405,720
-10,05.02.04.02,Description,"[""472""]",355,460,"Umbrella term that includes central processing units (CPUs)\, graphics processing units (GPUs)\, and others",,,,,,,405,720
-10,05.02.05,Opto,"[""472""]",460,570,"\Opto: Source\, detect\, and control light. Used in fiber-optic communications\, display technology\, and lighting",,,,,,,405,720
-10,05.02.05.01,Header,"[""472""]",460,466,"\Opto:",,,,,,,405,720
-10,05.02.05.02,Description,"[""472""]",466,570," Source\, detect\, and control light. Used in fiber-optic communications\, display technology\, and lighting",,,,,,,405,720
-10,05.02.06,Discretes,"[""472""]",570,697,"\Discretes: Individual semiconductor devices like diodes and thyristors. Used in power management\, switching\, and amplification",,,,,,,405,720
-10,05.02.06.01,Header,"[""472""]",570,582,"\Discretes: ",,,,,,,405,720
-10,05.02.06.02,Description,"[""472""]",582,697,"Individual semiconductor devices like diodes and thyristors. Used in power management\, switching\, and amplification",,,,,,,405,720
-10,05.02.07,Microcontroller Units (MCU),"[""472""]",697,819,"\Microcontroller Units (MCU): Similar to MPUs\, but don’t need external support chips to create a complete embedded system\",,,,,,,405,720
-10,05.02.07.01,Header,"[""472""]",697,727,"\Microcontroller Units (MCU): ",,,,,,,405,720
-10,05.02.07.02,Description,"[""472""]",727,819,"Similar to MPUs\, but don’t need external support chips to create a complete embedded system\
-",,,,,,,405,720
-10,05.02.08,Sensors,"[""472""]",819,916,"Sensors: Convert environmental variables such as temperature\, pressure\, into electrical signals \",,,,,,,405,720
-10,05.02.08.01,Header,"[""472""]",819,827,Sensors: ,,,,,,,405,720
-10,05.02.08.02,Description,"[""472""]",827,916," Convert environmental variables such as temperature\, pressure\, into electrical signals \",,,,,,,405,720
-10,05.02.09,Digital Signal Processors (DSP),"[""472""]",916,1089,"Digital Signal Processors (DSP): Specialized microprocessors designed to process digital signals. Used in audio and video processing\, telecommunications\, and control systems",,,,,,,405,720
-10,05.02.09.01,Header,"[""472""]",916,948,Digital Signal Processors (DSP):,,,,,,,405,720
-10,05.02.09.02,Description,"[""472""]",948,1089," Specialized microprocessors designed to process digital signals. Used in audio and video processing\, telecommunications\, and control systems",,,,,,,405,720
-10,6,Page number,"[""467""]",,,nan,370.26,36,79.2,383.96,43.2,13.7,405,720
-10,7,Footnote,"[""469""]",,,nan,370.26,56.22,687,387.22,630.78,16.96,405,720
-10,8,Manifold logo,"[""466""]",,,nan,373.3,642.28,696.19,384.72,53.91,11.42,405,720
