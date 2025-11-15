@@ -1,0 +1,34 @@
+[
+  {
+    "name": "title",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 8,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      4
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.05,
+        0.0971,
+        0.6958,
+        0.0533
+      ]
+    ],
+    "color_rgb": [
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "Market expected to grow at 7% - 15% over the next few years."
+    ]
+  }
+]

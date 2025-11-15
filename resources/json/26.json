@@ -1,23 +1,30 @@
 [
   {
-    "name": "Definitions",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-26-04_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 4,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
+    "name": "Carlo",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 2,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
     "selection_type": "shape",
     "shape_ids": [
-      2
+      127,
+      138
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.0275,
-        0.1727,
-        0.9378,
-        0.7611
+        0.6083,
+        0.3571,
+        0.0944,
+        0.0593
+      ],
+      [
+        0.6083,
+        0.4153,
+        0.1488,
+        0.0889
       ]
     ],
     "color_rgb": [
@@ -25,32 +32,16 @@
         255,
         255,
         255
+      ],
+      [
+        255,
+        255,
+        255
       ]
     ],
     "text": [
-      ""
+      "Carlo Sanchez\u000bDirector",
+      "Experienced healthcare consultant\rEx-BCG, UofC MBA"
     ]
-  },
-  {
-    "name": "Definitions",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-26-04_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 4,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
-    "selection_type": "table_cols",
-    "shape_ids": 2,
-    "table_rows": "",
-    "table_cols": "2",
-    "table_cells": "",
-    "bbox": [
-      [
-        0.18,
-        0.1727,
-        0.2491,
-        0.7611
-      ]
-    ],
-    "color_rgb": [],
-    "text": []
   }
 ]

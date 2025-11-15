@@ -1,0 +1,86 @@
+[
+  {
+    "name": "legend",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 20,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      48,
+      49,
+      50,
+      55,
+      72
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.124,
+        0.9508,
+        0.0374,
+        0.0
+      ],
+      [
+        0.1598,
+        0.9222,
+        0.2539,
+        0.0419
+      ],
+      [
+        0.3822,
+        0.9222,
+        0.2539,
+        0.0419
+      ],
+      [
+        0.124,
+        0.9362,
+        0.0374,
+        0.0
+      ],
+      [
+        0.3591,
+        0.9415,
+        0.0374,
+        0.0
+      ]
+    ],
+    "color_rgb": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "text": [
+      "",
+      "Information flow to / from outside",
+      "Information flow within Evergrain",
+      "",
+      ""
+    ]
+  }
+]

@@ -1,60 +1,17 @@
 [
   {
-    "name": "tables",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-24-25_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 3,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
+    "name": "pictures",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 2,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
     "selection_type": "shape",
-    "shape_ids": [
-      3,
-      12,
-      2
-    ],
+    "shape_ids": [],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
-    "bbox": [
-      [
-        0.3588,
-        0.2829,
-        0.2701,
-        0.1807
-      ],
-      [
-        0.6983,
-        0.2829,
-        0.2701,
-        0.5179
-      ],
-      [
-        0.0352,
-        0.2829,
-        0.2701,
-        0.1807
-      ]
-    ],
-    "color_rgb": [
-      [
-        255,
-        255,
-        255
-      ],
-      [
-        255,
-        255,
-        255
-      ],
-      [
-        255,
-        255,
-        255
-      ]
-    ],
-    "text": [
-      "",
-      "",
-      ""
-    ]
+    "bbox": [],
+    "color_rgb": [],
+    "text": []
   }
 ]

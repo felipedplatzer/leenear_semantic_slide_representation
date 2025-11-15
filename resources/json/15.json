@@ -1,23 +1,23 @@
 [
   {
-    "name": "note",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-23-35_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 2,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
+    "name": "template element",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 1,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
     "selection_type": "shape",
     "shape_ids": [
-      19
+      86
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.0348,
-        0.7102,
-        0.3299,
-        0.202
+        0.8332,
+        0.9162,
+        0.109,
+        0.0315
       ]
     ],
     "color_rgb": [
@@ -28,7 +28,7 @@
       ]
     ],
     "text": [
-      "Top 5 modalities (across all CSIC participants)\rPatient Monitoring Systems\rPatient Care and Exam\rInfusion Pumps\rRespiratory\rSurgery"
+      "Private & Confidential"
     ]
   }
 ]

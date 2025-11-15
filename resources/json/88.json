@@ -1,0 +1,47 @@
+[
+  {
+    "name": "callout",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 12,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      597,
+      563
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.8733,
+        0.2961,
+        0.0,
+        0.1718
+      ],
+      [
+        0.8834,
+        0.3372,
+        0.0785,
+        0.1067
+      ]
+    ],
+    "color_rgb": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "",
+      "Prioritized for further analysis"
+    ]
+  }
+]

@@ -1,23 +1,30 @@
 [
   {
-    "name": "KPIs",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-25-52_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 4,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
+    "name": "erich",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 2,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
     "selection_type": "shape",
     "shape_ids": [
-      2
+      145,
+      150
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.0275,
-        0.1727,
-        0.9378,
-        0.7611
+        0.4273,
+        0.3571,
+        0.0962,
+        0.0593
+      ],
+      [
+        0.4273,
+        0.4153,
+        0.1427,
+        0.0889
       ]
     ],
     "color_rgb": [
@@ -25,32 +32,16 @@
         255,
         255,
         255
+      ],
+      [
+        255,
+        255,
+        255
       ]
     ],
     "text": [
-      ""
+      "Erich Klotz\u000bSenior Director",
+      "16 years experience in healthcare tech architecture & strategy"
     ]
-  },
-  {
-    "name": "KPIs",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-25-52_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 4,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
-    "selection_type": "table_cols",
-    "shape_ids": 2,
-    "table_rows": "",
-    "table_cols": "1",
-    "table_cells": "",
-    "bbox": [
-      [
-        0.0275,
-        0.1727,
-        0.1525,
-        0.7611
-      ]
-    ],
-    "color_rgb": [],
-    "text": []
   }
 ]

@@ -1,45 +1,22 @@
 [
   {
-    "name": "headers",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-03-40_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 1,
-    "selection_type": "shape",
-    "shape_ids": [
-      8,
-      9
+    "name": "ALS symptoms",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-14-17-24-32_Stimuli draft.pptx",
+    "slide_number": 2,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.0475,
+        0.4243,
+        0.5028,
+        0.2481
+      ]
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
-    "bbox": [
-      [
-        26.375118255615234,
-        99.09677124023438,
-        222.91519165039062,
-        43.20551300048828
-      ],
-      [
-        363.645263671875,
-        100.33818817138672,
-        280.4520568847656,
-        43.20551300048828
-      ]
-    ],
-    "color_rgb": [
-      [
-        255,
-        255,
-        255
-      ],
-      [
-        255,
-        255,
-        255
-      ]
-    ],
-    "text": [
-      "Data volume",
-      "Work orders by year"
-    ]
+    "shape_ids": []
   }
 ]

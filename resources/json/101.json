@@ -1,0 +1,34 @@
+[
+  {
+    "name": "footnote",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 13,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      953
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.1019,
+        0.9533,
+        0.5793,
+        0.0237
+      ]
+    ],
+    "color_rgb": [
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "Source: Pitchbook. Startups defined as companies founded in 2017 or later. Only deals in 2017 or later are included."
+    ]
+  }
+]

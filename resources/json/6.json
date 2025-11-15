@@ -1,58 +1,22 @@
 [
   {
-    "name": "headers",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-03-56_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 3,
-    "selection_type": "shape",
-    "shape_ids": [
-      4,
-      8,
-      9
+    "name": "als prognosis",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-14-17-24-41_Stimuli draft.pptx",
+    "slide_number": 2,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.0503,
+        0.6873,
+        0.4483,
+        0.2457
+      ]
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
-    "bbox": [
-      [
-        336.7200012207031,
-        99.09677124023438,
-        280.44842529296875,
-        43.20551300048828
-      ],
-      [
-        660.5864868164062,
-        100.33818817138672,
-        280.4520568847656,
-        43.20551300048828
-      ],
-      [
-        21.876693725585938,
-        100.33818817138672,
-        280.4520568847656,
-        43.20551300048828
-      ]
-    ],
-    "color_rgb": [
-      [
-        255,
-        255,
-        255
-      ],
-      [
-        255,
-        255,
-        255
-      ],
-      [
-        255,
-        255,
-        255
-      ]
-    ],
-    "text": [
-      "Preventive maintenance",
-      "Other",
-      "Corrective maintenance"
-    ]
+    "shape_ids": []
   }
 ]

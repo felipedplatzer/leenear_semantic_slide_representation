@@ -1,0 +1,34 @@
+[
+  {
+    "name": "deloitte clients",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 16,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      1287
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.05,
+        0.2951,
+        0.0889,
+        0.2489
+      ]
+    ],
+    "color_rgb": [
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "Deloitte\rArm\rMarvell\rTSMC\rWinbond"
+    ]
+  }
+]

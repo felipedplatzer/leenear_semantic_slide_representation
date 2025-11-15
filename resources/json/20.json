@@ -1,47 +1,28 @@
 [
   {
-    "name": "corrective maintenance",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-24-32_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 3,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
-    "selection_type": "shape",
-    "shape_ids": [
-      2,
-      9
+    "name": "names",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 2,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.0894,
+        0.3499,
+        0.8757,
+        0.0422
+      ],
+      [
+        0.0894,
+        0.7097,
+        0.8771,
+        0.0447
+      ]
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
-    "bbox": [
-      [
-        0.0352,
-        0.2829,
-        0.2701,
-        0.1807
-      ],
-      [
-        0.0228,
-        0.1858,
-        0.2921,
-        0.08
-      ]
-    ],
-    "color_rgb": [
-      [
-        255,
-        255,
-        255
-      ],
-      [
-        255,
-        255,
-        255
-      ]
-    ],
-    "text": [
-      "",
-      "Corrective maintenance"
-    ]
+    "shape_ids": []
   }
 ]

@@ -1,0 +1,47 @@
+[
+  {
+    "name": "james zuercher",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 2,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      132,
+      141
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.7881,
+        0.7179,
+        0.1076,
+        0.0593
+      ],
+      [
+        0.7881,
+        0.7804,
+        0.1488,
+        0.0889
+      ]
+    ],
+    "color_rgb": [
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "James Zuercher \u000bSenior Associate",
+      "Experienced healthcare consultant\rUofC MBA"
+    ]
+  }
+]

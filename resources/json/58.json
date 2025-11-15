@@ -1,0 +1,34 @@
+[
+  {
+    "name": "IDM's",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 7,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      335
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.05,
+        0.7111,
+        0.4052,
+        0.1648
+      ]
+    ],
+    "color_rgb": [
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "Integrated device manufacturers (IDMs)"
+    ]
+  }
+]

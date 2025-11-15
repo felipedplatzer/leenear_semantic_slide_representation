@@ -1,42 +1,96 @@
 [
   {
-    "name": "tables",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-04-15_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 3,
+    "name": "treatments",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-14-17-25-52_Stimuli draft.pptx",
+    "slide_number": 4,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
     "selection_type": "shape",
     "shape_ids": [
-      3,
-      12,
-      2
+      57,
+      58,
+      69,
+      74,
+      71,
+      75,
+      8,
+      11,
+      12
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        344.4556579589844,
-        152.77621459960938,
-        259.2684326171875,
-        97.57504272460938
+        0.1277,
+        0.5354,
+        0.3617,
+        0.0579
       ],
       [
-        670.342529296875,
-        152.77621459960938,
-        259.2684326171875,
-        279.6663818359375
+        0.1277,
+        0.603,
+        0.3617,
+        0.0726
       ],
       [
-        33.812835693359375,
-        152.77621459960938,
-        259.2684326171875,
-        97.57504272460938
+        0.1282,
+        0.4516,
+        0.3827,
+        0.0774
+      ],
+      [
+        0.0596,
+        0.42,
+        0.1875,
+        0.0267
+      ],
+      [
+        0.2723,
+        0.7335,
+        0.503,
+        0.08
+      ],
+      [
+        0.3944,
+        0.863,
+        0.5476,
+        0.08
+      ],
+      [
+        0.0515,
+        0.684,
+        0.4325,
+        0.04
+      ],
+      [
+        0.2732,
+        0.8176,
+        0.4975,
+        0.04
+      ],
+      [
+        0.3969,
+        0.9463,
+        0.5457,
+        0.04
       ]
     ],
     "color_rgb": [
       [
-        255,
-        255,
-        255
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
       ],
       [
         255,
@@ -47,12 +101,38 @@
         255,
         255,
         255
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
       ]
     ],
     "text": [
-      "",
-      "",
-      ""
+      "Edaravone (Radicava® and Radicava ORS®) can slow the decline in muscle functioning.",
+      "Tofersen (Qalsody®) can decrease some damage to neurons. This may help if provider finds a genetic change on the SOD1 gene.",
+      "Riluzole* (Rilutek®, Exservan® and Tiglutik®) may reduce damage to motor neurons. It may extend survival by a few months.",
+      "ALS disease-modifying drugs：",
+      "Physical and Occupational Therapy\rNutritional Support: dietitian involvement, feeding support\rSpeech and Communication Support: speech therapy, assistive communication devices",
+      "Airway clearance: mechanical cough assist, suction devices.\rMonitoring: regular FVC/SNIP assessment and early NIV initiation.\rVentilatory support: noninvasive ventilation (NIV), mechanical ventilation as disease progresses.",
+      "Medication",
+      "Rehabilitative therapy",
+      "Breathing support"
     ]
   }
 ]

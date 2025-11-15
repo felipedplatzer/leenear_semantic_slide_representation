@@ -1,0 +1,22 @@
+[
+  {
+    "name": "dollar numbers",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 15,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.7444,
+        0.2531,
+        0.2346,
+        0.5236
+      ]
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "shape_ids": []
+  }
+]

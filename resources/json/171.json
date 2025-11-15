@@ -1,0 +1,22 @@
+[
+  {
+    "name": "average scores",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 17,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.2025,
+        0.3052,
+        0.0573,
+        0.5385
+      ]
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "shape_ids": []
+  }
+]

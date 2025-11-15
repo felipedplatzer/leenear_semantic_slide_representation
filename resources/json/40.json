@@ -1,0 +1,22 @@
+[
+  {
+    "name": "bios",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 6,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.088,
+        0.4715,
+        0.8883,
+        0.3027
+      ]
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "shape_ids": []
+  }
+]

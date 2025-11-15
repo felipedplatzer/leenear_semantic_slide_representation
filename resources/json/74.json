@@ -1,0 +1,47 @@
+[
+  {
+    "name": "product type descriptions",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 9,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      472,
+      474
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.5462,
+        0.2858,
+        0.4,
+        0.5659
+      ],
+      [
+        0.5246,
+        0.1924,
+        0.2134,
+        0.0415
+      ]
+    ],
+    "color_rgb": [
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "Logic: Main building blocks of digital circuits. They perform basic logical operations like AND, OR, NOT, and XOR\rMemory: Store data. Includes volatile memory (like RAM) and non-volatile memory (like flash memory and ROM)\rAnalog: Process analog signals. Used in audio amplification, radio transmission, and signal processing. \rMicroprocessor Units (MPU): Umbrella term that includes central processing units (CPUs), graphics processing units (GPUs), and others\rOpto: Source, detect, and control light. Used in fiber-optic communications, display technology, and lighting\rDiscretes: Individual semiconductor devices like diodes and thyristors. Used in power management, switching, and amplification\rMicrocontroller Units (MCU): Similar to MPUs, but don’t need external support chips to create a complete embedded system\rSensors: Convert environmental variables such as temperature, pressure, into electrical signals \rDigital Signal Processors (DSP): Specialized microprocessors designed to process digital signals. Used in audio and video processing, telecommunications, and control systems",
+      "Product type description"
+    ]
+  }
+]

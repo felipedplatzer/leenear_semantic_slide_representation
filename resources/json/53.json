@@ -1,0 +1,60 @@
+[
+  {
+    "name": "manufacturing suppliers",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 7,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "shape",
+    "shape_ids": [
+      322,
+      338,
+      339
+    ],
+    "table_rows": "",
+    "table_cols": "",
+    "table_cells": "",
+    "bbox": [
+      [
+        0.7427,
+        0.2529,
+        0.2073,
+        0.0639
+      ],
+      [
+        0.7396,
+        0.3444,
+        0.1,
+        0.5352
+      ],
+      [
+        0.85,
+        0.3444,
+        0.1,
+        0.5352
+      ]
+    ],
+    "color_rgb": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "Manufacturing",
+      "Raw materials",
+      "Equipment"
+    ]
+  }
+]

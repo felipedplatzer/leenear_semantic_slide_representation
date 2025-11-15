@@ -3,6 +3,7 @@ from tkinter import ttk, messagebox
 import win32com.client
 import os
 import json
+import tempfile
 from datetime import datetime
 from PIL import ImageGrab
 import pythoncom
@@ -372,7 +373,7 @@ class PowerPointShapeCaptureApp:
     def __init__(self, root):
         self.root = root
         self.root.title("PowerPoint Shape Capture")
-        self.root.geometry("700x600")
+        self.root.geometry("800x700")
         
         # Initialize PowerPoint connection
         try:
@@ -387,9 +388,13 @@ class PowerPointShapeCaptureApp:
         main_frame = ttk.Frame(root, padding=10)
         main_frame.pack(fill=tk.BOTH, expand=True)
         
-        # Info label for current presentation/slide/selection
-        self.info_label = ttk.Label(main_frame, text="", foreground="gray", wraplength=680, justify=tk.LEFT)
-        self.info_label.pack(fill=tk.X, pady=(0, 10))
+        # File label
+        self.file_label = ttk.Label(main_frame, text="File: ", foreground="gray", wraplength=780, justify=tk.LEFT)
+        self.file_label.pack(fill=tk.X, pady=(0, 5))
+        
+        # Slide number label
+        self.slide_label = ttk.Label(main_frame, text="Slide number: ", foreground="gray", justify=tk.LEFT)
+        self.slide_label.pack(fill=tk.X, pady=(0, 10))
         
         # Name field
         name_frame = ttk.Frame(main_frame)
@@ -399,13 +404,57 @@ class PowerPointShapeCaptureApp:
         self.name_entry = ttk.Entry(name_frame, width=40)
         self.name_entry.pack(side=tk.LEFT, padx=5)
         
-        # Table cells section
-        section_frame = ttk.LabelFrame(main_frame, text="Table Cells", padding=10)
-        section_frame.pack(fill=tk.BOTH, expand=True, pady=10)
+        # Radio button for selection mode
+        radio_frame = ttk.Frame(main_frame)
+        radio_frame.pack(fill=tk.X, pady=10)
+        
+        self.selection_mode = tk.StringVar(value="shapes")
+        
+        # Select shapes radio button with label on same line
+        shapes_frame = ttk.Frame(radio_frame)
+        shapes_frame.pack(fill=tk.X, pady=2)
+        
+        self.shapes_radio = ttk.Radiobutton(shapes_frame, text="Select shapes", 
+                                           variable=self.selection_mode, 
+                                           value="shapes", 
+                                           command=self.on_mode_change)
+        self.shapes_radio.pack(side=tk.LEFT, padx=5)
+        
+        # Label for selected shapes (shown next to "Select shapes" radio button)
+        self.selected_shapes_label = ttk.Label(shapes_frame, text="", foreground="blue")
+        self.selected_shapes_label.pack(side=tk.LEFT, padx=5)
+        
+        # Drag rectangle radio button
+        self.rectangle_radio = ttk.Radiobutton(radio_frame, text="Drag rectangle", 
+                                              variable=self.selection_mode, 
+                                              value="rectangle", 
+                                              command=self.on_mode_change)
+        self.rectangle_radio.pack(fill=tk.X, padx=5, pady=2)
+        
+        # Table radio button with label on same line
+        table_frame = ttk.Frame(radio_frame)
+        table_frame.pack(fill=tk.X, pady=2)
+        
+        self.table_radio = ttk.Radiobutton(table_frame, text="Select table rows/cols/cells", 
+                                          variable=self.selection_mode, 
+                                          value="table", 
+                                          command=self.on_mode_change)
+        self.table_radio.pack(side=tk.LEFT, padx=5)
+        
+        # Label for selected table (shown next to "Select table" radio button)
+        self.selected_table_label = ttk.Label(table_frame, text="", foreground="blue")
+        self.selected_table_label.pack(side=tk.LEFT, padx=5)
+        
+        # Container for mode-specific content
+        self.mode_content_frame = ttk.Frame(main_frame)
+        self.mode_content_frame.pack(fill=tk.BOTH, expand=True, pady=10)
+        
+        # Table cells section (hidden by default)
+        self.table_section_frame = ttk.LabelFrame(self.mode_content_frame, text="Table Cells", padding=10)
         
         # Scrollable frame for table sections
-        canvas = tk.Canvas(section_frame, height=350)
-        scrollbar = ttk.Scrollbar(section_frame, orient="vertical", command=canvas.yview)
+        canvas = tk.Canvas(self.table_section_frame, height=300)
+        scrollbar = ttk.Scrollbar(self.table_section_frame, orient="vertical", command=canvas.yview)
         self.scrollable_frame = ttk.Frame(canvas)
         
         self.scrollable_frame.bind(
@@ -420,7 +469,7 @@ class PowerPointShapeCaptureApp:
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         
         # Add section button
-        self.add_section_btn = ttk.Button(section_frame, text="Add Section", 
+        self.add_section_btn = ttk.Button(self.table_section_frame, text="Add Section", 
                                           command=self.add_table_section)
         self.add_section_btn.pack(pady=5)
         
@@ -429,6 +478,35 @@ class PowerPointShapeCaptureApp:
         
         # Add initial section
         self.add_table_section()
+        
+        # Drag rectangle section (hidden by default)
+        self.rectangle_section_frame = ttk.LabelFrame(self.mode_content_frame, text="Drag Rectangle", padding=10)
+        
+        # Instructions label
+        instruction_text = "Drag rectangles on top of the image. Once you're done with one rectangle, drag the next one"
+        ttk.Label(self.rectangle_section_frame, text=instruction_text, wraplength=760, justify=tk.LEFT).pack(fill=tk.X, pady=(0, 10))
+        
+        # Canvas for slide image with rectangles
+        self.rect_canvas = tk.Canvas(self.rectangle_section_frame, bg="white", height=400)
+        self.rect_canvas.pack(fill=tk.BOTH, expand=True, pady=5)
+        
+        # Bind mouse events for drawing rectangles
+        self.rect_canvas.bind("<ButtonPress-1>", self.on_rect_press)
+        self.rect_canvas.bind("<B1-Motion>", self.on_rect_drag)
+        self.rect_canvas.bind("<ButtonRelease-1>", self.on_rect_release)
+        
+        # Variables for rectangle drawing
+        self.rect_start_x = None
+        self.rect_start_y = None
+        self.current_rect = None
+        self.rectangles = []  # List of drawn rectangle IDs
+        self.rectangle_bboxes = []  # List of bounding boxes in relative coordinates
+        self.slide_image = None
+        self.canvas_image_id = None
+        
+        # Clear selections button
+        ttk.Button(self.rectangle_section_frame, text="Clear Selections", 
+                  command=self.clear_rectangles).pack(pady=5)
         
         # Buttons frame
         button_frame = ttk.Frame(main_frame)
@@ -452,6 +530,196 @@ class PowerPointShapeCaptureApp:
         self.last_selection_info = ""
         self.update_info_label()
         self.poll_selection_changes()
+        
+        # Initialize mode display
+        self.on_mode_change()
+    
+    def on_mode_change(self):
+        """Handle radio button mode change"""
+        mode = self.selection_mode.get()
+        
+        # Hide all sections first
+        self.table_section_frame.pack_forget()
+        self.rectangle_section_frame.pack_forget()
+        
+        # Clear labels for non-active modes
+        if mode != "shapes":
+            self.selected_shapes_label.config(text="")
+        if mode != "table":
+            self.selected_table_label.config(text="")
+        
+        # Show appropriate section
+        if mode == "shapes":
+            # Update selected shapes label
+            self.update_selected_shapes_label()
+        elif mode == "table":
+            self.table_section_frame.pack(fill=tk.BOTH, expand=True)
+            # Update selected table label
+            self.update_selected_table_label()
+        elif mode == "rectangle":
+            self.rectangle_section_frame.pack(fill=tk.BOTH, expand=True)
+            self.load_slide_image()
+    
+    def update_selected_shapes_label(self):
+        """Update the label showing selected shape IDs"""
+        try:
+            if self.ppt.Presentations.Count == 0:
+                self.selected_shapes_label.config(text="")
+                return
+            
+            selection = self.ppt.ActiveWindow.Selection
+            if selection.Type == 2:  # ppSelectionShapes = 2
+                shapes = selection.ShapeRange
+                shape_ids = [str(shape.Id) for shape in shapes]
+                if shape_ids:
+                    self.selected_shapes_label.config(text=f"Selected shapes: {', '.join(shape_ids)}")
+                else:
+                    self.selected_shapes_label.config(text="")
+            else:
+                self.selected_shapes_label.config(text="")
+        except:
+            self.selected_shapes_label.config(text="")
+    
+    def update_selected_table_label(self):
+        """Update the label showing selected table ID or error message"""
+        try:
+            if self.ppt.Presentations.Count == 0:
+                self.selected_table_label.config(text="ERROR: PLEASE SELECT A TABLE", foreground="red")
+                return
+            
+            selection = self.ppt.ActiveWindow.Selection
+            if selection.Type == 2:  # ppSelectionShapes = 2
+                shapes = selection.ShapeRange
+                # Check if any selected shape is a table
+                for shape in shapes:
+                    if shape.HasTable:
+                        self.selected_table_label.config(text=f"Table ID: {shape.Id}", foreground="blue")
+                        return
+                
+                # No table found in selection
+                self.selected_table_label.config(text="ERROR: PLEASE SELECT A TABLE", foreground="red")
+            else:
+                self.selected_table_label.config(text="ERROR: PLEASE SELECT A TABLE", foreground="red")
+        except:
+            self.selected_table_label.config(text="ERROR: PLEASE SELECT A TABLE", foreground="red")
+    
+    def load_slide_image(self):
+        """Load the current slide image into the canvas"""
+        try:
+            if self.ppt.Presentations.Count == 0:
+                return
+            
+            presentation = self.ppt.ActivePresentation
+            slide = self.ppt.ActiveWindow.View.Slide
+            
+            # Get slide dimensions
+            self.slide_width_pts = presentation.PageSetup.SlideWidth
+            self.slide_height_pts = presentation.PageSetup.SlideHeight
+            
+            # Export slide to temporary image
+            temp_img = tempfile.NamedTemporaryFile(suffix='.png', delete=False)
+            temp_path = temp_img.name
+            temp_img.close()
+            
+            slide.Export(temp_path, "PNG")
+            
+            # Load image
+            from PIL import Image, ImageTk
+            img = Image.open(temp_path)
+            
+            # Calculate scaling to fit canvas
+            canvas_width = self.rect_canvas.winfo_width()
+            canvas_height = self.rect_canvas.winfo_height()
+            
+            # Use canvas size or default if not yet rendered
+            if canvas_width <= 1:
+                canvas_width = 760
+            if canvas_height <= 1:
+                canvas_height = 400
+            
+            # Calculate scale to fit
+            scale_x = canvas_width / img.width
+            scale_y = canvas_height / img.height
+            self.image_scale = min(scale_x, scale_y, 1.0)  # Don't scale up
+            
+            new_width = int(img.width * self.image_scale)
+            new_height = int(img.height * self.image_scale)
+            
+            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            self.slide_image = ImageTk.PhotoImage(img)
+            
+            # Clear canvas and display image
+            self.rect_canvas.delete("all")
+            self.canvas_image_id = self.rect_canvas.create_image(0, 0, anchor=tk.NW, image=self.slide_image)
+            
+            # Store image dimensions for coordinate calculations
+            self.image_width = new_width
+            self.image_height = new_height
+            
+            # Clean up temp file
+            try:
+                os.unlink(temp_path)
+            except:
+                pass
+                
+        except Exception as e:
+            print(f"Error loading slide image: {str(e)}")
+    
+    def on_rect_press(self, event):
+        """Handle mouse press for rectangle drawing"""
+        self.rect_start_x = event.x
+        self.rect_start_y = event.y
+        
+        # Create a new rectangle
+        self.current_rect = self.rect_canvas.create_rectangle(
+            self.rect_start_x, self.rect_start_y, 
+            self.rect_start_x, self.rect_start_y,
+            outline='red', width=2, fill='yellow', stipple='gray25'
+        )
+    
+    def on_rect_drag(self, event):
+        """Handle mouse drag for rectangle drawing"""
+        if self.current_rect:
+            # Update rectangle coordinates
+            self.rect_canvas.coords(self.current_rect, 
+                                   self.rect_start_x, self.rect_start_y,
+                                   event.x, event.y)
+    
+    def on_rect_release(self, event):
+        """Handle mouse release for rectangle drawing"""
+        if self.current_rect:
+            # Get final coordinates
+            x1 = min(self.rect_start_x, event.x)
+            y1 = min(self.rect_start_y, event.y)
+            x2 = max(self.rect_start_x, event.x)
+            y2 = max(self.rect_start_y, event.y)
+            
+            # Update rectangle to final position
+            self.rect_canvas.coords(self.current_rect, x1, y1, x2, y2)
+            
+            # Store rectangle
+            self.rectangles.append(self.current_rect)
+            
+            # Calculate relative coordinates (relative to the image on canvas)
+            if hasattr(self, 'image_width') and hasattr(self, 'image_height'):
+                rel_x = x1 / self.image_width
+                rel_y = y1 / self.image_height
+                rel_w = (x2 - x1) / self.image_width
+                rel_h = (y2 - y1) / self.image_height
+                
+                # Round to 4 decimal places
+                bbox = [round(rel_x, 4), round(rel_y, 4), round(rel_w, 4), round(rel_h, 4)]
+                self.rectangle_bboxes.append(bbox)
+            
+            # Reset for next rectangle
+            self.current_rect = None
+    
+    def clear_rectangles(self):
+        """Clear all drawn rectangles"""
+        for rect in self.rectangles:
+            self.rect_canvas.delete(rect)
+        self.rectangles.clear()
+        self.rectangle_bboxes.clear()
     
     def add_table_section(self):
         """Add a new table section"""
@@ -469,10 +737,11 @@ class PowerPointShapeCaptureApp:
             pass  # Add button is always visible
     
     def update_info_label(self):
-        """Update the info label with current presentation, slide, and selection"""
+        """Update the file and slide labels with current presentation info"""
         try:
             if self.ppt.Presentations.Count == 0:
-                self.info_label.config(text="No presentation open")
+                self.file_label.config(text="File: No presentation open")
+                self.slide_label.config(text="Slide number: ")
                 return
             
             presentation = self.ppt.ActivePresentation
@@ -481,24 +750,22 @@ class PowerPointShapeCaptureApp:
             
             # Get presentation path (truncate if too long)
             pres_path = presentation.FullName
-            if len(pres_path) > 60:
-                pres_path = "..." + pres_path[-57:]
+            if len(pres_path) > 100:
+                pres_path = "..." + pres_path[-97:]
             
-            info_text = f"File: {pres_path} | Slide: {slide_number}"
+            self.file_label.config(text=f"File: {pres_path}")
+            self.slide_label.config(text=f"Slide number: {slide_number}")
             
-            # Get selected shapes
-            selection = self.ppt.ActiveWindow.Selection
-            if selection.Type == 2:  # ppSelectionShapes = 2
-                shapes = selection.ShapeRange
-                shape_ids = [shape.Id for shape in shapes]
-                info_text += f" | Selected shapes: {shape_ids}"
-            else:
-                info_text += " | No shapes selected"
-            
-            self.info_label.config(text=info_text)
+            # Update mode-specific labels
+            mode = self.selection_mode.get()
+            if mode == "shapes":
+                self.update_selected_shapes_label()
+            elif mode == "table":
+                self.update_selected_table_label()
             
         except Exception as e:
-            self.info_label.config(text=f"Error: {str(e)}")
+            self.file_label.config(text=f"File: Error: {str(e)}")
+            self.slide_label.config(text="Slide number: ")
     
     def poll_selection_changes(self):
         """Poll for selection changes every 500ms"""
@@ -531,6 +798,9 @@ class PowerPointShapeCaptureApp:
         """Clear all form inputs"""
         self.name_entry.delete(0, tk.END)
         
+        # Reset to shapes mode
+        self.selection_mode.set("shapes")
+        
         # Remove all table sections
         for section in list(self.table_sections):
             section.destroy()
@@ -538,6 +808,12 @@ class PowerPointShapeCaptureApp:
         
         # Add one empty section back
         self.add_table_section()
+        
+        # Clear rectangles
+        self.clear_rectangles()
+        
+        # Update mode display
+        self.on_mode_change()
     
     def show_status_message(self, message, duration=1000):
         """Show a temporary status message"""
@@ -708,212 +984,239 @@ class PowerPointShapeCaptureApp:
             img_path = os.path.join(img_dir, f"{file_id}.png")
             self.capture_slide_screenshot(slide, img_path)
             
-            # Collect data
+            # Collect data based on selection mode
             json_data = []
+            mode = self.selection_mode.get()
             
-            # Get selected shapes
-            selection = self.ppt.ActiveWindow.Selection
-            if selection.Type == 2:  # ppSelectionShapes = 2
-                shapes = selection.ShapeRange
-                
-                # Extract shape data
-                shape_ids = []
-                bboxes = []
-                colors = []
-                texts = []
-                
-                for shape in shapes:
-                    # Check if shape is invisible (white/transparent fill and outline)
-                    shape_invisible = self.is_shape_invisible(shape)
+            if mode == "shapes":
+                # Get selected shapes
+                selection = self.ppt.ActiveWindow.Selection
+                if selection.Type == 2:  # ppSelectionShapes = 2
+                    shapes = selection.ShapeRange
                     
-                    if shape_invisible:
-                        # Check if text is visible
-                        text_visible = self.is_text_visible(shape)
+                    # Extract shape data
+                    shape_ids = []
+                    bboxes = []
+                    colors = []
+                    texts = []
+                    
+                    for shape in shapes:
+                        # Check if shape is invisible (white/transparent fill and outline)
+                        shape_invisible = self.is_shape_invisible(shape)
                         
-                        if not text_visible:
-                            # Skip this shape entirely
-                            continue
-                        
-                        # Use text bounding box instead of shape bounding box
-                        try:
-                            text_range = shape.TextFrame.TextRange
-                            text_left = text_range.BoundLeft
-                            text_top = text_range.BoundTop
-                            text_width = text_range.BoundWidth
-                            text_height = text_range.BoundHeight
-                            abs_bbox = [text_left, text_top, text_width, text_height]
-                        except:
-                            # Fallback to shape bounds if text bounds fail
+                        if shape_invisible:
+                            # Check if text is visible
+                            text_visible = self.is_text_visible(shape)
+                            
+                            if not text_visible:
+                                # Skip this shape entirely
+                                continue
+                            
+                            # Use text bounding box instead of shape bounding box
+                            try:
+                                text_range = shape.TextFrame.TextRange
+                                text_left = text_range.BoundLeft
+                                text_top = text_range.BoundTop
+                                text_width = text_range.BoundWidth
+                                text_height = text_range.BoundHeight
+                                abs_bbox = [text_left, text_top, text_width, text_height]
+                            except:
+                                # Fallback to shape bounds if text bounds fail
+                                abs_bbox = [shape.Left, shape.Top, shape.Width, shape.Height]
+                        else:
+                            # Use normal shape bounding box
                             abs_bbox = [shape.Left, shape.Top, shape.Width, shape.Height]
-                    else:
-                        # Use normal shape bounding box
-                        abs_bbox = [shape.Left, shape.Top, shape.Width, shape.Height]
-                    
-                    shape_ids.append(shape.Id)
-                    
-                    # Convert to relative coordinates
-                    rel_bbox = self.bbox_to_relative(abs_bbox, slide_width, slide_height)
-                    bboxes.append(rel_bbox)
-                    
-                    # Color (RGB)
-                    try:
-                        if shape.Fill.ForeColor.Type == 1:  # msoColorTypeRGB = 1
-                            rgb = shape.Fill.ForeColor.RGB
-                            # RGB is stored as BGR in COM, need to convert
-                            r = rgb & 0xFF
-                            g = (rgb >> 8) & 0xFF
-                            b = (rgb >> 16) & 0xFF
-                            colors.append([r, g, b])
-                        else:
+                        
+                        shape_ids.append(shape.Id)
+                        
+                        # Convert to relative coordinates
+                        rel_bbox = self.bbox_to_relative(abs_bbox, slide_width, slide_height)
+                        bboxes.append(rel_bbox)
+                        
+                        # Color (RGB)
+                        try:
+                            if shape.Fill.ForeColor.Type == 1:  # msoColorTypeRGB = 1
+                                rgb = shape.Fill.ForeColor.RGB
+                                # RGB is stored as BGR in COM, need to convert
+                                r = rgb & 0xFF
+                                g = (rgb >> 8) & 0xFF
+                                b = (rgb >> 16) & 0xFF
+                                colors.append([r, g, b])
+                            else:
+                                colors.append([0, 0, 0])
+                        except:
                             colors.append([0, 0, 0])
-                    except:
-                        colors.append([0, 0, 0])
-                    
-                    # Text
-                    try:
-                        if shape.HasTextFrame:
-                            text = shape.TextFrame.TextRange.Text.strip()
-                            texts.append(text)
-                        else:
+                        
+                        # Text
+                        try:
+                            if shape.HasTextFrame:
+                                text = shape.TextFrame.TextRange.Text.strip()
+                                texts.append(text)
+                            else:
+                                texts.append("")
+                        except:
                             texts.append("")
-                    except:
-                        texts.append("")
+                    
+                    # Add shapes data to JSON
+                    shapes_data = {
+                        "name": self.name_entry.get().strip(),
+                        "path": presentation_path,
+                        "slide_number": slide_number,
+                        "slide_width": slide_width,
+                        "slide_height": slide_height,
+                        "selection_type": "shape",
+                        "shape_ids": shape_ids,
+                        "table_rows": "",
+                        "table_cols": "",
+                        "table_cells": "",
+                        "bbox": bboxes,
+                        "color_rgb": colors,
+                        "text": texts
+                    }
+                    json_data.append(shapes_data)
+                else:
+                    messagebox.showwarning("Warning", "No shapes selected")
+                    return
+            
+            elif mode == "table":
+                # Get table data from sections
+                for section in self.table_sections:
+                    section_data = section.get_data()
+                    if not section_data:
+                        continue
+                    
+                    table_id = int(section_data["table_id"])
+                    values = section_data["values"]
+                    section_type = section_data["type"]
+                    
+                    # Find the table shape
+                    table_shape = None
+                    for shape in slide.Shapes:
+                        if shape.Id == table_id and shape.HasTable:
+                            table_shape = shape
+                            break
+                    
+                    if not table_shape:
+                        messagebox.showwarning("Warning", f"Table ID {table_id} not found")
+                        continue
+                    
+                    table = table_shape.Table
+                    
+                    # Extract bboxes
+                    bboxes = []
+                    
+                    if section_type == "cells":
+                        for cell_ref in values:
+                            parts = cell_ref.split('.')
+                            row_idx = int(parts[0])
+                            col_idx = int(parts[1])
+                            
+                            cell = table.Cell(row_idx, col_idx)
+                            abs_bbox = [cell.Shape.Left, cell.Shape.Top, 
+                                   cell.Shape.Width, cell.Shape.Height]
+                            rel_bbox = self.bbox_to_relative(abs_bbox, slide_width, slide_height)
+                            bboxes.append(rel_bbox)
+                        
+                        table_data = {
+                            "name": self.name_entry.get().strip(),
+                            "path": presentation_path,
+                            "slide_number": slide_number,
+                            "slide_width": slide_width,
+                            "slide_height": slide_height,
+                            "selection_type": "table_cells",
+                            "shape_ids": table_id,
+                            "table_rows": "",
+                            "table_cols": "",
+                            "table_cells": ",".join(values),
+                            "bbox": bboxes,
+                            "color_rgb": [],
+                            "text": []
+                        }
+                    
+                    elif section_type == "rows":
+                        for row_idx in values:
+                            # Get bounding box of entire row
+                            first_cell = table.Cell(row_idx, 1)
+                            last_cell = table.Cell(row_idx, table.Columns.Count)
+                            
+                            left = first_cell.Shape.Left
+                            top = first_cell.Shape.Top
+                            width = (last_cell.Shape.Left + last_cell.Shape.Width) - left
+                            height = first_cell.Shape.Height
+                            
+                            abs_bbox = [left, top, width, height]
+                            rel_bbox = self.bbox_to_relative(abs_bbox, slide_width, slide_height)
+                            bboxes.append(rel_bbox)
+                        
+                        table_data = {
+                            "name": self.name_entry.get().strip(),
+                            "path": presentation_path,
+                            "slide_number": slide_number,
+                            "slide_width": slide_width,
+                            "slide_height": slide_height,
+                            "selection_type": "table_rows",
+                            "shape_ids": table_id,
+                            "table_rows": ",".join(map(str, values)),
+                            "table_cols": "",
+                            "table_cells": "",
+                            "bbox": bboxes,
+                            "color_rgb": [],
+                            "text": []
+                        }
+                    
+                    elif section_type == "cols":
+                        for col_idx in values:
+                            # Get bounding box of entire column
+                            first_cell = table.Cell(1, col_idx)
+                            last_cell = table.Cell(table.Rows.Count, col_idx)
+                            
+                            left = first_cell.Shape.Left
+                            top = first_cell.Shape.Top
+                            width = first_cell.Shape.Width
+                            height = (last_cell.Shape.Top + last_cell.Shape.Height) - top
+                            
+                            abs_bbox = [left, top, width, height]
+                            rel_bbox = self.bbox_to_relative(abs_bbox, slide_width, slide_height)
+                            bboxes.append(rel_bbox)
+                        
+                        table_data = {
+                            "name": self.name_entry.get().strip(),
+                            "path": presentation_path,
+                            "slide_number": slide_number,
+                            "slide_width": slide_width,
+                            "slide_height": slide_height,
+                            "selection_type": "table_cols",
+                            "shape_ids": table_id,
+                            "table_rows": "",
+                            "table_cols": ",".join(map(str, values)),
+                            "table_cells": "",
+                            "bbox": bboxes,
+                            "color_rgb": [],
+                            "text": []
+                        }
+                    
+                    json_data.append(table_data)
+            
+            elif mode == "rectangle":
+                # Handle drag rectangle mode
+                if not self.rectangle_bboxes:
+                    messagebox.showwarning("Warning", "No rectangles drawn")
+                    return
                 
-                # Add shapes data to JSON
-                shapes_data = {
+                rectangle_data = {
                     "name": self.name_entry.get().strip(),
                     "path": presentation_path,
                     "slide_number": slide_number,
                     "slide_width": slide_width,
                     "slide_height": slide_height,
-                    "selection_type": "shape",
-                    "shape_ids": shape_ids,
+                    "selection_type": "rectangle",
+                    "bbox": self.rectangle_bboxes,
                     "table_rows": "",
                     "table_cols": "",
                     "table_cells": "",
-                    "bbox": bboxes,
-                    "color_rgb": colors,
-                    "text": texts
+                    "shape_ids": []
                 }
-                json_data.append(shapes_data)
-            
-            # Get table data from sections
-            for section in self.table_sections:
-                section_data = section.get_data()
-                if not section_data:
-                    continue
-                
-                table_id = int(section_data["table_id"])
-                values = section_data["values"]
-                section_type = section_data["type"]
-                
-                # Find the table shape
-                table_shape = None
-                for shape in slide.Shapes:
-                    if shape.Id == table_id and shape.HasTable:
-                        table_shape = shape
-                        break
-                
-                if not table_shape:
-                    messagebox.showwarning("Warning", f"Table ID {table_id} not found")
-                    continue
-                
-                table = table_shape.Table
-                
-                # Extract bboxes
-                bboxes = []
-                
-                if section_type == "cells":
-                    for cell_ref in values:
-                        parts = cell_ref.split('.')
-                        row_idx = int(parts[0])
-                        col_idx = int(parts[1])
-                        
-                        cell = table.Cell(row_idx, col_idx)
-                        abs_bbox = [cell.Shape.Left, cell.Shape.Top, 
-                               cell.Shape.Width, cell.Shape.Height]
-                        rel_bbox = self.bbox_to_relative(abs_bbox, slide_width, slide_height)
-                        bboxes.append(rel_bbox)
-                    
-                    table_data = {
-                        "name": self.name_entry.get().strip(),
-                        "path": presentation_path,
-                        "slide_number": slide_number,
-                        "slide_width": slide_width,
-                        "slide_height": slide_height,
-                        "selection_type": "table_cells",
-                        "shape_ids": table_id,
-                        "table_rows": "",
-                        "table_cols": "",
-                        "table_cells": ",".join(values),
-                        "bbox": bboxes,
-                        "color_rgb": [],
-                        "text": []
-                    }
-                
-                elif section_type == "rows":
-                    for row_idx in values:
-                        # Get bounding box of entire row
-                        first_cell = table.Cell(row_idx, 1)
-                        last_cell = table.Cell(row_idx, table.Columns.Count)
-                        
-                        left = first_cell.Shape.Left
-                        top = first_cell.Shape.Top
-                        width = (last_cell.Shape.Left + last_cell.Shape.Width) - left
-                        height = first_cell.Shape.Height
-                        
-                        abs_bbox = [left, top, width, height]
-                        rel_bbox = self.bbox_to_relative(abs_bbox, slide_width, slide_height)
-                        bboxes.append(rel_bbox)
-                    
-                    table_data = {
-                        "name": self.name_entry.get().strip(),
-                        "path": presentation_path,
-                        "slide_number": slide_number,
-                        "slide_width": slide_width,
-                        "slide_height": slide_height,
-                        "selection_type": "table_rows",
-                        "shape_ids": table_id,
-                        "table_rows": ",".join(map(str, values)),
-                        "table_cols": "",
-                        "table_cells": "",
-                        "bbox": bboxes,
-                        "color_rgb": [],
-                        "text": []
-                    }
-                
-                elif section_type == "cols":
-                    for col_idx in values:
-                        # Get bounding box of entire column
-                        first_cell = table.Cell(1, col_idx)
-                        last_cell = table.Cell(table.Rows.Count, col_idx)
-                        
-                        left = first_cell.Shape.Left
-                        top = first_cell.Shape.Top
-                        width = first_cell.Shape.Width
-                        height = (last_cell.Shape.Top + last_cell.Shape.Height) - top
-                        
-                        abs_bbox = [left, top, width, height]
-                        rel_bbox = self.bbox_to_relative(abs_bbox, slide_width, slide_height)
-                        bboxes.append(rel_bbox)
-                    
-                    table_data = {
-                        "name": self.name_entry.get().strip(),
-                        "path": presentation_path,
-                        "slide_number": slide_number,
-                        "slide_width": slide_width,
-                        "slide_height": slide_height,
-                        "selection_type": "table_cols",
-                        "shape_ids": table_id,
-                        "table_rows": "",
-                        "table_cols": ",".join(map(str, values)),
-                        "table_cells": "",
-                        "bbox": bboxes,
-                        "color_rgb": [],
-                        "text": []
-                    }
-                
-                json_data.append(table_data)
+                json_data.append(rectangle_data)
             
             # Save JSON
             json_path = os.path.join(json_dir, f"{file_id}.json")

@@ -1,32 +1,34 @@
 [
   {
-    "name": "note",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-04-32_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 2,
+    "name": "footnote",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-14-17-26-05_Stimuli draft.pptx",
+    "slide_number": 4,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
     "selection_type": "shape",
     "shape_ids": [
-      19
+      14
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        33.4117317199707,
-        383.4889831542969,
-        316.7059020996094,
-        109.05472564697266
+        0.05,
+        0.9644,
+        0.902,
+        0.0356
       ]
     ],
     "color_rgb": [
       [
-        255,
-        255,
-        255
+        0,
+        0,
+        0
       ]
     ],
     "text": [
-      "Top 5 modalities (across all CSIC participants)\rPatient Monitoring Systems\rPatient Care and Exam\rInfusion Pumps\rRespiratory\rSurgery"
+      "* Generic drugs are available"
     ]
   }
 ]

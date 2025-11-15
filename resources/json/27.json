@@ -1,23 +1,30 @@
 [
   {
-    "name": "Observations",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-26-23_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 4,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
+    "name": "DANIELA",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 2,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
     "selection_type": "shape",
     "shape_ids": [
-      2
+      131,
+      140
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.0275,
-        0.1727,
-        0.9378,
-        0.7611
+        0.7881,
+        0.3571,
+        0.1625,
+        0.0593
+      ],
+      [
+        0.7881,
+        0.4153,
+        0.1483,
+        0.0889
       ]
     ],
     "color_rgb": [
@@ -25,32 +32,16 @@
         255,
         255,
         255
+      ],
+      [
+        255,
+        255,
+        255
       ]
     ],
     "text": [
-      ""
+      "Daniela Terrizzi, PhD, RN Manager",
+      "Asst Prof UIC, 25 years healthcare experience\rFulbright Scholar"
     ]
-  },
-  {
-    "name": "Observations",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-26-23_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 4,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
-    "selection_type": "table_cols",
-    "shape_ids": 2,
-    "table_rows": "",
-    "table_cols": "3",
-    "table_cells": "",
-    "bbox": [
-      [
-        0.4291,
-        0.1727,
-        0.5362,
-        0.7611
-      ]
-    ],
-    "color_rgb": [],
-    "text": []
   }
 ]

@@ -1,21 +1,23 @@
 [
   {
-    "name": "footnote",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-04-25_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 2,
+    "name": "title",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-14-17-26-00_Stimuli draft.pptx",
+    "slide_number": 4,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
     "selection_type": "shape",
     "shape_ids": [
-      20
+      2
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        397.565185546875,
-        387.8489074707031,
-        533.7391357421875,
-        100.57267761230469
+        0.0575,
+        0.0523,
+        0.5965,
+        0.0533
       ]
     ],
     "color_rgb": [
@@ -26,7 +28,7 @@
       ]
     ],
     "text": [
-      "Top 5 modalities across all CSIC participants. May differ from top 5 modalities for Wakemed\rLow usability for MTBF because all assets require at least 1 CM event for MTBF calculation, and most assets require at least 2 CM events\r% WOs with matching asset = 1 - % orphaned work orders. Orphaned work orders = work orders whose asset ID is not found in the asset dataset\rOrphaned work orders don’t have a matching asset, so the asset’s modality is unknown. % orphaned work orders and % of WOs with matching assets cannot be calculated for a subset of modalities / makes / models"
+      "Amyotrophic lateral sclerosis: Treatment Overview"
     ]
   }
 ]

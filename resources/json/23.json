@@ -1,23 +1,30 @@
 [
   {
-    "name": "title",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-24-55_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
-    "slide_number": 4,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
+    "name": "oliver",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 2,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
     "selection_type": "shape",
     "shape_ids": [
-      6
+      130,
+      139
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.0275,
-        0.0348,
-        0.948,
-        0.08
+        0.0999,
+        0.3571,
+        0.0809,
+        0.0593
+      ],
+      [
+        0.0999,
+        0.4153,
+        0.1281,
+        0.0593
       ]
     ],
     "color_rgb": [
@@ -25,10 +32,16 @@
         255,
         255,
         255
+      ],
+      [
+        255,
+        255,
+        255
       ]
     ],
     "text": [
-      "CSIC Definitions"
+      "Oliver Halter\u000bPartner",
+      "30 years experience in enterprise tech"
     ]
   }
 ]

@@ -1,24 +1,74 @@
 [
   {
-    "name": "footnote",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-12-17-04-06_Data quality dashboard _ Wakemed _ 2025-11-10.pptx",
+    "name": "timeline",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-14-17-25-18_Stimuli draft.pptx",
     "slide_number": 3,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
     "selection_type": "shape",
     "shape_ids": [
-      13
+      20,
+      21,
+      35,
+      38,
+      4
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        662.5667114257812,
-        481.9158935546875,
-        273.9333190917969,
-        43.20551300048828
+        0.2542,
+        0.1666,
+        0.0416,
+        0.0731
+      ],
+      [
+        0.7665,
+        0.1666,
+        0.0416,
+        0.0731
+      ],
+      [
+        0.6072,
+        0.1666,
+        0.0416,
+        0.0731
+      ],
+      [
+        0.4112,
+        0.1666,
+        0.0416,
+        0.0731
+      ],
+      [
+        0.0515,
+        0.151,
+        0.8985,
+        0.1054
       ]
     ],
     "color_rgb": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
       [
         255,
         255,
@@ -26,7 +76,11 @@
       ]
     ],
     "text": [
-      "1. Gemba - Service, Education / Inservice, Incident Investigation, Software/Firmware Upgrade, Nuvolo Project, Raleigh OffSites, Vulnerability Remediation, Dept. Rounds, Device Verification, Cary Middle Room, New Equipment Inspection, Tech Support, (Blanks), Upper Southern Route, Lower Southern Route, Equipment Distribution, Calibration Testing, Fireman"
+      "",
+      "",
+      "",
+      "",
+      "Progression of ALS"
     ]
   }
 ]
