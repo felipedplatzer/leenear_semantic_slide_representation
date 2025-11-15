@@ -1,30 +1,23 @@
 [
   {
-    "name": "erich",
+    "name": "title",
     "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
-    "slide_number": 2,
+    "slide_number": 12,
     "slide_width": 720.0,
     "slide_height": 405.0,
     "selection_type": "shape",
     "shape_ids": [
-      145,
-      150
+      568
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.4273,
-        0.3571,
-        0.0962,
-        0.0593
-      ],
-      [
-        0.4273,
-        0.4153,
-        0.1427,
-        0.0889
+        0.05,
+        0.0971,
+        0.7639,
+        0.1067
       ]
     ],
     "color_rgb": [
@@ -32,16 +25,10 @@
         255,
         255,
         255
-      ],
-      [
-        255,
-        255,
-        255
       ]
     ],
     "text": [
-      "Erich Klotz\u000bSenior Director",
-      "16 years experience in healthcare tech architecture & strategy"
+      "4 priority trends were identified based on impact on the industry and \u000bon KPMG’s business lines."
     ]
   }
 ]

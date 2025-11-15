@@ -1,17 +1,34 @@
 [
   {
-    "name": "drawing - mechanism of ALS in the body",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-14-17-23-53_Stimuli draft.pptx",
+    "name": "title",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
     "slide_number": 2,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
     "selection_type": "shape",
-    "shape_ids": [],
+    "shape_ids": [
+      123
+    ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
-    "bbox": [],
-    "color_rgb": [],
-    "text": []
+    "bbox": [
+      [
+        0.1,
+        0.1058,
+        0.1569,
+        0.0533
+      ]
+    ],
+    "color_rgb": [
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "text": [
+      "Introductions."
+    ]
   }
 ]

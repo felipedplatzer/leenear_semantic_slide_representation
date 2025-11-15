@@ -1,34 +1,34 @@
 [
   {
-    "name": "raw material suppliers",
-    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "name": "highlight box",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-15-15-58-09_Neurizon_Market Access Strategy Weekly Check-in 11102025.pptx",
     "slide_number": 7,
-    "slide_width": 720.0,
-    "slide_height": 405.0,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
     "selection_type": "shape",
     "shape_ids": [
-      338
+      30
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.7396,
-        0.3444,
-        0.1,
-        0.5352
+        0.0504,
+        0.3084,
+        0.9143,
+        0.1261
       ]
     ],
     "color_rgb": [
       [
-        255,
-        255,
-        255
+        0,
+        35,
+        82
       ]
     ],
     "text": [
-      "Raw materials"
+      ""
     ]
   }
 ]

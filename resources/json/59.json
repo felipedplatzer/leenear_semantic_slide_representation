@@ -1,17 +1,22 @@
 [
   {
-    "name": "logos",
-    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "name": "indications",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-15-15-58-09_Neurizon_Market Access Strategy Weekly Check-in 11102025.pptx",
     "slide_number": 7,
-    "slide_width": 720.0,
-    "slide_height": 405.0,
-    "selection_type": "shape",
-    "shape_ids": [],
+    "slide_width": 960.0,
+    "slide_height": 540.0,
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.2011,
+        0.1787,
+        0.1788,
+        0.5707
+      ]
+    ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
-    "bbox": [],
-    "color_rgb": [],
-    "text": []
+    "shape_ids": []
   }
 ]

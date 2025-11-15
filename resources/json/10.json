@@ -1,34 +1,28 @@
 [
   {
-    "name": "title",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-14-17-26-00_Stimuli draft.pptx",
-    "slide_number": 4,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
-    "selection_type": "shape",
-    "shape_ids": [
-      2
+    "name": "quick bios",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 2,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.0922,
+        0.4144,
+        0.8659,
+        0.1042
+      ],
+      [
+        0.0866,
+        0.7742,
+        0.8575,
+        0.1117
+      ]
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
-    "bbox": [
-      [
-        0.0575,
-        0.0523,
-        0.5965,
-        0.0533
-      ]
-    ],
-    "color_rgb": [
-      [
-        255,
-        255,
-        255
-      ]
-    ],
-    "text": [
-      "Amyotrophic lateral sclerosis: Treatment Overview"
-    ]
+    "shape_ids": []
   }
 ]

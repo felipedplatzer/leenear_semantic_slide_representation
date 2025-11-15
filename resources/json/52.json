@@ -1,50 +1,26 @@
 [
   {
-    "name": "design firms",
-    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "name": "title",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-15-15-58-09_Neurizon_Market Access Strategy Weekly Check-in 11102025.pptx",
     "slide_number": 7,
-    "slide_width": 720.0,
-    "slide_height": 405.0,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
     "selection_type": "shape",
     "shape_ids": [
-      323,
-      336,
-      337
+      2
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.501,
-        0.2529,
-        0.2104,
-        0.0639
-      ],
-      [
-        0.5012,
-        0.3444,
-        0.1,
-        0.5352
-      ],
-      [
-        0.6147,
-        0.3444,
-        0.1,
-        0.5352
+        0.0575,
+        0.0523,
+        0.4778,
+        0.0533
       ]
     ],
     "color_rgb": [
-      [
-        0,
-        0,
-        0
-      ],
-      [
-        255,
-        255,
-        255
-      ],
       [
         255,
         255,
@@ -52,9 +28,7 @@
       ]
     ],
     "text": [
-      "Design",
-      "Core IP",
-      "EDA3"
+      "Overview of Analogues (Non-Oncology)"
     ]
   }
 ]

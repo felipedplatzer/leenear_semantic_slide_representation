@@ -1,34 +1,22 @@
 [
   {
-    "name": "extra people",
+    "name": "trends",
     "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
-    "slide_number": 6,
+    "slide_number": 12,
     "slide_width": 720.0,
     "slide_height": 405.0,
-    "selection_type": "shape",
-    "shape_ids": [
-      3
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.0405,
+        0.2184,
+        0.4218,
+        0.5931
+      ]
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
-    "bbox": [
-      [
-        0.1,
-        0.8252,
-        0.8542,
-        0.0595
-      ]
-    ],
-    "color_rgb": [
-      [
-        0,
-        0,
-        0
-      ]
-    ],
-    "text": [
-      "+ Advisory analysts, Manifold Ventures team, Advisory Network experts"
-    ]
+    "shape_ids": []
   }
 ]

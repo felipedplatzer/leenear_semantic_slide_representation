@@ -1,34 +1,22 @@
 [
   {
-    "name": "IDM's",
-    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "name": "analogue list",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-15-15-58-09_Neurizon_Market Access Strategy Weekly Check-in 11102025.pptx",
     "slide_number": 7,
-    "slide_width": 720.0,
-    "slide_height": 405.0,
-    "selection_type": "shape",
-    "shape_ids": [
-      335
+    "slide_width": 960.0,
+    "slide_height": 540.0,
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.0433,
+        0.1687,
+        0.1592,
+        0.5856
+      ]
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
-    "bbox": [
-      [
-        0.05,
-        0.7111,
-        0.4052,
-        0.1648
-      ]
-    ],
-    "color_rgb": [
-      [
-        255,
-        255,
-        255
-      ]
-    ],
-    "text": [
-      "Integrated device manufacturers (IDMs)"
-    ]
+    "shape_ids": []
   }
 ]

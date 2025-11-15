@@ -1,23 +1,37 @@
 [
   {
-    "name": "subtitle",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-14-17-26-10_Stimuli draft.pptx",
-    "slide_number": 4,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
+    "name": "Jordan Katz",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 2,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
     "selection_type": "shape",
     "shape_ids": [
-      76
+      128,
+      134,
+      142
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.0575,
-        0.1129,
-        0.8681,
-        0.056
+        0.2606,
+        0.2075,
+        0.08,
+        0.1422
+      ],
+      [
+        0.2606,
+        0.3571,
+        0.0774,
+        0.0593
+      ],
+      [
+        0.2606,
+        0.4153,
+        0.1281,
+        0.0593
       ]
     ],
     "color_rgb": [
@@ -25,10 +39,22 @@
         255,
         255,
         255
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
       ]
     ],
     "text": [
-      "There’s no known treatment that stops or reverses the progression of ALS, even though the FDA has approved several drugs for ALS that may prolong survival, reduce the rate of decline, or help manage symptoms."
+      "",
+      "Jordan Katz\u000bPartner",
+      "Leader of Manifold’s HealthCare practice"
     ]
   }
 ]

@@ -1,86 +1,28 @@
 [
   {
-    "name": "timeline",
-    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-14-17-25-18_Stimuli draft.pptx",
-    "slide_number": 3,
-    "slide_width": 960.0,
-    "slide_height": 540.0,
-    "selection_type": "shape",
-    "shape_ids": [
-      20,
-      21,
-      35,
-      38,
-      4
+    "name": "names of people",
+    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "slide_number": 2,
+    "slide_width": 720.0,
+    "slide_height": 405.0,
+    "selection_type": "rectangle",
+    "bbox": [
+      [
+        0.09,
+        0.3525,
+        0.8678,
+        0.0375
+      ],
+      [
+        0.0858,
+        0.7175,
+        0.879,
+        0.0275
+      ]
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
-    "bbox": [
-      [
-        0.2542,
-        0.1666,
-        0.0416,
-        0.0731
-      ],
-      [
-        0.7665,
-        0.1666,
-        0.0416,
-        0.0731
-      ],
-      [
-        0.6072,
-        0.1666,
-        0.0416,
-        0.0731
-      ],
-      [
-        0.4112,
-        0.1666,
-        0.0416,
-        0.0731
-      ],
-      [
-        0.0515,
-        0.151,
-        0.8985,
-        0.1054
-      ]
-    ],
-    "color_rgb": [
-      [
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0
-      ],
-      [
-        255,
-        255,
-        255
-      ]
-    ],
-    "text": [
-      "",
-      "",
-      "",
-      "",
-      "Progression of ALS"
-    ]
+    "shape_ids": []
   }
 ]

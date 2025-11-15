@@ -4,6 +4,7 @@ import win32com.client
 import os
 import json
 import tempfile
+import re
 from datetime import datetime
 from PIL import ImageGrab
 import pythoncom
@@ -384,6 +385,9 @@ class PowerPointShapeCaptureApp:
             self.root.destroy()
             return
         
+        # Track if cloud file has been converted to local
+        self.cloud_converted_path = None
+        
         # Main container
         main_frame = ttk.Frame(root, padding=10)
         main_frame.pack(fill=tk.BOTH, expand=True)
@@ -507,6 +511,30 @@ class PowerPointShapeCaptureApp:
         # Clear selections button
         ttk.Button(self.rectangle_section_frame, text="Clear Selections", 
                   command=self.clear_rectangles).pack(pady=5)
+        
+        # Cloud file warning section (hidden by default)
+        self.cloud_warning_frame = ttk.Frame(main_frame)
+        self.cloud_warning_frame.pack(fill=tk.X, pady=10)
+        
+        self.cloud_warning_label = ttk.Label(
+            self.cloud_warning_frame,
+            text="⚠ CAN'T USE CLOUD FILES. Click on the 'Save Local Copy' button to save locally,\nor just select a locally saved presentation.",
+            foreground="red",
+            wraplength=760,
+            justify=tk.LEFT,
+            font=('Arial', 10, 'bold')
+        )
+        self.cloud_warning_label.pack(fill=tk.X, pady=5)
+        
+        self.save_local_button = ttk.Button(
+            self.cloud_warning_frame,
+            text="Save Local Copy",
+            command=self.save_local_copy
+        )
+        self.save_local_button.pack(pady=5)
+        
+        # Hide cloud warning by default
+        self.cloud_warning_frame.pack_forget()
         
         # Buttons frame
         button_frame = ttk.Frame(main_frame)
@@ -742,14 +770,30 @@ class PowerPointShapeCaptureApp:
             if self.ppt.Presentations.Count == 0:
                 self.file_label.config(text="File: No presentation open")
                 self.slide_label.config(text="Slide number: ")
+                self.cloud_warning_frame.pack_forget()
+                self.ok_button.config(state=tk.NORMAL)
                 return
             
             presentation = self.ppt.ActivePresentation
             slide = self.ppt.ActiveWindow.View.Slide
             slide_number = slide.SlideIndex
             
-            # Get presentation path (truncate if too long)
-            pres_path = presentation.FullName
+            # Get presentation path
+            full_pres_path = presentation.FullName
+            
+            # Check if it's a cloud file
+            is_cloud = full_pres_path.startswith("http://") or full_pres_path.startswith("https://")
+            
+            # Show/hide cloud warning and disable/enable OK button
+            if is_cloud and not self.cloud_converted_path:
+                self.cloud_warning_frame.pack(fill=tk.X, pady=10, before=self.mode_content_frame)
+                self.ok_button.config(state=tk.DISABLED)
+            else:
+                self.cloud_warning_frame.pack_forget()
+                self.ok_button.config(state=tk.NORMAL)
+            
+            # Truncate path if too long
+            pres_path = full_pres_path
             if len(pres_path) > 100:
                 pres_path = "..." + pres_path[-97:]
             
@@ -766,6 +810,8 @@ class PowerPointShapeCaptureApp:
         except Exception as e:
             self.file_label.config(text=f"File: Error: {str(e)}")
             self.slide_label.config(text="Slide number: ")
+            self.cloud_warning_frame.pack_forget()
+            self.ok_button.config(state=tk.NORMAL)
     
     def poll_selection_changes(self):
         """Poll for selection changes every 500ms"""
@@ -830,24 +876,22 @@ class PowerPointShapeCaptureApp:
         return [rel_left, rel_top, rel_width, rel_height]
     
     def is_color_white_or_transparent(self, color_obj):
-        """Check if a color is white or transparent"""
+        """Check if a color is white (disregarding Type, just using RGB)"""
         try:
-            # Check if transparent (no fill)
-            if color_obj.Type == 0:  # msoColorTypeBackground = 0 (transparent)
-                return True
+            # Try to get RGB value directly
+            rgb = color_obj.RGB
+            r = rgb & 0xFF
+            g = (rgb >> 8) & 0xFF
+            b = (rgb >> 16) & 0xFF
             
-            if color_obj.Type == 1:  # msoColorTypeRGB = 1
-                rgb = color_obj.RGB
-                r = rgb & 0xFF
-                g = (rgb >> 8) & 0xFF
-                b = (rgb >> 16) & 0xFF
-                # Check if white (all RGB values are 255)
-                if r >= 250 and g >= 250 and b >= 250:
-                    return True
+            # Check if white (all RGB values are close to 255)
+            if r >= 250 and g >= 250 and b >= 250:
+                return True
             
             return False
         except:
-            return False
+            # If RGB is not accessible, assume it might be transparent/white
+            return True
     
     def is_shape_invisible(self, shape):
         """Check if shape fill and outline are both white or transparent"""
@@ -928,6 +972,50 @@ class PowerPointShapeCaptureApp:
         
         return max_id + 1
     
+    def save_local_copy(self):
+        """Save a local copy of a cloud presentation, close cloud file, and open local copy"""
+        try:
+            # Get active presentation
+            if self.ppt.Presentations.Count == 0:
+                messagebox.showerror("Error", "No PowerPoint presentation is open")
+                return
+            
+            presentation = self.ppt.ActivePresentation
+            slide = self.ppt.ActiveWindow.View.Slide
+            current_slide_number = slide.SlideIndex
+            
+            # Verify it's a cloud file
+            presentation_path = presentation.FullName
+            is_cloud = presentation_path.startswith("http://") or presentation_path.startswith("https://")
+            
+            if not is_cloud:
+                messagebox.showinfo("Info", "This is already a local file")
+                return
+            
+            # Create cloud_presentations directory
+            cloud_dir = os.path.join("resources", "cloud_presentations")
+            os.makedirs(cloud_dir, exist_ok=True)
+            
+            # Extract filename from presentation name
+            pres_name = presentation.Name
+            if not pres_name.endswith('.pptx') and not pres_name.endswith('.ppt'):
+                pres_name += '.pptx'
+            
+            # Create local path for downloaded presentation (use timestamp for cloud files)
+            timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+            local_pres_path = os.path.join(cloud_dir, f"{timestamp}_{pres_name}")
+            abs_local_path = os.path.abspath(local_pres_path)
+            
+            # Save local copy
+            presentation.SaveCopyAs(abs_local_path)
+            self.cloud_converted_path = abs_local_path
+            
+            # Close cloud presentation and open local copy
+            self._reopen_local_file(presentation, abs_local_path, current_slide_number)
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to save local copy: {str(e)}")
+    
     def on_ok(self):
         """Handle OK button click"""
         try:
@@ -947,32 +1035,11 @@ class PowerPointShapeCaptureApp:
             slide_width = presentation.PageSetup.SlideWidth
             slide_height = presentation.PageSetup.SlideHeight
             
-            # Check if presentation is in the cloud and download if necessary
-            presentation_path = presentation.FullName
-            is_cloud = presentation_path.startswith("http://") or presentation_path.startswith("https://")
-            
-            if is_cloud:
-                # Create cloud_presentations directory
-                cloud_dir = os.path.join("resources", "cloud_presentations")
-                os.makedirs(cloud_dir, exist_ok=True)
-                
-                # Extract filename from presentation name
-                pres_name = presentation.Name
-                if not pres_name.endswith('.pptx') and not pres_name.endswith('.ppt'):
-                    pres_name += '.pptx'
-                
-                # Create local path for downloaded presentation (use timestamp for cloud files)
-                timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-                local_pres_path = os.path.join(cloud_dir, f"{timestamp}_{pres_name}")
-                
-                # Download presentation
-                try:
-                    presentation.SaveCopyAs(os.path.abspath(local_pres_path))
-                    presentation_path = os.path.abspath(local_pres_path)
-                    print(f"Cloud presentation downloaded to: {presentation_path}")
-                except Exception as e:
-                    messagebox.showwarning("Warning", 
-                        f"Could not download cloud presentation: {str(e)}\nUsing cloud URL in JSON.")
+            # Get presentation path (use converted local path if available)
+            if self.cloud_converted_path:
+                presentation_path = self.cloud_converted_path
+            else:
+                presentation_path = presentation.FullName
             
             # Create resources directories
             img_dir = os.path.join("resources", "img")
@@ -1001,31 +1068,63 @@ class PowerPointShapeCaptureApp:
                     texts = []
                     
                     for shape in shapes:
-                        # Check if shape is invisible (white/transparent fill and outline)
-                        shape_invisible = self.is_shape_invisible(shape)
+                        # Check if shape is a picture/image (always include pictures)
+                        is_picture = False
+                        try:
+                            # msoShapeTypePicture = 13, msoLinkedPicture = 11
+                            if shape.Type in [13, 11]:
+                                is_picture = True
+                        except:
+                            pass
                         
-                        if shape_invisible:
-                            # Check if text is visible
-                            text_visible = self.is_text_visible(shape)
-                            
-                            if not text_visible:
-                                # Skip this shape entirely
-                                continue
-                            
-                            # Use text bounding box instead of shape bounding box
-                            try:
-                                text_range = shape.TextFrame.TextRange
-                                text_left = text_range.BoundLeft
-                                text_top = text_range.BoundTop
-                                text_width = text_range.BoundWidth
-                                text_height = text_range.BoundHeight
-                                abs_bbox = [text_left, text_top, text_width, text_height]
-                            except:
-                                # Fallback to shape bounds if text bounds fail
-                                abs_bbox = [shape.Left, shape.Top, shape.Width, shape.Height]
-                        else:
-                            # Use normal shape bounding box
+                        # For pictures, always use the shape bounding box
+                        if is_picture:
                             abs_bbox = [shape.Left, shape.Top, shape.Width, shape.Height]
+                        else:
+                            # Check if shape is invisible (white/transparent fill and outline)
+                            shape_invisible = self.is_shape_invisible(shape)
+                            
+                            if shape_invisible:
+                                # Use text bounding box instead of shape bounding box
+                                # (even if text color is transparent, it might be visible against a non-transparent background)
+                                try:
+                                    # Remove trailing empty paragraphs before getting text bounds
+                                    text_frame = shape.TextFrame
+                                    text_range = text_frame.TextRange
+                                    original_text = text_range.Text
+                                    
+                                    # Find trailing whitespace (\n, \r, spaces, tabs)
+                                    trailing_whitespace = re.search(r'\s+$', original_text)
+                                    
+                                    if trailing_whitespace:
+                                        # Delete the trailing whitespace chunk
+                                        start_pos = trailing_whitespace.start()
+                                        deleted_text = original_text[start_pos:]
+                                        text_range.Text = original_text[:start_pos]
+                                        
+                                        # Get bounds without the trailing whitespace
+                                        text_left = text_range.BoundLeft
+                                        text_top = text_range.BoundTop
+                                        text_width = text_range.BoundWidth
+                                        text_height = text_range.BoundHeight
+                                        
+                                        # Restore the deleted trailing whitespace
+                                        text_range.Text = original_text
+                                        
+                                        abs_bbox = [text_left, text_top, text_width, text_height]
+                                    else:
+                                        # No trailing whitespace, use text bounds as-is
+                                        text_left = text_range.BoundLeft
+                                        text_top = text_range.BoundTop
+                                        text_width = text_range.BoundWidth
+                                        text_height = text_range.BoundHeight
+                                        abs_bbox = [text_left, text_top, text_width, text_height]
+                                except:
+                                    # Fallback to shape bounds if text bounds fail
+                                    abs_bbox = [shape.Left, shape.Top, shape.Width, shape.Height]
+                            else:
+                                # Use normal shape bounding box
+                                abs_bbox = [shape.Left, shape.Top, shape.Width, shape.Height]
                         
                         shape_ids.append(shape.Id)
                         
@@ -1229,6 +1328,31 @@ class PowerPointShapeCaptureApp:
             
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred: {str(e)}")
+    
+    def _reopen_local_file(self, cloud_presentation, local_path, slide_number):
+        """Close cloud presentation and open local copy"""
+        try:
+            # Close the cloud presentation
+            cloud_presentation.Close()
+            
+            # Open the local copy
+            local_presentation = self.ppt.Presentations.Open(local_path)
+            
+            # Navigate to the same slide
+            try:
+                if slide_number <= local_presentation.Slides.Count:
+                    local_presentation.Windows(1).View.GotoSlide(slide_number)
+            except:
+                pass  # If we can't navigate to the slide, just open at slide 1
+            
+            # Update info labels
+            self.update_info_label()
+            
+            messagebox.showinfo("Success", f"Local file opened: {local_path}")
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to reopen local file: {str(e)}")
+            self.cloud_converted_path = None  # Reset flag on error
     
     def capture_slide_screenshot(self, slide, output_path):
         """Capture screenshot of the current slide"""

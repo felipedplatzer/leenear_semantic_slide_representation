@@ -1,23 +1,37 @@
 [
   {
-    "name": "fabless design firms",
-    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
-    "slide_number": 7,
-    "slide_width": 720.0,
-    "slide_height": 405.0,
+    "name": "holidays",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-15-15-58-09_Neurizon_Market Access Strategy Weekly Check-in 11102025.pptx",
+    "slide_number": 5,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
     "selection_type": "shape",
     "shape_ids": [
-      332
+      4,
+      20,
+      46
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.05,
-        0.3407,
-        0.1199,
-        0.3426
+        0.7456,
+        0.4191,
+        0.0348,
+        0.0618
+      ],
+      [
+        0.8024,
+        0.4191,
+        0.0348,
+        0.0618
+      ],
+      [
+        0.5177,
+        0.4191,
+        0.0348,
+        0.0618
       ]
     ],
     "color_rgb": [
@@ -25,10 +39,22 @@
         255,
         255,
         255
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
       ]
     ],
     "text": [
-      "Fabless design firms"
+      "",
+      "",
+      ""
     ]
   }
 ]

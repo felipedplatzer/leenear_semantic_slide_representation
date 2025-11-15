@@ -15,6 +15,7 @@ class TestViewerApp:
         self.current_data = None
         self.current_image = None
         self.box_thickness = 5
+        self.zoom_level = 0.6  # Default zoom level (60% of original size)
         
         # Main container
         main_frame = ttk.Frame(root, padding=10)
@@ -24,15 +25,32 @@ class TestViewerApp:
         top_frame = ttk.Frame(main_frame)
         top_frame.pack(fill=tk.X, pady=(0, 10))
         
-        ttk.Label(top_frame, text="Enter Test ID:").pack(side=tk.LEFT, padx=5)
-        self.test_id_entry = ttk.Entry(top_frame, width=40)
+        # First row - Label and Entry
+        input_row = ttk.Frame(top_frame)
+        input_row.pack(fill=tk.X, pady=(0, 5))
+        
+        ttk.Label(input_row, text="Enter Test ID:").pack(side=tk.LEFT, padx=5)
+        self.test_id_entry = ttk.Entry(input_row, width=40)
         self.test_id_entry.pack(side=tk.LEFT, padx=5)
         
-        self.ok_button = ttk.Button(top_frame, text="OK", command=self.load_test_data)
+        self.ok_button = ttk.Button(input_row, text="OK", command=self.load_test_data)
         self.ok_button.pack(side=tk.LEFT, padx=5)
         
-        self.exit_button = ttk.Button(top_frame, text="Exit", command=self.on_exit)
+        self.exit_button = ttk.Button(input_row, text="Exit", command=self.on_exit)
         self.exit_button.pack(side=tk.LEFT, padx=5)
+        
+        # Second row - Navigation buttons
+        nav_row = ttk.Frame(top_frame)
+        nav_row.pack(fill=tk.X)
+        
+        # Add some spacing to align with the entry box
+        ttk.Label(nav_row, text="").pack(side=tk.LEFT, padx=82)
+        
+        self.prev_button = ttk.Button(nav_row, text="Prev", command=self.prev_test)
+        self.prev_button.pack(side=tk.LEFT, padx=5)
+        
+        self.next_button = ttk.Button(nav_row, text="Next", command=self.next_test)
+        self.next_button.pack(side=tk.LEFT, padx=5)
         
         # Box thickness controls
         thickness_frame = ttk.Frame(top_frame)
@@ -59,6 +77,24 @@ class TestViewerApp:
         
         self.apply_button = ttk.Button(thickness_frame, text="Apply", command=self.apply_thickness)
         self.apply_button.pack(side=tk.LEFT, padx=5)
+        
+        # Zoom controls
+        zoom_frame = ttk.Frame(top_frame)
+        zoom_frame.pack(side=tk.LEFT, padx=20)
+        
+        ttk.Label(zoom_frame, text="Zoom:").pack(side=tk.LEFT, padx=5)
+        
+        self.zoom_out_button = ttk.Button(zoom_frame, text="-", command=self.zoom_out, width=3)
+        self.zoom_out_button.pack(side=tk.LEFT, padx=2)
+        
+        self.zoom_label = ttk.Label(zoom_frame, text="60%", width=6)
+        self.zoom_label.pack(side=tk.LEFT, padx=5)
+        
+        self.zoom_in_button = ttk.Button(zoom_frame, text="+", command=self.zoom_in, width=3)
+        self.zoom_in_button.pack(side=tk.LEFT, padx=2)
+        
+        self.zoom_reset_button = ttk.Button(zoom_frame, text="Reset", command=self.zoom_reset, width=6)
+        self.zoom_reset_button.pack(side=tk.LEFT, padx=5)
         
         # Display section
         display_frame = ttk.LabelFrame(main_frame, text="Test Data Viewer", padding=10)
@@ -152,6 +188,68 @@ class TestViewerApp:
         # Update thickness
         self.box_thickness = int(self.thickness_var.get())
     
+    def prev_test(self):
+        """Navigate to previous test"""
+        test_id = self.test_id_entry.get().strip()
+        if not test_id:
+            messagebox.showwarning("Warning", "Please enter a test ID first")
+            return
+        
+        try:
+            current_id = int(test_id)
+            if current_id <= 1:
+                messagebox.showinfo("Info", "Already at the first test")
+                return
+            
+            new_id = current_id - 1
+            self.test_id_entry.delete(0, tk.END)
+            self.test_id_entry.insert(0, str(new_id))
+            self.load_test_data()
+        except ValueError:
+            messagebox.showwarning("Warning", "Test ID must be a number")
+    
+    def next_test(self):
+        """Navigate to next test"""
+        test_id = self.test_id_entry.get().strip()
+        if not test_id:
+            messagebox.showwarning("Warning", "Please enter a test ID first")
+            return
+        
+        try:
+            current_id = int(test_id)
+            new_id = current_id + 1
+            self.test_id_entry.delete(0, tk.END)
+            self.test_id_entry.insert(0, str(new_id))
+            self.load_test_data()
+        except ValueError:
+            messagebox.showwarning("Warning", "Test ID must be a number")
+    
+    def zoom_in(self):
+        """Zoom in by 10%"""
+        self.zoom_level = min(self.zoom_level + 0.1, 3.0)  # Max 300%
+        self.update_zoom_label()
+        if self.current_data and self.current_image:
+            self.draw_and_display_image()
+    
+    def zoom_out(self):
+        """Zoom out by 10%"""
+        self.zoom_level = max(self.zoom_level - 0.1, 0.1)  # Min 10%
+        self.update_zoom_label()
+        if self.current_data and self.current_image:
+            self.draw_and_display_image()
+    
+    def zoom_reset(self):
+        """Reset zoom to 100%"""
+        self.zoom_level = 1.0
+        self.update_zoom_label()
+        if self.current_data and self.current_image:
+            self.draw_and_display_image()
+    
+    def update_zoom_label(self):
+        """Update the zoom label"""
+        zoom_percent = int(self.zoom_level * 100)
+        self.zoom_label.config(text=f"{zoom_percent}%")
+    
     def update_prompt(self):
         """Update the prompt text area"""
         if not self.current_data:
@@ -199,9 +297,16 @@ class TestViewerApp:
         
         # Create a copy of the image to draw on
         img_with_boxes = self.current_image.copy()
+        
+        # Apply zoom level
+        original_width, original_height = img_with_boxes.size
+        new_width = int(original_width * self.zoom_level)
+        new_height = int(original_height * self.zoom_level)
+        img_with_boxes = img_with_boxes.resize((new_width, new_height), Image.Resampling.LANCZOS)
+        
         draw = ImageDraw.Draw(img_with_boxes, 'RGBA')
         
-        # Get image dimensions
+        # Get image dimensions (after zoom)
         img_width, img_height = img_with_boxes.size
         
         # Draw bounding boxes for all items
@@ -242,9 +347,10 @@ class TestViewerApp:
                 overlay_draw.rectangle([x1, y1, x2, y2], fill=(255, 0, 0, 30))
                 img_with_boxes = Image.alpha_composite(img_with_boxes.convert('RGBA'), overlay)
                 
-                # Then draw the red outline
+                # Then draw the red outline (scale thickness with zoom)
                 draw = ImageDraw.Draw(img_with_boxes)
-                for i in range(self.box_thickness):
+                scaled_thickness = max(1, int(self.box_thickness * self.zoom_level))
+                for i in range(scaled_thickness):
                     draw.rectangle([x1-i, y1-i, x2+i, y2+i], outline=(255, 0, 0, 255))
         
         # Convert to PhotoImage and display

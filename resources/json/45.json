@@ -1,86 +1,23 @@
 [
   {
-    "name": "core players",
-    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
-    "slide_number": 7,
-    "slide_width": 720.0,
-    "slide_height": 405.0,
+    "name": "title",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-15-15-58-09_Neurizon_Market Access Strategy Weekly Check-in 11102025.pptx",
+    "slide_number": 5,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
     "selection_type": "shape",
     "shape_ids": [
-      326,
-      327,
-      328,
-      329,
-      330,
-      331,
-      332,
-      333,
-      334,
-      335
+      2
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.06,
-        0.1959,
-        0.1153,
-        0.0415
-      ],
-      [
-        0.051,
-        0.2529,
-        0.117,
-        0.0639
-      ],
-      [
-        0.1942,
-        0.2529,
-        0.117,
-        0.0639
-      ],
-      [
-        0.3374,
-        0.2529,
-        0.117,
-        0.0639
-      ],
-      [
-        0.168,
-        0.2849,
-        0.0262,
-        0.0
-      ],
-      [
-        0.3112,
-        0.2849,
-        0.0262,
-        0.0
-      ],
-      [
-        0.05,
-        0.3407,
-        0.1199,
-        0.3426
-      ],
-      [
-        0.1931,
-        0.3407,
-        0.1199,
-        0.3426
-      ],
-      [
-        0.3353,
-        0.3407,
-        0.1199,
-        0.3426
-      ],
-      [
-        0.05,
-        0.7111,
-        0.4052,
-        0.1648
+        0.0575,
+        0.0523,
+        0.2299,
+        0.0533
       ]
     ],
     "color_rgb": [
@@ -88,64 +25,10 @@
         255,
         255,
         255
-      ],
-      [
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0
-      ],
-      [
-        255,
-        255,
-        255
-      ],
-      [
-        255,
-        255,
-        255
-      ],
-      [
-        255,
-        255,
-        255
-      ],
-      [
-        255,
-        255,
-        255
       ]
     ],
     "text": [
-      "Core players",
-      "Design",
-      "Manufacturing",
-      "ATP1",
-      "",
-      "",
-      "Fabless design firms",
-      "Foundries",
-      "OSAT2 firms",
-      "Integrated device manufacturers (IDMs)"
+      "Proposed Timeline"
     ]
   }
 ]

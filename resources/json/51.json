@@ -1,34 +1,34 @@
 [
   {
-    "name": "OSAT FIRMS",
-    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
-    "slide_number": 7,
-    "slide_width": 720.0,
-    "slide_height": 405.0,
+    "name": "table",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-15-15-58-09_Neurizon_Market Access Strategy Weekly Check-in 11102025.pptx",
+    "slide_number": 5,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
     "selection_type": "shape",
     "shape_ids": [
-      334
+      5
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.3353,
-        0.3407,
-        0.1199,
-        0.3426
+        0.05,
+        0.3324,
+        0.9106,
+        0.4876
       ]
     ],
     "color_rgb": [
       [
-        255,
-        255,
-        255
+        0,
+        0,
+        0
       ]
     ],
     "text": [
-      "OSAT2 firms"
+      ""
     ]
   }
 ]

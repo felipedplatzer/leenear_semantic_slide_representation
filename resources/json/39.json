@@ -1,17 +1,17 @@
 [
   {
-    "name": "titles",
+    "name": "third column",
     "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
-    "slide_number": 6,
+    "slide_number": 12,
     "slide_width": 720.0,
     "slide_height": 405.0,
     "selection_type": "rectangle",
     "bbox": [
       [
-        0.0908,
-        0.4367,
-        0.8743,
-        0.0447
+        0.6536,
+        0.1985,
+        0.2011,
+        0.6154
       ]
     ],
     "table_rows": "",

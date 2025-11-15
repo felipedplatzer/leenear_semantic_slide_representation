@@ -1,23 +1,23 @@
 [
   {
-    "name": "core IP firms",
-    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
+    "name": "footnote",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-15-15-58-09_Neurizon_Market Access Strategy Weekly Check-in 11102025.pptx",
     "slide_number": 7,
-    "slide_width": 720.0,
-    "slide_height": 405.0,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
     "selection_type": "shape",
     "shape_ids": [
-      336
+      25
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.5012,
-        0.3444,
-        0.1,
-        0.5352
+        0.0507,
+        0.8446,
+        0.8928,
+        0.0711
       ]
     ],
     "color_rgb": [
@@ -28,7 +28,7 @@
       ]
     ],
     "text": [
-      "Core IP"
+      "1. ATTRuby: Median OS 2-5 years depending on disease stage. Source: Naoto et al., Journal of the American Heart Association, 2024. Ojjaara: Median OS 2.1 years. Source: Green et al., MPN Hub, 2025. Zilbrysq: 86% survival at 5 years, 79% at 10 years. Source: Khateb et al., Frontiers in Neurology, 2025. Ctexli: Median OS > 5 years. Source: Nie et al., Orphanet J Rare Disease, 2014. Filspari, Vanrafia: Median kidney failure-free survival > 5 years. Source: McGrogan et al., Nephrol Dial Transplant., 2011. Iqirvo, Livdelzi: Median OS > 5 years. Source: Green et al., The Pharmaceutical Journal, 2023. Joenja: Median OS > 5 years. Source: Mahendran et al., Orphanet J Rare Disease, 2025. Alyftrek: Median OS > 5 years. Source: CF Foundation Patient Registry, 2025"
     ]
   }
 ]

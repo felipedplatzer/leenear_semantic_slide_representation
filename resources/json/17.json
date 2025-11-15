@@ -1,23 +1,37 @@
 [
   {
-    "name": "title",
+    "name": "daniela terrizzi",
     "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
     "slide_number": 2,
     "slide_width": 720.0,
     "slide_height": 405.0,
     "selection_type": "shape",
     "shape_ids": [
-      123
+      131,
+      133,
+      140
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.1,
-        0.1058,
-        0.1569,
-        0.0533
+        0.7881,
+        0.3571,
+        0.1625,
+        0.0593
+      ],
+      [
+        0.7881,
+        0.2075,
+        0.08,
+        0.1422
+      ],
+      [
+        0.7881,
+        0.4153,
+        0.1483,
+        0.0889
       ]
     ],
     "color_rgb": [
@@ -25,10 +39,22 @@
         255,
         255,
         255
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
       ]
     ],
     "text": [
-      "Introductions."
+      "Daniela Terrizzi, PhD, RN Manager",
+      "",
+      "Asst Prof UIC, 25 years healthcare experience\rFulbright Scholar"
     ]
   }
 ]

@@ -1,23 +1,37 @@
 [
   {
-    "name": "RPA overview bullets",
+    "name": "carlo sanchez",
     "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
-    "slide_number": 1,
+    "slide_number": 2,
     "slide_width": 720.0,
     "slide_height": 405.0,
     "selection_type": "shape",
     "shape_ids": [
-      89
+      127,
+      129,
+      138
     ],
     "table_rows": "",
     "table_cols": "",
     "table_cells": "",
     "bbox": [
       [
-        0.0909,
-        0.2175,
-        0.863,
-        0.5316
+        0.6083,
+        0.3571,
+        0.0944,
+        0.0593
+      ],
+      [
+        0.6083,
+        0.2075,
+        0.08,
+        0.1422
+      ],
+      [
+        0.6083,
+        0.4153,
+        0.1488,
+        0.0889
       ]
     ],
     "color_rgb": [
@@ -25,10 +39,22 @@
         255,
         255,
         255
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
       ]
     ],
     "text": [
-      "RPA enables the automation of repetitive, rules-based tasks\r\rRPA is commonly used to facilitate data transfers between systems without integration capabilities\r\rIdeal RPA candidates are tasks that are manual, time-intensive, error-prone, and follow clear decision rules\r\rHowever, the advent of generative AI and LLMs is extending RPA’s applicability to more complex, less deterministic workflows through the use of intelligent agents\r\rRPA workflows can be developed in two main ways:\rWriting custom code from the ground up\rUsing low-code/no-code platforms with graphical interfaces, such as UiPath Studio, Automation Anywhere, and Blue Prism"
+      "Carlo Sanchez\u000bDirector",
+      "",
+      "Experienced healthcare consultant\rEx-BCG, UofC MBA"
     ]
   }
 ]

@@ -1,34 +1,24 @@
 [
   {
-    "name": "footnote",
-    "path": "C:\\Users\\felip\\Documents\\Leenear\\Tests\\PlsFix_LLMtests_2025-09-14.pptx",
-    "slide_number": 8,
-    "slide_width": 720.0,
-    "slide_height": 405.0,
-    "selection_type": "shape",
-    "shape_ids": [
-      392
-    ],
+    "name": "US prevalence",
+    "path": "C:\\Users\\felip\\source\\repos\\visual_grounding_data_generation\\resources\\cloud_presentations\\2025-11-15-15-58-09_Neurizon_Market Access Strategy Weekly Check-in 11102025.pptx",
+    "slide_number": 7,
+    "slide_width": 960.0,
+    "slide_height": 540.0,
+    "selection_type": "table_cols",
+    "shape_ids": 7,
     "table_rows": "",
-    "table_cols": "",
+    "table_cols": "4",
     "table_cells": "",
     "bbox": [
       [
-        0.11,
-        0.9268,
-        0.1314,
-        0.0237
+        0.4327,
+        0.1846,
+        0.0748,
+        0.5515
       ]
     ],
-    "color_rgb": [
-      [
-        255,
-        255,
-        255
-      ]
-    ],
-    "text": [
-      "Source: WSTS, McKinsey"
-    ]
+    "color_rgb": [],
+    "text": []
   }
 ]
